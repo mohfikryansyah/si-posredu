@@ -169,7 +169,7 @@
     </div>
 
     <!-- MODAL --->
-    @include('ibu.create')
+    @include('Ibu.create')
     @include('Ibu.edit')
     
     <div class="mt-5">
