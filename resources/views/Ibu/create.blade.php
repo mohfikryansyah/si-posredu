@@ -1,5 +1,5 @@
 <!-- Modal Component -->
-<x-modal name="my-modal" :show="false" maxWidth="2xl">
+<x-modal name="add_ibu" :show="false" maxWidth="2xl">
     <div class="p-6">
         <h2 class="text-lg font-medium text-gray-900">Buat Data Ibu</h2>
         <p class="mt-4 text-sm text-gray-600">
@@ -91,7 +91,7 @@
                 </button>
                 
                 <div class="">
-                    <button type="button" x-on:click="$dispatch('close-modal', 'my-modal')"
+                    <button type="button" x-on:click="$dispatch('close-modal', 'add_ibu')"
                         class="bg-red-600 text-white px-4 py-2 rounded">
                         Batal
                     </button>

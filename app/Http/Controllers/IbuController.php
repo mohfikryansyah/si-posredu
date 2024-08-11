@@ -68,7 +68,7 @@ class IbuController extends Controller
      */
     public function update(Request $request, Ibu $ibu)
     {
-        //
+        dd($request->all());
     }
 
     /**

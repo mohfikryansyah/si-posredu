@@ -1,19 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-medium md:text-lg text-md text-gray-700 leading-tight">
-            Welcome back! {{ auth()->user()->name }}
-            <i class="fa-solid fa-children"></i>
+        <h2 class="font-semibold md:text-xl text-lg text-gray-800 leading-tight">
+            {{ __('Data Ibu') }}
         </h2>
     </x-slot>
 
-
-
-    <div class="relative overflow-x-auto sm:rounded-lg">
-        <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between py-4">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+        <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 p-5 bg-white dark:bg-gray-900">
             <!-- Button to open modal -->
-            <button x-data x-on:click="$dispatch('open-modal', 'my-modal')"
-                class="bg-orange-400 text-white inline-flex items-center px-4 py-1.5 rounded">
-                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+            <button x-data x-on:click="$dispatch('open-modal', 'add_ibu')"
+                class="bg-orange-400 text-white inline-flex items-center px-4 py-1.5 rounded-lg font-medium">
+                <svg class="me-1 -ms-1 w-5 h-5 font-bold" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
@@ -21,7 +18,7 @@
                     </svg>
                 Tambah Data
             </button>
-            @include('ibu.create')
+            
             <div class="flex flex-column sm:flex-row flex-wrap items-center space-x-2">
                 <div>
                     <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
@@ -163,8 +160,7 @@
                             {{ $mom->golongan_darah }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="#"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <a data-nama="{{ $mom->nama }}" data-tempat-tanggal-lahir="{{ $mom->tempat_tanggal_lahir }}" data-alamat="{{ $mom->alamat }}" data-pekerjaan="{{ $mom->pekerjaan }}" data-golongan-darah="{{ $mom->golongan_darah }}" data-no-tlp="{{ $mom->no_tlp }}" href="javascript:void(0);" x-data x-on:click="$dispatch('open-modal', 'edit_ibu')" class="editbtn font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -172,6 +168,10 @@
         </table>
     </div>
 
+    <!-- MODAL --->
+    @include('ibu.create')
+    @include('Ibu.edit')
+    
     <div class="mt-5">
         {{ $moms->links() }}
     </div>

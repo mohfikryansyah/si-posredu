@@ -38,7 +38,7 @@
     </div>
 
     
-    {{-- <script src="{{ asset('build/assets/plugins/jquery/jquery.min.js') }}"></script> --}}
+    <script src="{{ asset('build/assets/plugins/jquery/jquery.min.js') }}"></script>
     @isset($script)
         {{ $script }}
     @endisset
