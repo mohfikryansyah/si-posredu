@@ -17,6 +17,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BrvCqdWe.css') }}" data-navigate-track="reload"/>
+    <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script> 
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('build/assets/style.css') }}">
