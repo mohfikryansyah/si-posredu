@@ -77,8 +77,8 @@
                     </div>
                 </div>
                 <div class="py-8 w-full items-center justify-center flex">
-                    <img src="{{ asset('build/assets/images/kesehatan.png') }}" id="bayi" class="animate-bounce"
-                        alt="" srcset="{{ asset('build/assets/images/kesehatan.png') }}">
+                    <img src="{{ asset('images/kesehatan.png') }}" id="bayi" class="animate-bounce"
+                        alt="" srcset="{{ asset('images/kesehatan.png') }}">
                 </div>
             </div>
         </div>
