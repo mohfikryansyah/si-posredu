@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ibus', function (Blueprint $table) {
-            $table->uuid()->default(Str::uuid());
+            $table->uuid('id');
             $table->string('nama');
             $table->string('tempat_tanggal_lahir');
             $table->string('alamat');

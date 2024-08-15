@@ -32,7 +32,7 @@
                         <x-dropdown-link href="fiqri">Anak</x-dropdown-link>
                     </li>
                     <li>
-                        <x-dropdown-link href="{{ route('ibu.index') }}">Ibu</x-dropdown-link>
+                        <x-dropdown-link href="{{ route('ibu') }}">Ibu</x-dropdown-link>
                     </li>
                 </ul>
             </li>

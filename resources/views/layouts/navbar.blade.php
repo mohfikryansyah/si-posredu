@@ -13,7 +13,7 @@
                         </path>
                     </svg>
                 </button>
-                <a href="http://si-posredu.test/" class="flex ms-2 md:me-24">
+                <a href="{{ env('APP_URL') }}" class="flex ms-2 md:me-24">
                     <img src="{{ asset('build/assets/icons/logo.png') }}" class="h-8 me-3" alt="Posyandu Logo" />
                     <span
                         class="self-center text-xl font-semibold text-white sm:text-2xl whitespace-nowrap dark:text-white">SI-POSREDU</span>

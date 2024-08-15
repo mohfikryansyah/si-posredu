@@ -25,12 +25,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('/employee', EmployeeController::class)->middleware(['auth', 'verified']);
-Route::resource('/ibu', IbuController::class)->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/ibu', [IbuController::class, 'index'])->name('ibu');
+    Route::post('/ibu', [IbuController::class, 'store']);
+    Route::put('/ibu', [IbuController::class, 'update']);
+    Route::delete('/ibu', [IbuController::class, 'destroy'])->name('ibu.destroy');
 });
 
 require __DIR__.'/auth.php';

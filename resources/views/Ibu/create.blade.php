@@ -1,12 +1,12 @@
 <!-- Modal Component -->
-<x-modal name="add_ibu" :show="false" maxWidth="2xl">
+<x-modal name="add_ibu" :show="$errors->any()" maxWidth="2xl" focusable>
     <div class="p-6">
         <h2 class="text-lg font-medium text-gray-900">Buat Data Ibu</h2>
         <p class="mt-4 text-sm text-gray-600">
             Periksa semua data sebelum menyimpan.
         </p>
 
-        <form action="{{ route('ibu.store') }}" method="POST" class="mt-4">
+        <form action="{{ route('ibu') }}" method="POST" class="mt-4">
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2">
@@ -83,21 +83,15 @@
                     @enderror
                 </div>
             </div>
-            <div class="flex justify-between">
-                <button type="submit"
-                    class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Batal') }}
+                </x-secondary-button>
 
-                    Simpan
-                </button>
-                
-                <div class="">
-                    <button type="button" x-on:click="$dispatch('close-modal', 'add_ibu')"
-                        class="bg-red-600 text-white px-4 py-2 rounded">
-                        Batal
-                    </button>
-                </div>
+                <x-save-button class="ms-3">
+                    {{ __('Simpan') }}
+                </x-save-button>
             </div>
         </form>
-
     </div>
 </x-modal>

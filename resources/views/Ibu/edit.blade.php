@@ -1,16 +1,19 @@
 <!-- Modal Component -->
 <x-modal name="edit_ibu" id="edit_ibu" :show="false" maxWidth="2xl">
     <div class="p-6">
-        <h2 class="text-lg font-medium text-gray-900">Buat Data Ibu</h2>
+        <h2 class="text-lg font-medium text-gray-900">Ubah Data Ibu</h2>
         <p class="mt-4 text-sm text-gray-600">
             Periksa semua data sebelum menyimpan.
         </p>
 
-        <form action="{{ route('ibu.update', ['ibu' => $mom->uuid]) }}" method="POST" class="mt-4">
+        
+
+        <form action="{{ route('ibu') }}" method="POST" class="mt-4">
             @method("PUT")
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2">
+                    <input type="hidden" name="id" id="edit_id">
                     <label for="edit_nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama<span class="text-red-500">*</span></label>
                     <input type="text" name="nama" id="edit_nama"
@@ -102,25 +105,4 @@
     </div>
 </x-modal>
 
-<x-slot:script>
-    <script>
-        $(document).ready(function() {
-            $('table').on('click', '.editbtn', function() {
-                var name = $(this).data('nama');
-                var ttl = $(this).data('tempat-tanggal-lahir');
-                var alamat = $(this).data('alamat');
-                var pekerjaan = $(this).data('pekerjaan');
-                var golongan_darah = $(this).data('golongan-darah');
-                var no_tlp = $(this).data('no-tlp');
-                
 
-                $('#edit_nama').val(name);
-                $('#edit_tempat_tanggal_lahir').val(ttl);
-                $('#edit_alamat').val(alamat);
-                $('#edit_pekerjaan').val(pekerjaan);
-                $('#edit_golongan_darah').val(golongan_darah);
-                $('#edit_no_tlp').val(no_tlp);
-            });
-        });
-    </script>
-</x-slot:script>

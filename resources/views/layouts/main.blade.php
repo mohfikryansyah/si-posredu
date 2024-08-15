@@ -11,7 +11,7 @@
     </div>
 
     <!-- ALERTS -->
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="mt-5">
             <div id="alert-2"
                 class="flex items-center p-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
@@ -38,11 +38,11 @@
                     </svg>
                 </button>
             </div>
-    @endif
+    @endif --}}
 
-    @if (session('success'))
-        <div id="alert-3"
-            class="flex items-center p-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+    {{-- @if (session('success')) --}}
+        {{-- <div id="alert-3"
+            class="flex items-center p-4 mt-5 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
             role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">
@@ -64,8 +64,22 @@
                 </svg>
             </button>
         </div>
-</div>
-@endif
+        <x-slot:script>
+            <script>
+                console.log('success');
+                
 
-{{ $slot }}
+                toastr.success('{{ Session('success') }}', 'Success');
+
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+            </script>
+        </x-slot:script> --}}
+        {{-- </div> --}}
+    {{-- @endif --}}
+
+    {{ $slot }}
 </div>

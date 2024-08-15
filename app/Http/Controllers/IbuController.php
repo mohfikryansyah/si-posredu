@@ -14,7 +14,7 @@ class IbuController extends Controller
     {
         $golonganDarah = ['A', 'B', 'AB', 'O'];
         return view('Ibu.index', [
-            'moms' => Ibu::paginate(10),
+            'moms' => Ibu::get(),
             'golongan_darah' => $golonganDarah
         ]);
     }
@@ -44,7 +44,7 @@ class IbuController extends Controller
 
         Ibu::create($validatedData);
 
-        return redirect()->route('ibu.index')->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('ibu')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -66,16 +66,28 @@ class IbuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ibu $ibu)
-    {
-        dd($request->all());
+    public function update(Request $request)
+    {   
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'tempat_tanggal_lahir' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'pekerjaan' => 'required|string|max:255',
+            'golongan_darah' => 'required|string|max:3',
+            'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
+        ]);
+
+        Ibu::where('id', $request->id)->update($validatedData);        
+
+        return redirect()->route('ibu')->with('success', 'Data berhasil diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ibu $ibu)
+    public function destroy(Request $request)
     {
-        //
+        Ibu::findOrFail($request->id)->delete();
+        return back()->with('success',"Data berhasil dihapus!");
     }
 }
