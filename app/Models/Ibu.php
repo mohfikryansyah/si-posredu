@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\PemeriksaanIbu;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Ibu extends Model
 {
@@ -13,6 +14,11 @@ class Ibu extends Model
     protected $guarded = ['id'];
     protected $primaryKey = 'id';
     // public $incrementing = false;
-    // protected $keyType = 'string';
+    protected $keyType = 'string';
+
+    public function pemeriksaanIbu()
+    {
+        return $this->hasMany(PemeriksaanIbu::class, 'ibu_id', 'id');
+    }
     
 }

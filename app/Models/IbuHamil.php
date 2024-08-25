@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\PemeriksaanIbu;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Employee extends Model
+class IbuHamil extends Model
 {
     use HasFactory, HasUuids;
 
@@ -14,4 +15,9 @@ class Employee extends Model
     protected $primaryKey = 'id';
     // public $incrementing = false;
     protected $keyType = 'string';
+
+    public function pemeriksaanIbu()
+    {
+        return $this->hasMany(PemeriksaanIbu::class, 'ibu_hamil_id', 'id');
+    }
 }

@@ -20,6 +20,7 @@ module.exports = {
                 abyssinica: ['Abyssinica SIL', 'serif'],
                 akshar: ['Akshar', 'sans-serif'],
                 nunito: ['Nunito'],
+                inter: ['Inter', 'sans-serif'],
             },
             keyframes: {
                 bounce: {

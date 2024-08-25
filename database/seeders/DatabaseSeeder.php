@@ -6,6 +6,8 @@ use App\Models\Ibu;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Employee;
+use App\Models\IbuHamil;
+use App\Models\PemeriksaanIbu;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,9 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(12)->create();
-        Employee::factory(100)->create();
-        Ibu::factory(100)->create();
+        User::factory(2)->create();
+        Employee::factory(3)->create();
+        Ibu::factory(5)->create();
+        IbuHamil::factory(10)->create();
+        // PemeriksaanIbu::factory(129)->create();
 
         User::create([
             'name' => 'Fiqriansyah',

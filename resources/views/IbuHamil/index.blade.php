@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold md:text-xl text-lg text-gray-800 leading-tight">
-            {{ __('Data Ibu') }}
+            {{ __('Data Ibu Hamil') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div
             class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 bg-transparent dark:bg-gray-900 rounded-t-lg">
             <!-- Button to open modal -->
-            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'add_ibu')"
+            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'add_ibuHamil')"
                 class="openbtn bg-orange-400 text-white inline-flex items-center px-4 py-1.5 rounded-lg font-medium">
                 <svg class="me-1 -ms-1 w-5 h-5 font-bold" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -23,17 +23,15 @@
     </div>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white">
-        <table id="table_ibu">
+        <table id="table_ibu_hamil">
             <thead>
                 <tr>
                     <th scope="col">Nama</th>
-                    <th scope="col">Nama Suami</th>
-                    <th scope="col">Lahir</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">No. Tlp</th>
-                    <th scope="col">Pekerjaan</th>
-                    <th scope="col">Gol. Darah</th>
-                    <th scope="col">Kontrasepsi</th>
+                    <th scope="col">Usia Kehamilan</th>
+                    <th scope="col">Kehamilan Ke</th>
+                    <th scope="col">Tanggal Persalinan</th>
+                    <th scope="col">Penolong Persalinan</th>
+                    <th scope="col">Kondisi Bayi</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -44,26 +42,20 @@
                         <th class="whitespace-nowrap">
                             {{ $mom->nama }}
                         </th>
-                        <th class="whitespace-nowrap">
-                            {{ $mom->nama_suami }}
-                        </th>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->tempat_tanggal_lahir }}
+                            {{ $mom->usia_kehamilan }} Bulan
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->alamat }}
+                            {{ $mom->nomor_kehamilan }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->no_tlp }}
+                            {{ $mom->tanggal_persalinan }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->pekerjaan }}
-                        </td>
-                        <td class="text-center">
-                            {{ $mom->golongan_darah }}
+                            {{ $mom->penolong_persalinan }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->jenis_kontrasepsi }}
+                            {{ $mom->kondisi_bayi }}
                         </td>
                         <td>
                             <x-dropdown2 align="right" width="w-32">
@@ -76,13 +68,13 @@
 
                                 <x-slot name="content">
                                     <!-- Dropdown content here -->
-                                    <a data-id="{{ $mom->id }}" data-nama="{{ $mom->nama }}" data-nama-suami="{{ $mom->nama_suami }}"
-                                        data-tempat-tanggal-lahir="{{ $mom->tempat_tanggal_lahir }}"
-                                        data-alamat="{{ $mom->alamat }}" data-pekerjaan="{{ $mom->pekerjaan }}"
-                                        data-golongan-darah="{{ $mom->golongan_darah }}" 
-                                        data-jenis-kontrasepsi="{{ $mom->jenis_kontrasepsi }}"
-                                        data-no-tlp="{{ $mom->no_tlp }}" href="javascript:void(0);" x-data=""
-                                        x-on:click="$dispatch('open-modal', 'edit_ibu')"
+                                    <a data-id="{{ $mom->id }}" data-nama="{{ $mom->nama }}"
+                                        data-usia-kehamilan="{{ $mom->usia_kehamilan }}"
+                                        data-nomor-kehamilan="{{ $mom->nomor_kehamilan }}"
+                                        data-tanggal-persalinan="{{ $mom->tanggal_persalinan }}" data-penolong-persalinan="{{ $mom->penolong_persalinan }}"
+                                        data-kondisi-bayi="{{ $mom->kondisi_bayi }}"
+                                        href="javascript:void(0);"
+                                        x-data="" x-on:click="$dispatch('open-modal', 'edit_ibu_hamil')"
                                         class="editbtn block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
                                     <a data-id={{ $mom->id }} data-nama="{{ $mom->nama }}"
                                         href="javascript:void(0);" x-data=""
@@ -98,15 +90,15 @@
     </div>
 
     <!-- MODAL --->
-    @include('Ibu.create')
-    @include('Ibu.edit')
-    @include('Ibu.delete')
+    @include('IbuHamil.create')
+    @include('IbuHamil.edit')
+    @include('IbuHamil.delete')
 
     <x-slot:script>
         <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
         <script src="{{ asset('plugins/jquery/dataTables.tailwindcss.js') }}"></script>
         <script>
-            new DataTable('#table_ibu', {
+            new DataTable('#table_ibu_hamil', {
                 order: []
             });
         </script>
@@ -115,31 +107,25 @@
                 $('table').on('click', '.editbtn', function() {
                     var id = $(this).data('id');
                     var name = $(this).data('nama');
-                    var name_suami = $(this).data('nama-suami');
-                    var ttl = $(this).data('tempat-tanggal-lahir');
-                    var alamat = $(this).data('alamat');
-                    var pekerjaan = $(this).data('pekerjaan');
-                    var golongan_darah = $(this).data('golongan-darah');
-                    var jenis_kontrasepsi = $(this).data('jenis-kontrasepsi');
-                    var no_tlp = $(this).data('no-tlp');
+                    var usia_kehamilan = $(this).data('usia-kehamilan');
+                    var nomor_kehamilan = $(this).data('nomor-kehamilan');
+                    var tanggal_persalinan = $(this).data('tanggal-persalinan');
+                    var penolong_persalinan = $(this).data('penolong-persalinan');
+                    var kondisi_bayi = $(this).data('kondisi-bayi');
 
                     $('#edit_id').val(id);
                     $('#edit_nama').val(name);
-                    $('#edit_nama_suami').val(name_suami);
-                    $('#edit_tempat_tanggal_lahir').val(ttl);
-                    $('#edit_alamat').val(alamat);
-                    $('#edit_pekerjaan').val(pekerjaan);
-                    $('#edit_golongan_darah').val(golongan_darah);
-                    $('#edit_jenis_kontrasepsi').val(jenis_kontrasepsi);
-                    $('#edit_no_tlp').val(no_tlp);
+                    $('#edit_usia_kehamilan').val(usia_kehamilan);
+                    $('#edit_nomor_kehamilan').val(nomor_kehamilan);
+                    $('#edit_tanggal_persalinan').val(tanggal_persalinan);
+                    $('#edit_penolong_persalinan').val(penolong_persalinan);
+                    $('#edit_kondisi_bayi').val(kondisi_bayi);
                 });
 
                 $('table').on('click', '.deletebtn', function() {
                     var id = $(this).data('id');
-                    var name = $(this).data('nama');
 
                     $('#delete_id').val(id);
-                    $('#delete_nama').html(name);
                 });
             });
         </script>

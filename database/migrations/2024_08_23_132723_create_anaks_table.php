@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -12,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ibus', function (Blueprint $table) {
+        Schema::create('anaks', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('ibu_id')->nullable(); // Kolom ini harus sesuai dengan tipe data pada tabel 'ibu'
+            $table->foreign('ibu_id')->references('id')->on('ibus')->onDelete('cascade');
             $table->string('nama');
-            $table->string('nama_suami');
             $table->string('tempat_tanggal_lahir');
-            $table->string('alamat');
-            $table->string('no_tlp');
-            $table->string('pekerjaan');
+            $table->string('jenis_kelamin');
             $table->string('golongan_darah');
-            $table->string('jenis_kontrasepsi');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ibus');
+        Schema::dropIfExists('anaks');
     }
 };

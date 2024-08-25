@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Employee extends Model
+class Anak extends Model
 {
     use HasFactory, HasUuids;
 
@@ -14,4 +14,9 @@ class Employee extends Model
     protected $primaryKey = 'id';
     // public $incrementing = false;
     protected $keyType = 'string';
+
+    public function ibu()
+    {
+        return $this->belongsTo(Ibu::class, 'ibu_id', 'id');
+    }
 }

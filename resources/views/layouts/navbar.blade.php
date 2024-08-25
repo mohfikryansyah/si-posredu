@@ -14,7 +14,7 @@
                     </svg>
                 </button>
                 <a href="{{ env('APP_URL') }}" class="flex ms-2 md:me-24">
-                    <img src="{{ asset('build/assets/icons/logo.png') }}" class="h-8 me-3" alt="Posyandu Logo" />
+                    <img src="{{ asset('images/logo.png') }}" class="h-8 me-3" alt="Posyandu Logo" />
                     <span
                         class="self-center text-xl font-semibold text-white sm:text-2xl whitespace-nowrap dark:text-white">SI-POSREDU</span>
                 </a>
@@ -60,6 +60,15 @@
                                 <a href="#"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Sign out</a>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+            
+                                        <x-dropdown-link :href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </form>
                             </li>
                         </ul>
                     </div>

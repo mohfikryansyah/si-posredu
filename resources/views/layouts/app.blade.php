@@ -8,23 +8,26 @@
     <title>{{ config('app.name', 'Posyandu') }}</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=abyssinica-sil:400|akshar:300,400,500,600,700|figtree:600|nunito:400,500,600,700,800,900|source-sans-pro:200,300,400,600,700,900"
-        rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=abyssinica-sil:400|akshar:300,400,500,600,700|figtree:600|inter:400,500,600,700,800,900|nunito:400,500,600,700,800,900|source-sans-pro:200,300,400,600,700,900" rel="stylesheet" />
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/app-BPMqsMFO.css') }}" data-navigate-track="reload"/>
-    <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js ') }}" data-navigate-track="reload"></script> 
+    <link rel="stylesheet" href="{{ asset('build/assets/app-jSHZKoj9.css') }}" data-navigate-track="reload"/>
+    <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script> 
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="{{ asset('build/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- TOAST CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <!-- CONDITION CSS -->
+    @isset($css)
+        {{ $css }}
+    @endisset
 </head>
 
-<body class="font-poppins antialiased">
+<body class="font-inter antialiased">
     <div class="min-h-screen bg-gray-100">
         <!-- NAVBAR -->
         @include('layouts.navbar')
@@ -34,7 +37,7 @@
         @include('layouts.main')
     </div>
 
-    <script src="{{ asset('build/assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @if (session('success'))
         <script>

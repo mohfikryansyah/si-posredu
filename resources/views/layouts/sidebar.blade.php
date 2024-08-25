@@ -29,10 +29,19 @@
                 </x-dropdown>
                 <ul id="posyandu" class="hidden py-2 space-y-2">
                     <li>
-                        <x-dropdown-link href="fiqri">Anak</x-dropdown-link>
+                        <x-dropdown-link href="{{ route('ibu') }}">Ibu</x-dropdown-link>
                     </li>
                     <li>
-                        <x-dropdown-link href="{{ route('ibu') }}">Ibu</x-dropdown-link>
+                        <x-dropdown-link href="{{ route('ibu-hamil') }}">Ibu Hamil</x-dropdown-link>
+                    </li>
+                    <li>
+                        <x-dropdown-link href="{{ route('pemeriksaanIbu') }}">Pemeriksaan Ibu Hamil</x-dropdown-link>
+                    </li>
+                    <li>
+                        <x-dropdown-link href="{{ route('anak') }}">Anak</x-dropdown-link>
+                    </li>
+                    <li>
+                        <x-dropdown-link href="fiqri">Pemeriksaan Anak</x-dropdown-link>
                     </li>
                 </ul>
             </li>

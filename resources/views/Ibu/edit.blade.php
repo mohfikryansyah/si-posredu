@@ -1,67 +1,75 @@
 <!-- Modal Component -->
-<x-modal name="edit_ibu" id="edit_ibu" :show="false" maxWidth="2xl">
+<x-modal name="edit_ibu" id="edit_ibu" :show="$errors->edit_ibu->any()" maxWidth="2xl">
     <div class="p-6">
         <h2 class="text-lg font-medium text-gray-900">Ubah Data Ibu</h2>
         <p class="mt-4 text-sm text-gray-600">
             Periksa semua data sebelum menyimpan.
         </p>
 
-        
-
         <form action="{{ route('ibu') }}" method="POST" class="mt-4">
             @method("PUT")
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2">
-                    <input type="hidden" name="id" id="edit_id">
+                    <input type="hidden" name="id" id="edit_id" value="{{ old('id') }}">
                     <label for="edit_nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama<span class="text-red-500">*</span></label>
-                    <input type="text" name="nama" id="edit_nama"
-                        class="bg-gray-50 border {{ $errors->has('nama') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Ketik Nama Ibu" required>
-                    @error('nama')
+                    <x-text-input name="nama" id="edit_nama"
+                        class="{{ $errors->edit_ibu->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Nama Ibu" required value="{{ old('nama', $mom->nama) }}"></x-text-input>
+                    @error('nama', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-span-2">
-                    <label for="tempat_tanggal_lahir"
+                    <label for="edit_nama_suami" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Nama Suami<span class="text-red-500">*</span></label>
+                    <x-text-input name="nama_suami" id="edit_nama_suami"
+                        class="{{ $errors->edit_ibu->has('nama_suami') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Nama Suami" required value="{{ old('nama_suami', $mom->nama_suami) }}"></x-text-input>
+                    @error('nama_suami', 'edit_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2">
+                    <label for="edit_tempat_tanggal_lahir"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat, Tanggal
                         Lahir<span class="text-red-500">*</span></label>
-                    <input type="text" name="tempat_tanggal_lahir" id="edit_tempat_tanggal_lahir"
-                        class="bg-gray-50 border {{ $errors->has('tempat_tanggal_lahir') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Contoh: Gorontalo, 11 April 2001" required>
-                    @error('tempat_tanggal_lahir')
+                    <x-text-input name="tempat_tanggal_lahir" id="edit_tempat_tanggal_lahir"
+                        class="{{ $errors->edit_ibu->has('tempat_tanggal_lahir') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Contoh: Gorontalo, 11 April 2001" required value="{{ old('tempat_tanggal_lahir', $mom->tempat_tanggal_lahir) }}"></x-text-input>
+                    @error('tempat_tanggal_lahir', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-span-2">
-                    <label for="alamat"
+                    <label for="edit_alamat"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat<span
                             class="text-red-500">*</span></label>
-                    <input type="text" name="alamat" id="edit_alamat"
-                        class="bg-gray-50 border {{ $errors->has('alamat') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Ketik Alamat" required>
-                    @error('alamat')
+                    <x-text-input name="alamat" id="edit_alamat"
+                        class="{{ $errors->edit_ibu->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('alamat', $mom->alamat) }}"></x-text-input>
+                    @error('alamat', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="pekerjaan"
+                    <label for="edit_pekerjaan"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pekerjaan<span
                             class="text-red-500">*</span></label>
-                    <input type="text" name="pekerjaan" id="edit_pekerjaan"
-                        class="bg-gray-50 border {{ $errors->has('pekerjaan') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Contoh: Petani" required>
-                    @error('pekerjaan')
+                    <x-text-input name="pekerjaan" id="edit_pekerjaan"
+                        class="{{ $errors->edit_ibu->has('pekerjaan') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('pekerjaan', $mom->pekerjaan) }}"></x-text-input>
+                    @error('pekerjaan', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="golongan_darah"
+                    <label for="edit_golongan_darah"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gol. Darah<span
                             class="text-red-500">*</span></label>
                     <select id="edit_golongan_darah" name="golongan_darah"
-                        class="bg-gray-50 border {{ $errors->has('golongan_darah') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        class="{{ $errors->edit_ibu->has('golongan_darah') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option disabled selected>Pilih</option>
                         @foreach ($golongan_darah as $goldar)
                             @if (old('golongan_darah') === $goldar)
@@ -70,35 +78,42 @@
                                 <option value="{{ $goldar }}">{{ $goldar }}</option>
                             @endif
                         @endforeach
-                        @error('golongan_darah')
-                            <p class="text-red-500 text-xs">{{ $message }}</p>
-                        @enderror
                     </select>
+                    @error('golongan_darah', 'edit_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
                 </div>
-                <div class="col-span-2">
-                    <label for="no_tlp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No.
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="edit_no_tlp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No.
                         HP<span class="text-red-500">*</span></label>
-                    <input type="text" name="no_tlp" id="edit_no_tlp"
-                        class="bg-gray-50 border {{ $errors->has('no_tlp') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Contoh: Petani" required>
-                    @error('no_tlp')
+                    <x-number-input name="no_tlp" id="edit_no_tlp"
+                        class="{{ $errors->edit_ibu->has('no_tlp') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('no_tlp', $mom->no_tlp) }}"></x-number-input>
+                    @error('no_tlp', 'edit_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="edit_jenis_kontrasepsi"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kontrasepsi<span
+                            class="text-red-500">*</span></label>
+                    <x-text-input name="jenis_kontrasepsi" id="edit_jenis_kontrasepsi"
+                        class="{{ $errors->edit_ibu->has('jenis_kontrasepsi') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('jenis_kontrasepsi', $mom->jenis_kontrasepsi) }}"></x-text-input>
+                    @error('jenis_kontrasepsi', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
-            <div class="flex justify-between">
-                <button type="submit"
-                    class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-
-                    Simpan
-                </button>
-
-                <div class="">
-                    <button type="button" x-on:click="$dispatch('close-modal', 'edit_ibu')"
-                        class="bg-red-600 text-white px-4 py-2 rounded">
-                        Batal
-                    </button>
-                </div>
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Batal') }}
+                </x-secondary-button>
+    
+                <x-save-button class="ms-3">
+                    {{ __('Simpan') }}
+                </x-save-button>
+            </div>
             </div>
         </form>
 

@@ -124,6 +124,8 @@
             </div>
         </div>
     </div>
+
+    <!-- CHART -->
     <div class="grid md:grid-cols-2 grid-cols-1 gap-5">
         <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5">
             <h2 class="text-center text-gray-700 font-semibold md:text-xl text-lg mb-3">
@@ -140,83 +142,35 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 mb-4">
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white mb-52">
+        <div class="border-r border-gray-200">
+            <div class="grid grid-rows-3 grid-cols-1 px-4">
+                <div class="row-span-1 flex justify-between mt-3">
+                    <h1 class="font-medium">Pemeriksaan Ibu</h1>
+                    @if ($persentasePerubahan > 0)
+                        <h1 class="font-medium text-green-400">{{ round($persentasePerubahan, 2) }}%</h1>
+                    @elseif ($persentasePerubahan < 0)
+                        <h1 class="font-medium text-red-400">{{ round($persentasePerubahan, 2) }}%</h1>
+                    @else
+                        <h1 class="font-medium text-yellow-400">{{ round($persentasePerubahan, 2) }}%</h1>
+                    @endif
+                </div>
+                <div class="row-span-1">
+                    <h1 class="text-4xl font-bold">{{ $pemeriksaanBulanIni }}</h1>
+                </div>
+                <div class="row-span-1 mb-3 mt-1 items-center">
+                    <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                        <div class="bg-blue-600 h-1.5 rounded-full progress-bar"
+                            data-percentage="{{ $persentasePerubahan }}" style="width: 0;"></div>
+                    </div>
+                    <h1 class="text-gray-400 text-sm mt-1">Overall Pemeriksaan Ibu
+                        {{ count(App\Models\PemeriksaanIbu::all()) }}</h1>
+                </div>
+            </div>
         </div>
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 1v16M1 9h16" />
-                </svg>
-            </p>
-        </div>
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 1v16M1 9h16" />
-                </svg>
-            </p>
-        </div>
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 1v16M1 9h16" />
-                </svg>
-            </p>
-        </div>
-    </div>
-    <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-        <p class="text-2xl text-gray-400 dark:text-gray-500">
-            <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-            </svg>
-        </p>
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 1v16M1 9h16" />
-                </svg>
-            </p>
-        </div>
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 1v16M1 9h16" />
-                </svg>
-            </p>
-        </div>
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 1v16M1 9h16" />
-                </svg>
-            </p>
-        </div>
-        <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 1v16M1 9h16" />
-                </svg>
-            </p>
-        </div>
+        <div class="border-r border-gray-200 font-medium p-4"></div>
+        <div class="border-r border-gray-200 font-medium p-4"></div>
+        <div class="font-medium p-4"></div>
     </div>
 
 
@@ -225,7 +179,38 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let progressBar = document.querySelector('.progress-bar');
+                let targetPercentage = parseFloat(progressBar.getAttribute('data-percentage'));
+                let currentPercentage = 0;
 
+                function updateProgressBar(percentage) {
+                    progressBar.style.width = percentage + '%';
+                    // progressBar.textContent = percentage + '%';
+
+                    // Change color based on percentage
+                    if (percentage < 33) {
+                        progressBar.style.backgroundColor = '#f44336'; // Red
+                    } else if (percentage < 66) {
+                        progressBar.style.backgroundColor = '#ff9800'; // Orange
+                    } else if (percentage < 100) {
+                        progressBar.style.backgroundColor = '#4caf50'; // Green
+                    } else {
+                        progressBar.style.backgroundColor = '#2196f3'; // Blue for 100%
+                    }
+                }
+
+                let interval = setInterval(function() {
+                    if (currentPercentage >= targetPercentage) {
+                        clearInterval(interval);
+                    } else {
+                        currentPercentage++;
+                        updateProgressBar(currentPercentage);
+                    }
+                }, 20);
+            });
+        </script>
         <script>
             var dataPetugas = {!! $data !!}
             var data = [{

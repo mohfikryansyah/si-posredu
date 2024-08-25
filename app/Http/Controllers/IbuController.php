@@ -14,7 +14,7 @@ class IbuController extends Controller
     {
         $golonganDarah = ['A', 'B', 'AB', 'O'];
         return view('Ibu.index', [
-            'moms' => Ibu::get(),
+            'moms' => Ibu::latest()->get(),
             'golongan_darah' => $golonganDarah
         ]);
     }
@@ -32,12 +32,14 @@ class IbuController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedData = $request->validateWithBag('add_ibu', [
             'nama' => 'required|string|max:255',
+            'nama_suami' => 'required|string|max:255',
             'tempat_tanggal_lahir' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'pekerjaan' => 'required|string|max:255',
             'golongan_darah' => 'required|string|max:3',
+            'jenis_kontrasepsi' => 'required|string|max:3',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
         ]);
 
@@ -68,12 +70,14 @@ class IbuController extends Controller
      */
     public function update(Request $request)
     {   
-        $validatedData = $request->validate([
+        $validatedData = $request->validateWithBag('edit_ibu', [
             'nama' => 'required|string|max:255',
+            'nama_suami' => 'required|string|max:255',
             'tempat_tanggal_lahir' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'pekerjaan' => 'required|string|max:255',
             'golongan_darah' => 'required|string|max:3',
+            'jenis_kontrasepsi' => 'required|string|max:255',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
         ]);
 
