@@ -10,7 +10,7 @@
             @method("PUT")
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
-                <div class="col-span-2">
+                <div class="col-span-2 sm:col-span-1">
                     <input type="hidden" name="id" id="edit_id" value="{{ old('id') }}">
                     <label for="edit_nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama<span class="text-red-500">*</span></label>
@@ -21,7 +21,7 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2 sm:col-span-1">
                     <label for="edit_nama_suami" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama Suami<span class="text-red-500">*</span></label>
                     <x-text-input name="nama_suami" id="edit_nama_suami"
@@ -42,7 +42,7 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2 sm:col-span-1">
                     <label for="edit_alamat"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat<span
                             class="text-red-500">*</span></label>
@@ -50,6 +50,17 @@
                         class="{{ $errors->edit_ibu->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
                         required value="{{ old('alamat', $mom->alamat) }}"></x-text-input>
                     @error('alamat', 'edit_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="edit_tanggal_pendaftaran"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pendaftaran<span
+                            class="text-red-500">*</span></label>
+                    <x-date-input name="tanggal_pendaftaran" id="edit_tanggal_pendaftaran"
+                        class="{{ $errors->edit_ibu->has('tanggal_pendaftaran') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('tanggal_pendaftaran', $mom->tanggal_pendaftaran) }}"></x-date-input>
+                    @error('tanggal_pendaftaran', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
@@ -94,13 +105,13 @@
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="edit_jenis_kontrasepsi"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kontrasepsi<span
+                    <label for="edit_nomor_kehamilan"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kehamilan Ke<span
                             class="text-red-500">*</span></label>
-                    <x-text-input name="jenis_kontrasepsi" id="edit_jenis_kontrasepsi"
-                        class="{{ $errors->edit_ibu->has('jenis_kontrasepsi') ? 'border-red-500' : 'border-gray-300' }}"
-                        required value="{{ old('jenis_kontrasepsi', $mom->jenis_kontrasepsi) }}"></x-text-input>
-                    @error('jenis_kontrasepsi', 'edit_ibu')
+                    <x-number-input name="nomor_kehamilan" id="edit_nomor_kehamilan"
+                        class="{{ $errors->edit_ibu->has('nomor_kehamilan') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('nomor_kehamilan', $mom->nomor_kehamilan) }}"></x-number-input>
+                    @error('nomor_kehamilan', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

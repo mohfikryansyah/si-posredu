@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ibu;
+use App\Models\Lansia;
 use Illuminate\Http\Request;
 
-class IbuController extends Controller
+class LansiaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,10 @@ class IbuController extends Controller
     public function index()
     {
         $golonganDarah = ['A', 'B', 'AB', 'O'];
-        return view('Ibu.index', [
-            'moms' => Ibu::latest()->get(),
-            'golongan_darah' => $golonganDarah
+        $lansias = Lansia::latest()->get();
+        return view('Lansia.index', [
+            'lansias' => $lansias,
+            'golongan_darah' => $golonganDarah,
         ]);
     }
 
@@ -32,28 +33,25 @@ class IbuController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validateWithBag('add_ibu', [
+        $validatedData = $request->validateWithBag('add_lansia', [
             'nama' => 'required|string|max:255',
-            'nama_suami' => 'required|string|max:255',
             'tempat_tanggal_lahir' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'pekerjaan' => 'required|string|max:255',
             'golongan_darah' => 'required|string|max:3',
-            'nomor_kehamilan' => 'required|numeric|max_digits:2',
-            'tanggal_pendaftaran' => 'required',
+            'alamat' => 'required|string|max:255',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
+            'pekerjaan' => 'required|string|max:255',
         ]);
 
 
-        Ibu::create($validatedData);
+        Lansia::create($validatedData);
 
-        return redirect()->route('ibu')->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('lansia')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Ibu $ibu)
+    public function show(Lansia $lansia)
     {
         //
     }
@@ -61,7 +59,7 @@ class IbuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ibu $ibu)
+    public function edit(Lansia $lansia)
     {
         //
     }
@@ -70,23 +68,20 @@ class IbuController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-    {   
-        // dd($request->all());
-        $validatedData = $request->validateWithBag('edit_ibu', [
+    {
+        $validatedData = $request->validateWithBag('edit_lansia', [
             'nama' => 'required|string|max:255',
-            'nama_suami' => 'required|string|max:255',
             'tempat_tanggal_lahir' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'pekerjaan' => 'required|string|max:255',
             'golongan_darah' => 'required|string|max:3',
-            'nomor_kehamilan' => 'required|numeric|max_digits:2',
-            'tanggal_pendaftaran' => 'required',
+            'alamat' => 'required|string|max:255',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
+            'pekerjaan' => 'required|string|max:255',
         ]);
 
-        Ibu::where('id', $request->id)->update($validatedData);        
 
-        return redirect()->route('ibu')->with('success', 'Data berhasil diubah!');
+        Lansia::where('id', $request->id)->update($validatedData);
+
+        return redirect()->route('lansia')->with('success', 'Data berhasil diubah!');
     }
 
     /**
@@ -94,7 +89,7 @@ class IbuController extends Controller
      */
     public function destroy(Request $request)
     {
-        Ibu::findOrFail($request->id)->delete();
+        Lansia::findOrFail($request->id)->delete();
         return back()->with('success',"Data berhasil dihapus!");
     }
 }

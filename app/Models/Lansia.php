@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Anak extends Model
+class Lansia extends Model
 {
     use HasFactory, HasUuids;
 
@@ -15,8 +15,8 @@ class Anak extends Model
     // public $incrementing = false;
     protected $keyType = 'string';
 
-    public function pemeriksaanAnak()
+    public function PemeriksaanLansia()
     {
-        return $this->hasMany(PemeriksaanAnak::class, 'anak_id', 'id');
+        return $this->hasMany(PemeriksaanLansia::class, 'lansia_id', 'id');
     }
 }

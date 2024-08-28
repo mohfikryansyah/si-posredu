@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Carbon\Carbon;
 use App\Models\Ibu;
-use App\Models\IbuHamil;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanIbu;
 
@@ -17,8 +16,8 @@ class PemeriksaanIbuController extends Controller
     public function index()
     {
         $golonganDarah = ['A', 'B', 'AB', 'O'];
-        $moms = IbuHamil::with('pemeriksaanIbu')->get();
-        $moms_cek = PemeriksaanIbu::with('ibuHamil')->latest()->get();
+        $moms = Ibu::with('pemeriksaanIbu')->latest()->get();
+        $moms_cek = PemeriksaanIbu::with('ibu')->latest()->get();
         $employees = Employee::all();
         return view('PemeriksaanIbu.index', [
             'moms' => $moms,
@@ -43,16 +42,16 @@ class PemeriksaanIbuController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validateWithBag('add_pemeriksaan_ibu', [
-            'ibu_hamil_id' => 'required',
+            'ibu_id' => 'required',
             'employee_id' => 'required',
-            'tinggi_badan' => 'required|numeric',
+            'tanggal_pemeriksaan' => 'required',
+            'usia_kehamilan' => 'required|max:255',
+            'tekanan_darah' => 'required|max:255',
             'berat_badan' => 'required|numeric',
-            'tekanan_darah_sistolik' => 'required|numeric',
-            'tekanan_darah_diastolik' => 'required|numeric',
-            'kadar_gula_darah' => 'required|numeric',
-            'kadar_asam_urat' => 'required|numeric',
-            'kadar_kolestrol' => 'required|numeric',
-            'riwayat_penyakit' => 'required|max:50',
+            'tinggi_fundus' => 'required|numeric',
+            'denyut_jantung_janin' => 'required|numeric',
+            'keluhan' => 'required|max:100',
+            'pemberian_vitamin' => 'required|max:100',
             'catatan' => 'required|max:72',
         ]);
 
@@ -66,7 +65,7 @@ class PemeriksaanIbuController extends Controller
      */
     public function show($pemeriksaanIbu)
     {
-        $showPemeriksaan = PemeriksaanIbu::with('ibuHamil')->where('id', $pemeriksaanIbu)->firstOrFail();
+        $showPemeriksaan = PemeriksaanIbu::with('ibu')->where('id', $pemeriksaanIbu)->firstOrFail();
         return view('PemeriksaanIbu.show', [
             'mom' => $showPemeriksaan,
         ]);
@@ -85,18 +84,17 @@ class PemeriksaanIbuController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validateWithBag('edit_pemeriksaan_ibu', [
-            'ibu_hamil_id' => 'required',
+            'ibu_id' => 'required',
             'employee_id' => 'required',
-            'tinggi_badan' => 'required|numeric',
+            'tanggal_pemeriksaan' => 'required',
+            'usia_kehamilan' => 'required|max:255',
+            'tekanan_darah' => 'required|max:255',
             'berat_badan' => 'required|numeric',
-            'tekanan_darah_sistolik' => 'required|numeric',
-            'tekanan_darah_diastolik' => 'required|numeric',
-            'kadar_gula_darah' => 'required|numeric',
-            'kadar_asam_urat' => 'required|numeric',
-            'kadar_kolestrol' => 'required|numeric',
-            'riwayat_penyakit' => 'required|max:50',
+            'tinggi_fundus' => 'required|numeric',
+            'denyut_jantung_janin' => 'required|numeric',
+            'keluhan' => 'required|max:100',
+            'pemberian_vitamin' => 'required|max:100',
             'catatan' => 'required|max:72',
         ]);
         

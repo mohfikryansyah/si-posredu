@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ibu_hamils', function (Blueprint $table) {
+        Schema::create('lansias', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama');
-            $table->string('usia_kehamilan');
-            $table->integer('nomor_kehamilan');
-            $table->date('tanggal_persalinan');
-            $table->string('penolong_persalinan');
-            $table->string('kondisi_bayi');
+            $table->string('tempat_tanggal_lahir');
+            $table->string('golongan_darah');
+            $table->string('alamat');
+            $table->string('no_tlp', 13);
+            $table->string('pekerjaan');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ibu_hamils');
+        Schema::dropIfExists('lansias');
     }
 };

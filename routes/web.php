@@ -1,17 +1,17 @@
 <?php
 
 use Carbon\Carbon;
-use App\Models\User;
-use App\Models\PemeriksaanIbu;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IbuController;
 use App\Http\Controllers\AnakController;
+use App\Http\Controllers\LansiaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\DashboardController;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use App\Http\Controllers\PemeriksaanIbuController;
+use App\Http\Controllers\PemeriksaanAnakController;
+use App\Http\Controllers\PemeriksaanLansiaController;
 
 Route::get('/', function () {
     $dataPetugas = [111, 121, 125, 135, 145, 155, 165];
@@ -39,13 +39,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/ibu-hamil', [IbuHamilController::class, 'index'])->name('ibu-hamil');
-    Route::post('/ibu-hamil', [IbuHamilController::class, 'store']);
-    Route::put('/ibu-hamil', [IbuHamilController::class, 'update']);
-    Route::delete('/ibu-hamil', [IbuHamilController::class, 'destroy'])->name('ibu-hamil.destroy');
-});
-
-Route::middleware('auth')->group(function () {
     Route::get('/pemeriksaan-ibu', [PemeriksaanIbuController::class, 'index'])->name('pemeriksaanIbu');
     Route::get('/pemeriksaan-ibu/show/{id}', [PemeriksaanIbuController::class, 'show'])->name('pemeriksaanIbu-show');
     Route::post('/pemeriksaan-ibu', [PemeriksaanIbuController::class, 'store']);
@@ -59,5 +52,29 @@ Route::middleware('auth')->group(function () {
     Route::put('/anak', [AnakController::class, 'update']);
     Route::delete('/anak', [AnakController::class, 'destroy'])->name('anak.destroy');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'index'])->name('pemeriksaanAnak');
+    Route::get('/pemeriksaan-anak/show/{id}', [PemeriksaanAnakController::class, 'show'])->name('pemeriksaananak-show');
+    Route::post('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'store']);
+    Route::put('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'update']);
+    Route::delete('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'destroy'])->name('pemeriksaanAnak.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/lansia', [LansiaController::class, 'index'])->name('lansia');
+    Route::post('/lansia', [LansiaController::class, 'store']);
+    Route::put('/lansia', [LansiaController::class, 'update']);
+    Route::delete('/lansia', [LansiaController::class, 'destroy'])->name('lansia.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'index'])->name('pemeriksaanlansia');
+    Route::get('/pemeriksaan-lansia/show/{id}', [PemeriksaanLansiaController::class, 'show'])->name('pemeriksaanlansia-show');
+    Route::post('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'store']);
+    Route::put('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'update']);
+    Route::delete('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'destroy'])->name('pemeriksaanLansia.destroy');
+});
+
 
 require __DIR__ . '/auth.php';

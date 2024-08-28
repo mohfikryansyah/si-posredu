@@ -15,16 +15,17 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/app-jSHZKoj9.css') }}" data-navigate-track="reload"/>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BCMxoxo6.css ') }}" data-navigate-track="reload"/>
     <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script> 
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- TOAST CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <!-- CONDITION CSS -->
-    @isset($css)
+    <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}">
+    {{-- @isset($css)
         {{ $css }}
-    @endisset
+    @endisset --}}
 </head>
 
 <body class="font-inter antialiased">

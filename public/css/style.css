@@ -1,3 +1,7 @@
+.bg-sidebar {
+  background-color: #212529;
+}
+
 @keyframes heartbeat {
   0%, 100% {
     transform: scale(1);

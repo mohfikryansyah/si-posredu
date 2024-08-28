@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('anaks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('ibu_id')->nullable(); // Kolom ini harus sesuai dengan tipe data pada tabel 'ibu'
-            $table->foreign('ibu_id')->references('id')->on('ibus')->onDelete('cascade');
             $table->string('nama');
             $table->string('tempat_tanggal_lahir');
             $table->string('jenis_kelamin');
-            $table->string('golongan_darah');
+            $table->string('nama_ibu');
+            $table->string('nama_ayah');
+            $table->string('alamat');
+            $table->string('no_tlp');
+            $table->string('tanggal_pendaftaran');
             $table->timestamps();
         });
     }

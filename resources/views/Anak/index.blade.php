@@ -27,10 +27,13 @@
             <thead>
                 <tr>
                     <th scope="col">Nama Anak</th>
-                    <th scope="col">Nama Ibu</th>
-                    <th scope="col">Tempat, tanggal lahir</th>
+                    <th scope="col">Lahir</th>
                     <th scope="col">Jenis Kelamin</th>
-                    <th scope="col">Gol. Darah</th>
+                    <th scope="col">Nama Ibu</th>
+                    <th scope="col">Nama Ayah</th>
+                    <th scope="col">Alamat</th>
+                    <th scope="col">No. Tlp</th>
+                    <th scope="col">Tgl. Mendaftar</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -38,51 +41,49 @@
                 @foreach ($children as $child)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="whitespace-nowrap px-6 py-4">
-                            {{ $child->nama }}
+                        <th class="whitespace-nowrap" title="{{ $child->nama }}">
+                            {{ Str::limit($child->nama, 21) }}
                         </th>
-                        <th class="whitespace-nowrap px-6 py-4">
-                            {{ $child->ibu->nama }}
-                        </th>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $child->tempat_tanggal_lahir }}
+                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->tempat_tanggal_lahir }}">
+                            {{ Str::limit($child->tempat_tanggal_lahir, 21) }}
                         </td>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $child->alamat }}
+                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->jenis_kelamin }}">
+                            {{ $child->jenis_kelamin }}
                         </td>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $child->no_tlp }}
+                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->nama_ibu }}">
+                            {{ Str::limit($child->nama_ibu, 15) }}
                         </td>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $child->pekerjaan }}
+                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->nama_ayah }}">
+                            {{ Str::limit($child->nama_ayah, 15) }}
                         </td>
-                        <td class="text-center">
-                            {{ $child->golongan_darah }}
+                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->alamat }}">
+                            {{ Str::limit($child->alamat, 15) }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->no_tlp }}">
+                            {{ Str::limit($child->no_tlp, 13, ' ') }}
+                        </td>
+                        <td title="{{ $child->tanggal_pendaftaran }}">
+                            {{ $child->tanggal_pendaftaran }}
                         </td>
                         <td>
-                            <x-dropdown2 align="right" width="w-32">
-                                <x-slot name="trigger">
-                                    <button
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                                </x-slot>
-
-                                <x-slot name="content">
-                                    <!-- Dropdown content here -->
-                                    <a data-id="{{ $child->id }}" data-nama="{{ $child->nama }}"
-                                        data-tempat-tanggal-lahir="{{ $child->tempat_tanggal_lahir }}"
-                                        data-alamat="{{ $child->alamat }}" data-pekerjaan="{{ $child->pekerjaan }}"
-                                        data-golongan-darah="{{ $child->golongan_darah }}"
-                                        data-no-tlp="{{ $child->no_tlp }}" href="javascript:void(0);" x-data=""
-                                        x-on:click="$dispatch('open-modal', 'edit_anak')"
-                                        class="editbtn block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
-                                    <a data-id={{ $child->id }} data-nama="{{ $child->nama }}"
-                                        href="javascript:void(0);" x-data=""
-                                        x-on:click="$dispatch('open-modal', 'delete_anak')"
-                                        class="deletebtn block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hapus</a>
-                                </x-slot>
-                            </x-dropdown2>
+                            <div class="flex items-center">
+                                <a href="javascript:void(0);" x-data data-id="{{ $child->id }}"
+                                    data-nama="{{ $child->nama }}" data-nama-ibu="{{ $child->nama_ibu }}"
+                                    data-nama-ayah="{{ $child->nama_ayah }}"
+                                    data-jenis-kelamin="{{ $child->jenis_kelamin }}"
+                                    data-tempat-tanggal-lahir="{{ $child->tempat_tanggal_lahir }}"
+                                    data-alamat="{{ $child->alamat }}" data-no-tlp="{{ $child->no_tlp }}"
+                                    data-tanggal-pendaftaran="{{ $child->tanggal_pendaftaran }}"
+                                    x-on:click="$dispatch('open-modal', 'edit_anak')"
+                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+                                <a data-id={{ $child->id }} data-nama="{{ $child->nama }}"
+                                    href="javascript:void(0);" x-on:click="$dispatch('open-modal', 'delete_anak')"
+                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    <i class="fa-solid fa-trash-arrow-up"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -91,9 +92,9 @@
     </div>
 
     <!-- MODAL --->
-    {{-- @include('anak.create')
-    @include('anak.edit')
-    @include('anak.delete') --}}
+    @include('Anak.create')
+    @include('Anak.edit')
+    @include('Anak.delete')
 
     <x-slot:script>
         <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
@@ -108,20 +109,25 @@
                 $('table').on('click', '.editbtn', function() {
                     var id = $(this).data('id');
                     var name = $(this).data('nama');
+                    var name_ibu = $(this).data('nama-ibu');
+                    var name_ayah = $(this).data('nama-ayah');
                     var ttl = $(this).data('tempat-tanggal-lahir');
                     var alamat = $(this).data('alamat');
-                    var pekerjaan = $(this).data('pekerjaan');
-                    var golongan_darah = $(this).data('golongan-darah');
                     var no_tlp = $(this).data('no-tlp');
-                    console.log(no_tlp);
+                    var jenis_kelamin = $(this).data('jenis-kelamin');
+                    var tanggal_pendaftaran = $(this).data('tanggal-pendaftaran');
+                    console.log(jenis_kelamin);
+
 
                     $('#edit_id').val(id);
                     $('#edit_nama').val(name);
+                    $('#edit_nama_ibu').val(name_ibu);
+                    $('#edit_nama_ayah').val(name_ayah);
                     $('#edit_tempat_tanggal_lahir').val(ttl);
                     $('#edit_alamat').val(alamat);
-                    $('#edit_pekerjaan').val(pekerjaan);
-                    $('#edit_golongan_darah').val(golongan_darah);
                     $('#edit_no_tlp').val(no_tlp);
+                    $('#edit_jenis_kelamin').val(jenis_kelamin);
+                    $('#edit_tanggal_pendaftaran').val(tanggal_pendaftaran);
                 });
 
                 $('table').on('click', '.deletebtn', function() {

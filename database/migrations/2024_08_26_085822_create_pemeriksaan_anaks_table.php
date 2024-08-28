@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemeriksaan_ibus', function (Blueprint $table) {
+        Schema::create('pemeriksaan_anaks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('ibu_id');
+            $table->uuid('anak_id');
             $table->uuid('employee_id');
             $table->string('tanggal_pemeriksaan');
-            $table->string('usia_kehamilan');
+            $table->decimal('berat_badan', 4, 1);
+            $table->decimal('tinggi_badan', 4, 1);
             $table->string('tekanan_darah');
-            $table->decimal('berat_badan', 8, 1);
-            $table->decimal('tinggi_fundus', 8, 1);
-            $table->integer('denyut_jantung_janin');
-            $table->string('keluhan');
-            $table->string('pemberian_vitamin');
+            $table->decimal('suhu_tubuh', 4, 1);
+            $table->string('status_imunisasi');
+            $table->string('riwayat_penyakit');
             $table->string('catatan');
             $table->timestamps();
-
-            $table->foreign('ibu_id')->references('id')->on('ibus')->onDelete('cascade');
+            
+            $table->foreign('anak_id')->references('id')->on('anaks')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemeriksaan_ibus');
+        Schema::dropIfExists('pemeriksaan_anaks');
     }
 };

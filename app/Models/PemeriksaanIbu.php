@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\IbuHamil;
+use App\Models\Ibu;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,9 +16,9 @@ class PemeriksaanIbu extends Model
     // public $incrementing = false;
     protected $keyType = 'string';
 
-    public function ibuHamil()
+    public function ibu()
     {
-        return $this->belongsTo(IbuHamil::class, 'ibu_hamil_id', 'id');
+        return $this->belongsTo(Ibu::class, 'ibu_id', 'id');
     }
 
     public function employee()

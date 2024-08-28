@@ -15,8 +15,7 @@
                             <td class="py-1 text-orange-400">
                                 Petugas
                             </td>
-                            <th scope="row"
-                                class="text-right font-medium whitespace-nowrap dark:text-white">
+                            <th scope="row" class="text-right font-medium whitespace-nowrap dark:text-white">
                                 {{ Str::limit($mom->employee->name, 17, '...') }}
                             </th>
                         </tr>
@@ -24,67 +23,76 @@
                             <td class="py-1 text-orange-400">
                                 Tanggal Periksa
                             </td>
-                            <th scope="row"
-                                class="text-right font-medium dark:text-white">
-                                {{ date_format(date_create($mom->created_at), 'd M, Y') }}
+                            <th scope="row" class="text-right font-medium dark:text-white">
+                                {{ date_format(date_create($mom->tanggal_pemeriksaan), 'd M, Y') }}
                             </th>
                         </tr>
                         <tr>
                             <td class="py-1 text-orange-400">
-                                Riwayat Penyakit
+                                Vitamin
                             </td>
-                            <th scope="row"
-                                class="text-right font-medium dark:text-white">
-                                {{ $mom->riwayat_penyakit }}
+                            <th scope="row" class="text-right font-medium dark:text-white">
+                                {{ $mom->pemberian_vitamin }}
                             </th>
                         </tr>
                         <tr>
-                            <td class="py-1 text-orange-400">
-                                Kondisi Bayi
+                            <td colspan="2">
+                                <div class="inline-flex items-center justify-center w-full">
+                                    <hr class="w-full h-px bg-gray-200 border-0 dark:bg-gray-700">
+                                    <span
+                                        class="absolute px-3 font-medium -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Keluhan</span>
+                                </div>
                             </td>
-                            <th scope="row"
-                                class="text-right font-medium dark:text-white">
-                                {{ $mom->riwayat_penyakit }}
-                            </th>
+                        </tr>
+                        <tr>
+                            <td class="pt-2" colspan="2">
+                                {{ Str::limit($mom->keluhan, 69, '...') }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="lg:col-span-6 col-span-12">
-            <div class="grid grid-cols-2 gap-5">
-                <div class="col-span-2 rounded-lg px-5 py-5 bg-gray-50 shadow-lg">
+            <div class="grid grid-cols-2 gap-5 h-[54vh]">
+                <div class="col-span-2 rounded-lg px-5 pt-5 bg-gray-50 shadow-lg">
                     <h1 class="lg:text-2xl text-lg lg:text-left text-center font-medium text-orange-400">
-                        {{ $mom->ibuHamil->nama }}</h1>
-                    <h1 class="lg:text-lg text-md lg:text-left text-center text-gray-400">Kehamilan ke-{{ $mom->ibuHamil->nomor_kehamilan }}
+                        {{ $mom->ibu->nama }}</h1>
+                    <h1 class="lg:text-lg text-md lg:text-left text-center text-gray-400">Istri dari
+                        {{ $mom->ibu->nama_suami }}
                     </h1>
                 </div>
                 <div class="col-span-1 rounded-lg bg-gray-50 shadow-lg">
-                    <div class="py-3 px-5 border-b">
-                        <h1 class="font-medium text-md text-orange-400">Kadar Gula Darah</h1>
-                        <h1 class="font-medium text-xl text-gray-500 mt-2">{{ $mom->kadar_gula_darah }} mg/dL</h1>
-                    </div>
-                    <div class="py-3 px-5 border-b">
-                        <h1 class="font-medium text-md text-orange-400">Kadar Kolestrol</h1>
-                        <h1 class="font-medium text-xl text-gray-500 mt-2">{{ $mom->kadar_kolestrol }} mg/dL</h1>
-                    </div>
-                    <div class="py-3 px-5 border-b">
-                        <h1 class="font-medium text-md text-orange-400">Kadar Asam Urat</h1>
-                        <h1 class="font-medium text-xl text-gray-500 mt-2">{{ $mom->kadar_asam_urat }} mg/dL</h1>
+                    <div class="grid row-span-3 h-full">
+                        <div class="py-3 px-5 border-b">
+                            <h1 class="font-medium text-md text-orange-400">Lahir</h1>
+                            <h1 class="font-medium text-lg text-gray-500 mt-2">{{ $mom->ibu->tempat_tanggal_lahir }}
+                            </h1>
+                        </div>
+                        <div class="py-3 px-5 border-b">
+                            <h1 class="font-medium text-md text-orange-400">Alamat</h1>
+                            <h1 class="font-medium text-lg text-gray-500 mt-2">{{ $mom->ibu->alamat }}</h1>
+                        </div>
+                        <div class="py-3 px-5 border-b">
+                            <h1 class="font-medium text-md text-orange-400">No. Tlp</h1>
+                            <h1 class="font-medium text-lg text-gray-500 mt-2">{{ $mom->ibu->no_tlp }}</h1>
+                        </div>
                     </div>
                 </div>
                 <div class="col-span-1 rounded-lg bg-gray-50 shadow-lg">
-                    <div class="py-3 px-5 border-b">
-                        <h1 class="font-medium text-md text-orange-400">Usia Kehailan</h1>
-                        <h1 class="font-medium text-xl text-gray-500 mt-2">{{ $mom->ibuHamil->usia_kehamilan . ' Bulan' }}</h1>
-                    </div>
-                    <div class="py-3 px-5 border-b">
-                        <h1 class="font-medium text-md text-orange-400">Tanggal Persalinan</h1>
-                        <h1 class="font-medium text-xl text-gray-500 mt-2">{{ $mom->ibuHamil->tanggal_persalinan }}</h1>
-                    </div>
-                    <div class="py-3 px-5 border-b">
-                        <h1 class="font-medium text-md text-orange-400">Penolong Persalinan</h1>
-                        <h1 class="font-medium text-xl text-gray-500 mt-2">{{ $mom->ibuHamil->penolong_persalinan }}</h1>
+                    <div class="grid row-span-3 h-full">
+                        <div class="py-3 px-5 border-b">
+                            <h1 class="font-medium text-md text-orange-400">Usia Kehamilan</h1>
+                            <h1 class="font-medium text-lg text-gray-500 mt-2">{{ $mom->usia_kehamilan }}</h1>
+                        </div>
+                        <div class="py-3 px-5 border-b">
+                            <h1 class="font-medium text-md text-orange-400">Kehamilan Ke</h1>
+                            <h1 class="font-medium text-lg text-gray-500 mt-2">{{ $mom->ibu->nomor_kehamilan }}</h1>
+                        </div>
+                        <div class="py-3 px-5 border-b">
+                            <h1 class="font-medium text-md text-orange-400">Tinggi Fundus</h1>
+                            <h1 class="font-medium text-lg text-gray-500 mt-2">{{ $mom->tinggi_fundus . ' cm' }}</h1>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,27 +110,34 @@
                     <tbody>
                         <tr>
                             <td class="py-1 text-orange-400">
-                                Sistolik
+                                Tekanan Darah Ibu
                             </td>
-                            <th scope="row"
-                                class="text-right font-medium dark:text-white">
-                                {{ $mom->tekanan_darah_sistolik . ' mmHg' }}
+                            <th scope="row" class="text-right font-medium dark:text-white">
+                                {{ $mom->tekanan_darah . ' mmHg' }}
                             </th>
                         </tr>
                         <tr>
                             <td class="py-1 text-orange-400">
-                                Diastolik
+                                Denyut Jantung Janin
                             </td>
-                            <th scope="row"
-                                class="text-right font-medium dark:text-white">
-                                {{ $mom->tekanan_darah_diastolik . ' mmHg' }}
+                            <th scope="row" class="text-right font-medium dark:text-white">
+                                {{ $mom->denyut_jantung_janin . ' bpm' }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="py-1 text-orange-400">
+                                Gol. Darah
+                            </td>
+                            <th scope="row" class="text-right font-medium dark:text-white">
+                                {{ $mom->ibu->golongan_darah }}
                             </th>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <div class="inline-flex items-center justify-center w-full">
                                     <hr class="w-full h-px bg-gray-200 border-0 dark:bg-gray-700">
-                                    <span class="absolute px-3 font-medium -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Catatan</span>
+                                    <span
+                                        class="absolute px-3 font-medium -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Catatan</span>
                                 </div>
                             </td>
                         </tr>
@@ -137,5 +152,102 @@
         </div>
     </div>
     {{-- </div> --}}
+
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+            <p class="text-2xl text-gray-400 dark:text-gray-500">
+                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 18 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 1v16M1 9h16" />
+                </svg>
+            </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+        </div>
+        <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+            <p class="text-2xl text-gray-400 dark:text-gray-500">
+                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 18 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 1v16M1 9h16" />
+                </svg>
+            </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+            <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
+                <p class="text-2xl text-gray-400 dark:text-gray-500">
+                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 1v16M1 9h16" />
+                    </svg>
+                </p>
+            </div>
+        </div>
+    </div>
 
 </x-app-layout>

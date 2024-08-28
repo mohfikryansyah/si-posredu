@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot:css>
-        <!-- Select2 CSS -->
-        <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}">
-    </x-slot:css>
-
     <x-slot name="header">
         <h2 class="font-semibold md:text-xl text-lg text-orange-400 leading-tight">
             {{ __('Data Pemeriksaan Ibu Hamil') }}
@@ -32,10 +27,10 @@
             <thead>
                 <tr>
                     <th scope="col" class="whitespace-normal">Nama</th>
-                    <th scope="col" class="whitespace-normal">Berat Badan</th>
-                    <th scope="col" class="whitespace-normal">Tinggi Badan</th>
-                    <th scope="col" class="whitespace-normal">Riwayat Penyakit</th>
-                    <th scope="col" class="whitespace-normal">Catatan</th>
+                    <th scope="col" class="whitespace-normal">Tgl. Pemeriksaan</th>
+                    <th scope="col" class="whitespace-normal">Usia Kehamilan</th>
+                    <th scope="col" class="whitespace-normal">Tekanan Darah</th>
+                    <th scope="col" class="whitespace-normal">Tinggi Fundus</th>
                     <th scope="col" class="whitespace-normal">Aksi</th>
                 </tr>
             </thead>
@@ -43,52 +38,46 @@
                 @foreach ($momsCek as $mom)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="whitespace-nowrap text-orange-300 px-6 py-4">
+                        <th class="whitespace-nowrap text-orange-300">
                             <a class="hover:text-orange-400 duration-300"
-                                href="{{ route('pemeriksaanIbu-show', $mom->id) }}">{{ $mom->ibuHamil->nama }}</a>
+                                href="{{ route('pemeriksaanIbu-show', $mom->id) }}">{{ $mom->ibu->nama }}</a>
                         </th>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->berat_badan . ' kg' }}
+                            {{ $mom->tanggal_pemeriksaan }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->tinggi_badan . ' cm' }}
+                            {{ $mom->usia_kehamilan }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->riwayat_penyakit }}
+                            {{ $mom->tekanan_darah }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ Str::limit($mom->catatan, 31, '...') }}
+                            {{ $mom->tinggi_fundus }}
                         </td>
                         <td>
-                            <x-dropdown2 align="right" width="w-32">
-                                <x-slot name="trigger">
-                                    <button
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                                </x-slot>
-
-                                <x-slot name="content">
-                                    <!-- Dropdown content here -->
-                                    <a data-id="{{ $mom->id }}" data-ibu-id="{{ $mom->ibuHamil->id }}"
-                                        data-employee-id="{{ $mom->employee_id }}"
-                                        data-berat-badan="{{ $mom->berat_badan }}"
-                                        data-tinggi-badan="{{ $mom->tinggi_badan }}"
-                                        data-tekanan-darah-sistolik="{{ $mom->tekanan_darah_sistolik }}"
-                                        data-tekanan-darah-diastolik="{{ $mom->tekanan_darah_diastolik }}"
-                                        data-kadar-gula-darah="{{ $mom->kadar_gula_darah }}"
-                                        data-kadar-kolestrol="{{ $mom->kadar_kolestrol }}"
-                                        data-kadar-asam-urat="{{ $mom->kadar_asam_urat }}"
-                                        data-riwayat-penyakit="{{ $mom->riwayat_penyakit }}"
-                                        data-catatan="{{ $mom->catatan }}" href="javascript:void(0);" x-data=""
-                                        x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_ibu')"
-                                        class="editbtn block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
-                                    <a data-id={{ $mom->id }} data-nama="{{ $mom->ibuHamil->nama }}"
-                                        href="javascript:void(0);" x-data=""
-                                        x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_ibu')"
-                                        class="deletebtn block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hapus</a>
-                                </x-slot>
-                            </x-dropdown2>
+                            <div class="flex items-center">
+                                <a href="javascript:void(0);" x-data data-id="{{ $mom->id }}" data-ibu-id="{{ $mom->ibu->id }}"
+                                    data-employee-id="{{ $mom->employee_id }}"
+                                    data-tanggal-pemeriksaan="{{ $mom->tanggal_pemeriksaan }}"
+                                    data-berat-badan="{{ $mom->berat_badan }}"
+                                    data-usia-kehamilan="{{ $mom->usia_kehamilan }}"
+                                    data-tekanan-darah="{{ $mom->tekanan_darah }}"
+                                    data-tinggi-fundus="{{ $mom->tinggi_fundus }}"
+                                    data-denyut-jantung-janin="{{ $mom->denyut_jantung_janin }}"
+                                    data-keluhan="{{ $mom->keluhan }}"
+                                    data-pemberian-vitamin="{{ $mom->pemberian_vitamin }}"
+                                    data-catatan="{{ $mom->catatan }}"
+                                    x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_ibu')"
+                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+                                <a data-id={{ $mom->id }} data-nama="{{ $mom->ibu->nama }}"
+                                    href="javascript:void(0);" x-data=""
+                                    x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_ibu')"
+                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    <i class="fa-solid fa-trash-arrow-up"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -96,6 +85,7 @@
         </table>
     </div>
 
+    
     <!-- MODAL --->
     @include('PemeriksaanIbu.create')
     @include('PemeriksaanIbu.edit')
@@ -123,27 +113,27 @@
                     var id = $(this).data('id');
                     var ibu_id = $(this).data('ibu-id');
                     var employee_id = $(this).data('employee-id');
+                    var tanggal_pemeriksaan = $(this).data('tanggal-pemeriksaan');
                     var berat_badan = $(this).data('berat-badan');
-                    var tinggi_badan = $(this).data('tinggi-badan');
-                    var tekanan_darah_sistolik = $(this).data('tekanan-darah-sistolik');
-                    var tekanan_darah_diastolik = $(this).data('tekanan-darah-diastolik');
-                    var kadar_gula_darah = $(this).data('kadar-gula-darah');
-                    var kadar_asam_urat = $(this).data('kadar-asam-urat');
-                    var kadar_kolestrol = $(this).data('kadar-kolestrol');
-                    var riwayat_penyakit = $(this).data('riwayat-penyakit');
+                    var usia_kehamilan = $(this).data('usia-kehamilan');
+                    var tekanan_darah = $(this).data('tekanan-darah');
+                    var tinggi_fundus = $(this).data('tinggi-fundus');
+                    var denyut_jantung_janin = $(this).data('denyut-jantung-janin');
+                    var keluhan = $(this).data('keluhan');
+                    var pemberian_vitamin = $(this).data('pemberian-vitamin');
                     var catatan = $(this).data('catatan');
 
                     $('#edit_id').val(id);
                     $('#edit_ibu_id').val(ibu_id).trigger('change');
                     $('#edit_employee_id').val(employee_id).trigger('change');
+                    $('#edit_tanggal_pemeriksaan').val(tanggal_pemeriksaan);
                     $('#edit_berat_badan').val(berat_badan);
-                    $('#edit_tinggi_badan').val(tinggi_badan);
-                    $('#edit_tekanan_darah_sistolik').val(tekanan_darah_sistolik);
-                    $('#edit_tekanan_darah_diastolik').val(tekanan_darah_diastolik);
-                    $('#edit_kadar_gula_darah').val(kadar_gula_darah);
-                    $('#edit_kadar_asam_urat').val(kadar_asam_urat);
-                    $('#edit_kadar_kolestrol').val(kadar_kolestrol);
-                    $('#edit_riwayat_penyakit').val(riwayat_penyakit);
+                    $('#edit_usia_kehamilan').val(usia_kehamilan);
+                    $('#edit_tekanan_darah').val(tekanan_darah);
+                    $('#edit_tinggi_fundus').val(tinggi_fundus);
+                    $('#edit_denyut_jantung_janin').val(denyut_jantung_janin);
+                    $('#edit_keluhan').val(keluhan);
+                    $('#edit_pemberian_vitamin').val(pemberian_vitamin);
                     $('#edit_catatan').val(catatan);
                 });
 

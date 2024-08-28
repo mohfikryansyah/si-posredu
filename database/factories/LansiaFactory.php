@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Anak>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lansia>
  */
-class AnakFactory extends Factory
+class LansiaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,17 +16,16 @@ class AnakFactory extends Factory
      */
     public function definition(): array
     {
-        $randomDate = fake()->dateTimeBetween('-2 years', '-1 years');
+        $randomDate = fake()->dateTimeBetween('-70 years', '-60 years');
         $formatDate = $randomDate->format('j F Y');
+        $no_tlp = '+6282290';
         return [
             'nama' => fake()->name(),
             'tempat_tanggal_lahir' => fake()->city() . ', ' . $formatDate,
-            'jenis_kelamin' => fake()->randomElement(['Laki-laki', 'Perempuan']),
-            'nama_ibu' => fake()->name(),
-            'nama_ayah' => fake()->name(),
-            'no_tlp' => fake()->phoneNumber(),
-            'tanggal_pendaftaran' => fake()->date(),
+            'golongan_darah' => fake()->randomElement(['A', 'AB', 'O', 'B']),
             'alamat' => fake()->address(),
+            'no_tlp' => $no_tlp . fake()->randomNumber(5, true),
+            'pekerjaan' => fake()->jobTitle(),
         ];
     }
 }

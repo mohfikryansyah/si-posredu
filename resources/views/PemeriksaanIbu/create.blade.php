@@ -10,22 +10,22 @@
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-3">
                 <div class="col-span-2">
-                    <label for="ibu_hamil_id"
+                    <label for="ibu_id"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span
                             class="text-red-500">*</span></label>
-                    <select id="ibu_hamil_id" name="ibu_hamil_id"
-                        class="select2nama"
+                    <select id="ibu_id" name="ibu_id"
+                        class="select2nama bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         style="width: 100%;">
                         <option disabled selected>Pilih</option>
                         @foreach ($moms as $mom)
-                            @if (old('ibu_hamil_id') === $mom->id)
+                            @if (old('ibu_id') === $mom->id)
                                 <option value="{{ $mom->id }}" selected>{{ $mom->nama }}</option>
                             @else
                                 <option value="{{ $mom->id }}">{{ $mom->nama }}</option>
                             @endif
                         @endforeach
                     </select>
-                    @error('ibu_hamil_id', 'add_pemeriksaan_ibu')
+                    @error('ibu_id', 'add_pemeriksaan_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
@@ -50,74 +50,74 @@
                     @enderror
                 </div>
                 <div class="md:col-span-1 col-span-3">
-                    <label for="tinggi_badan"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi Badan<span
+                    <label for="tanggal_pemeriksaan"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pemeriksaan<span
                             class="text-red-500">*</span></label>
-                    <x-number-input name="tinggi_badan" id="tinggi_badan" class="{{ $errors->add_pemeriksaan_ibu->has('tinggi_badan') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('tinggi_badan') }}"></x-number-input>
-                    @error('tinggi_badan', 'add_pemeriksaan_ibu')
+                    <x-date-input name="tanggal_pemeriksaan" id="tanggal_pemeriksaan" class="{{ $errors->add_pemeriksaan_ibu->has('tanggal_pemeriksaan') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('tanggal_pemeriksaan') }}"></x-date-input>
+                    @error('tanggal_pemeriksaan', 'add_pemeriksaan_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="md:col-span-1 col-span-3">
+                    <label for="usia_kehamilan"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usia Kehamilan<span
+                            class="text-red-500">*</span><span class="text-gray-400"> (minggu)</span></label>
+                    <x-number-input name="usia_kehamilan" id="usia_kehamilan" class="{{ $errors->add_pemeriksaan_ibu->has('usia_kehamilan') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('usia_kehamilan') }}"></x-number-input>
+                    @error('usia_kehamilan', 'add_pemeriksaan_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="md:col-span-1 col-span-3">
+                    <label for="tekanan_darah"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tekanan Darah<span
+                            class="text-red-500">*</span><span class="text-gray-400"> (mmHg)</span></label>
+                    <x-text-input name="tekanan_darah" id="tekanan_darah" class="{{ $errors->add_pemeriksaan_ibu->has('tekanan_darah') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('tekanan_darah') }}"></x-text-input>
+                    @error('tekanan_darah', 'add_pemeriksaan_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="md:col-span-1 col-span-3">
                     <label for="berat_badan"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat Badan<span
-                            class="text-red-500">*</span></label>
+                            class="text-red-500">*</span><span class="text-gray-400"> (kg)</span></label>
                     <x-number-input name="berat_badan" id="berat_badan" class="{{ $errors->add_pemeriksaan_ibu->has('berat_badan') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('berat_badan') }}"></x-number-input>
                     @error('berat_badan', 'add_pemeriksaan_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="md:col-span-1 col-span-3">
-                    <label for="tekanan_darah_sistolik"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tekanan Darah Sistolik<span
-                            class="text-red-500">*</span></label>
-                    <x-number-input name="tekanan_darah_sistolik" id="tekanan_darah_sistolik" class="{{ $errors->add_pemeriksaan_ibu->has('tekanan_darah_sistolik') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('tekanan_darah_sistolik') }}"></x-number-input>
-                    @error('tekanan_darah_sistolik', 'add_pemeriksaan_ibu')
+                    <label for="tinggi_fundus"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi Fundus<span
+                            class="text-red-500">*</span><span class="text-gray-400"> (cm)</span></label>
+                    <x-number-input name="tinggi_fundus" id="tinggi_fundus" class="{{ $errors->add_pemeriksaan_ibu->has('tinggi_fundus') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('tinggi_fundus') }}"></x-number-input>
+                    @error('tinggi_fundus', 'add_pemeriksaan_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="md:col-span-1 col-span-3">
-                    <label for="tekanan_darah_diastolik"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tekanan Darah Diastolik<span
+                    <label for="denyut_jantung_janin"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Denyut Jantung Janin<span
                             class="text-red-500">*</span></label>
-                    <x-number-input name="tekanan_darah_diastolik" id="tekanan_darah_diastolik" class="{{ $errors->add_pemeriksaan_ibu->has('tekanan_darah_diastolik') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('tekanan_darah_diastolik') }}"></x-number-input>
-                    @error('tekanan_darah_diastolik', 'add_pemeriksaan_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="md:col-span-1 col-span-3">
-                    <label for="kadar_gula_darah"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kadar Gula Darah<span
-                            class="text-red-500">*</span></label>
-                    <x-number-input name="kadar_gula_darah" id="kadar_gula_darah" class="{{ $errors->add_pemeriksaan_ibu->has('kadar_gula_darah') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('kadar_gula_darah') }}"></x-number-input>
-                    @error('kadar_gula_darah', 'add_pemeriksaan_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="md:col-span-1 col-span-3">
-                    <label for="kadar_asam_urat"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kadar Asam Urat<span
-                            class="text-red-500">*</span></label>
-                    <x-number-input name="kadar_asam_urat" id="kadar_asam_urat" class="{{ $errors->add_pemeriksaan_ibu->has('kadar_asam_urat') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('kadar_asam_urat') }}"></x-number-input>
-                    @error('kadar_asam_urat', 'add_pemeriksaan_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="md:col-span-1 col-span-3">
-                    <label for="kadar_kolestrol"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kadar Kolestrol<span
-                            class="text-red-500">*</span></label>
-                    <x-number-input name="kadar_kolestrol" id="kadar_kolestrol" class="{{ $errors->add_pemeriksaan_ibu->has('kadar_kolestrol') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('kadar_kolestrol') }}"></x-number-input>
-                    @error('kadar_kolestrol', 'add_pemeriksaan_ibu')
+                    <x-number-input name="denyut_jantung_janin" id="denyut_jantung_janin" class="{{ $errors->add_pemeriksaan_ibu->has('denyut_jantung_janin') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('denyut_jantung_janin') }}"></x-number-input>
+                    @error('denyut_jantung_janin', 'add_pemeriksaan_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="md:col-span-2 col-span-3">
-                    <label for="riwayat_penyakit"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Riwayat Penyakit<span
+                    <label for="keluhan"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keluhan<span
                             class="text-red-500">*</span></label>
-                    <x-text-input id="riwayat_penyakit" name="riwayat_penyakit" class="{{ $errors->add_pemeriksaan_ibu->has('riwayat_penyakit') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('riwayat_penyakit') }}"></x-text-input>
-                    @error('riwayat_penyakit', 'add_pemeriksaan_ibu')
+                    <x-text-input name="keluhan" id="keluhan" class="{{ $errors->add_pemeriksaan_ibu->has('keluhan') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('keluhan') }}"></x-text-input>
+                    @error('keluhan', 'add_pemeriksaan_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="md:col-span-1 col-span-3">
+                    <label for="pemberian_vitamin"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pemberian Vitamin<span
+                            class="text-red-500">*</span></label>
+                    <x-text-input name="pemberian_vitamin" id="pemberian_vitamin" class="{{ $errors->add_pemeriksaan_ibu->has('pemberian_vitamin') ? 'border-red-500' : 'border-gray-300' }}" value="{{ old('pemberian_vitamin') }}"></x-text-input>
+                    @error('pemberian_vitamin', 'add_pemeriksaan_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

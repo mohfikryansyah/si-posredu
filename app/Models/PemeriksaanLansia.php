@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\PemeriksaanIbu;
+use App\Models\Lansia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class IbuHamil extends Model
+class PemeriksaanLansia extends Model
 {
     use HasFactory, HasUuids;
 
@@ -16,8 +16,13 @@ class IbuHamil extends Model
     // public $incrementing = false;
     protected $keyType = 'string';
 
-    public function pemeriksaanIbu()
+    public function lansia()
     {
-        return $this->hasMany(PemeriksaanIbu::class, 'ibu_hamil_id', 'id');
+        return $this->belongsTo(Lansia::class, 'lansia_id', 'id');
+    }
+    
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
 }

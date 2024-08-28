@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nama_suami');
             $table->string('tempat_tanggal_lahir');
+            $table->string('golongan_darah');
+            $table->string('nomor_kehamilan');
             $table->string('alamat');
             $table->string('no_tlp');
             $table->string('pekerjaan');
-            $table->string('golongan_darah');
-            $table->string('jenis_kontrasepsi');
+            $table->string('tanggal_pendaftaran');
             $table->timestamps();
         });
     }
