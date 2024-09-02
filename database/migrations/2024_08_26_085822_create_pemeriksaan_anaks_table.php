@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('anak_id');
             $table->uuid('employee_id');
-            $table->string('tanggal_pemeriksaan');
+            $table->date('tanggal_pemeriksaan');
             $table->decimal('berat_badan', 4, 1);
             $table->decimal('tinggi_badan', 4, 1);
             $table->string('tekanan_darah');

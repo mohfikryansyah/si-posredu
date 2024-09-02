@@ -15,15 +15,18 @@ class PemeriksaanIbuController extends Controller
      */
     public function index()
     {
+        $suntik_tetanus_toksoid = ['Ya', 'Tidak'];
         $golonganDarah = ['A', 'B', 'AB', 'O'];
         $moms = Ibu::with('pemeriksaanIbu')->latest()->get();
-        $moms_cek = PemeriksaanIbu::with('ibu')->latest()->get();
+        $pemeriksaanIbu = PemeriksaanIbu::with(['ibu', 'employee'])->latest()->get();
+        // dd($pemeriksaanIbu);
         $employees = Employee::all();
         return view('PemeriksaanIbu.index', [
             'moms' => $moms,
-            'momsCek' => $moms_cek,
+            'pemeriksaanIbu' => $pemeriksaanIbu,
             'employees' => $employees,
-            'golongan_darah' => $golonganDarah
+            'golongan_darah' => $golonganDarah,
+            'suntik_tetanus_toksoid' => $suntik_tetanus_toksoid,
         ]);
     }
 
@@ -47,9 +50,13 @@ class PemeriksaanIbuController extends Controller
             'tanggal_pemeriksaan' => 'required',
             'usia_kehamilan' => 'required|max:255',
             'tekanan_darah' => 'required|max:255',
+            'tinggi_badan' => 'required|numeric',
             'berat_badan' => 'required|numeric',
             'tinggi_fundus' => 'required|numeric',
             'denyut_jantung_janin' => 'required|numeric',
+            'lingkar_lengan_atas' => 'required|numeric',
+            'pemeriksaan_lab' => 'required|max:255',
+            'suntik_tetanus_toksoid' => 'required|max:255',
             'keluhan' => 'required|max:100',
             'pemberian_vitamin' => 'required|max:100',
             'catatan' => 'required|max:72',
@@ -90,9 +97,13 @@ class PemeriksaanIbuController extends Controller
             'tanggal_pemeriksaan' => 'required',
             'usia_kehamilan' => 'required|max:255',
             'tekanan_darah' => 'required|max:255',
+            'tinggi_badan' => 'required|numeric',
             'berat_badan' => 'required|numeric',
             'tinggi_fundus' => 'required|numeric',
             'denyut_jantung_janin' => 'required|numeric',
+            'lingkar_lengan_atas' => 'required|numeric',
+            'pemeriksaan_lab' => 'required|max:255',
+            'suntik_tetanus_toksoid' => 'required|max:255',
             'keluhan' => 'required|max:100',
             'pemberian_vitamin' => 'required|max:100',
             'catatan' => 'required|max:72',

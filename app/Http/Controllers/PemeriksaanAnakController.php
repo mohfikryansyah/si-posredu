@@ -58,9 +58,19 @@ class PemeriksaanAnakController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PemeriksaanAnak $pemeriksaanAnak)
+    public function show($pemeriksaanAnak)
     {
-        //
+        $children = PemeriksaanAnak::with(['anak', 'employee'])->where('id', $pemeriksaanAnak)->firstOrFail();
+        // dd($children->anak_id);
+        $pemeriksaanSebelumnya = PemeriksaanAnak::with(['anak', 'employee'])->where('anak_id', $children->anak_id)->orderBy('tanggal_pemeriksaan', 'desc')->skip(1)->first();
+        $count = PemeriksaanAnak::with(['anak', 'employee'])->where('anak_id', $children->anak_id)->count();
+        // dd($pemeriksaanSebelumnya);
+        // dd($count);
+        return view('PemeriksaanAnak.show', [
+            'children' => $children,
+            'pemeriksaanSebelumnya' => $pemeriksaanSebelumnya,
+            'count' => $count,
+        ]);
     }
 
     /**

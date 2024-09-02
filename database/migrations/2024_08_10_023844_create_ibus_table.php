@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('ibus', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama');
+            $table->string('nik', 16)->unique();
             $table->string('nama_suami');
             $table->string('tempat_tanggal_lahir');
             $table->string('golongan_darah');

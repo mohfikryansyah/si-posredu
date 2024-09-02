@@ -15,12 +15,16 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('ibu_id');
             $table->uuid('employee_id');
-            $table->string('tanggal_pemeriksaan');
+            $table->date('tanggal_pemeriksaan');
             $table->string('usia_kehamilan');
             $table->string('tekanan_darah');
-            $table->decimal('berat_badan', 8, 1);
+            $table->decimal('tinggi_badan', 5, 1);
+            $table->decimal('berat_badan', 5, 1);
             $table->decimal('tinggi_fundus', 8, 1);
             $table->integer('denyut_jantung_janin');
+            $table->decimal('lingkar_lengan_atas', 5,1);
+            $table->string('pemeriksaan_lab');
+            $table->string('suntik_tetanus_toksoid');
             $table->string('keluhan');
             $table->string('pemberian_vitamin');
             $table->string('catatan');

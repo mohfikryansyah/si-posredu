@@ -16,11 +16,16 @@ class LansiaFactory extends Factory
      */
     public function definition(): array
     {
+        $kodeWilayah = fake()->numberBetween(100000, 999999);
+        $tanggalLahir = fake()->dateTimeBetween('-70 years', '-17 years')->format('dmY');
+        $randomDigits = fake()->numberBetween(1000, 9999);
+        $nik = $kodeWilayah . substr($tanggalLahir, 0, 6) . $randomDigits;
         $randomDate = fake()->dateTimeBetween('-70 years', '-60 years');
         $formatDate = $randomDate->format('j F Y');
-        $no_tlp = '+6282290';
+        $no_tlp = '0822901';
         return [
             'nama' => fake()->name(),
+            'nik' => $nik,
             'tempat_tanggal_lahir' => fake()->city() . ', ' . $formatDate,
             'golongan_darah' => fake()->randomElement(['A', 'AB', 'O', 'B']),
             'alamat' => fake()->address(),

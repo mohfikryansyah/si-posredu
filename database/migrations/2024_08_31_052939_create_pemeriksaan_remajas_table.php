@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemeriksaan_lansias', function (Blueprint $table) {
+        Schema::create('pemeriksaan_remajas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('lansia_id');
+            $table->uuid('remaja_id');
             $table->uuid('employee_id');
             $table->date('tanggal_pemeriksaan');
+            $table->decimal('berat_badan', 5, 1);
+            $table->decimal('tinggi_badan', 5, 1);
             $table->string('tekanan_darah');
-            $table->decimal('kolestrol', 5, 1);
-            $table->decimal('asam_urat', 5, 1);
-            $table->decimal('gula_darah', 5, 1);
-            $table->decimal('suhu_tubuh', 5, 1);
+            $table->string('konseling_kesehatan');
+            $table->enum('pemberian_vitamin', ['Ya', 'Tidak']);
             $table->string('catatan');
             $table->timestamps();
 
-            $table->foreign('lansia_id')->references('id')->on('lansias')->onDelete('cascade');
+            $table->foreign('remaja_id')->references('id')->on('remajas')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemeriksaan_lansias');
+        Schema::dropIfExists('pemeriksaan_remajas');
     }
 };

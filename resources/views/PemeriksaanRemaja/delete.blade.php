@@ -1,6 +1,6 @@
 <!-- Modal Component -->
-<x-modal name="delete_ibu" :show="false" maxWidth="2xl">
-    <form method="post" action="{{ route('ibu.destroy') }}" class="p-6">
+<x-modal name="delete_pemeriksaan_remaja" :show="false" maxWidth="2xl">
+    <form method="post" action="{{ route('pemeriksaanRemaja.destroy') }}" class="p-6">
         @csrf
         @method('delete')
 

@@ -49,36 +49,16 @@
                     <div
                         class="flex items-center justify-center h-[60px] w-[60px] text-orange-400 bg-orange-2 float-left rounded-full">
                         <p class="text-xl">
-                            <i class="fa-solid fa-hospital"></i>
-                        </p>
-                    </div>
-                </div>
-                <div class="grid grid-rows-2 items-center">
-                    <p class="text-3xl text-right font-bold text-gray-700 dark:text-gray-500">
-                        3
-                    </p>
-                    <span class="text-[16px] font-medium text-gray-600 dark:text-gray-500">
-                        Posyandu
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="px-6 rounded-lg shadow-sm bg-white h-[117px] dark:bg-gray-800 grid items-center">
-            <div class="flex items-center justify-between">
-                <div>
-                    <div
-                        class="flex items-center justify-center h-[60px] w-[60px] text-orange-400 bg-orange-2 float-left rounded-full">
-                        <p class="text-xl">
                             <i class="fa-solid fa-children"></i>
                         </p>
                     </div>
                 </div>
                 <div class="grid grid-rows-2 items-center">
                     <p class="text-3xl text-right font-bold text-gray-700 dark:text-gray-500">
-                        130
+                        {{ App\Models\Anak::count() }}
                     </p>
                     <span class="text-[16px] font-medium text-gray-600 dark:text-gray-500">
-                        Data Anak
+                        Total Anak
                     </span>
                 </div>
             </div>
@@ -89,16 +69,16 @@
                     <div
                         class="flex items-center justify-center h-[60px] w-[60px] text-orange-400 bg-orange-2 float-left rounded-full">
                         <p class="text-xl">
-                            <i class="fa-solid fa-hands-holding-child"></i>
+                            <i class="fa-solid fa-person-breastfeeding"></i>
                         </p>
                     </div>
                 </div>
                 <div class="grid grid-rows-2 items-center">
                     <p class="text-3xl text-right font-bold text-gray-700 dark:text-gray-500">
-                        112
+                        {{ App\Models\Ibu::count() }}
                     </p>
                     <span class="text-[16px] font-medium text-gray-600 dark:text-gray-500">
-                        Data Ibu
+                        Total Ibu Hamil
                     </span>
                 </div>
             </div>
@@ -109,16 +89,36 @@
                     <div
                         class="flex items-center justify-center h-[60px] w-[60px] text-orange-400 bg-orange-2 float-left rounded-full">
                         <p class="text-xl">
-                            <i class="fa-solid fa-hospital-user"></i>
+                            <i class="fa-solid fa-person-running"></i>
                         </p>
                     </div>
                 </div>
                 <div class="grid grid-rows-2 items-center">
                     <p class="text-3xl text-right font-bold text-gray-700 dark:text-gray-500">
-                        {{ count(App\Models\Employee::all()) }}
+                        {{ App\Models\Remaja::count() }}
                     </p>
                     <span class="text-[16px] font-medium text-gray-600 dark:text-gray-500">
-                        Data Petugas
+                        Total Remaja
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="px-6 rounded-lg shadow-sm bg-white h-[117px] dark:bg-gray-800 grid items-center">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div
+                        class="flex items-center justify-center h-[60px] w-[60px] text-orange-400 bg-orange-2 float-left rounded-full">
+                        <p class="text-xl">
+                            <i class="fa-solid fa-person-cane"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-rows-2 items-center">
+                    <p class="text-3xl text-right font-bold text-gray-700 dark:text-gray-500">
+                        {{ App\Models\Lansia::count() }}
+                    </p>
+                    <span class="text-[16px] font-medium text-gray-600 dark:text-gray-500">
+                        Total Lansia
                     </span>
                 </div>
             </div>
@@ -136,7 +136,7 @@
 
         <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5">
             <h2 class="text-center text-gray-700 font-semibold md:text-xl text-lg mb-3">
-                Data Petugas
+                Data Pemeriksaan
             </h2>
             <div id="line-charts" class="h-100"></div>
         </div>
@@ -186,7 +186,6 @@
 
     <x-slot:script>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
         <script>
@@ -222,76 +221,65 @@
             });
         </script>
         <script>
-            var dataPetugas = {!! $data !!}
-            var data = [{
-                    y: '2006',
-                    a: 10,
-                    b: 90
-                },
-                {
-                    y: '2007',
-                    a: 75,
-                    b: 65
-                },
-                {
-                    y: '2008',
-                    a: 50,
-                    b: 40
-                },
-                {
-                    y: '2009',
-                    a: 75,
-                    b: 65
-                },
-                {
-                    y: '2010',
-                    a: 50,
-                    b: 40
-                },
-                {
-                    y: '2011',
-                    a: 75,
-                    b: 65
-                },
-                {
-                    y: '2012',
-                    a: 100,
-                    b: 90
-                }
-            ]
-
-            var updateData = data.map(function(item, index) {
-                return {
-                    y: item.y,
-                    a: dataPetugas[index],
-                    b: item.b,
+            $(function() {
+                // Data dari Laravel, pastikan setiap array pemeriksaan terdefinisi atau gunakan array kosong jika tidak ada data
+                var data = {
+                    pemeriksaanAnak: {!! json_encode($data['pemeriksaanAnak'] ?? []) !!},
+                    pemeriksaanIbu: {!! json_encode($data['pemeriksaanIbu'] ?? []) !!},
+                    pemeriksaanLansia: {!! json_encode($data['pemeriksaanLansia'] ?? []) !!},
+                    pemeriksaanRemaja: {!! json_encode($data['pemeriksaanRemaja'] ?? []) !!}
                 };
-            });
 
-            new Morris.Bar({
-                // ID of the element in which to draw the chart.
-                element: 'bar-charts',
-                data: updateData,
-                xkey: 'y',
-                ykeys: ['a', 'b'],
-                labels: ['Total Income', 'Total Outcome'],
-                lineColors: ['#ff9b44', '#fc6075'],
-                lineWidth: '3px',
-                barColors: ['#ff9b44', '#fc6075'],
-                resize: true,
-                redraw: true
-            });
+                // Menggabungkan data pemeriksaan untuk semua kategori
+                var tahun = [...new Set([
+                    ...data.pemeriksaanAnak.map(item => item.year),
+                    ...data.pemeriksaanIbu.map(item => item.year),
+                    ...data.pemeriksaanLansia.map(item => item.year),
+                    ...data.pemeriksaanRemaja.map(item => item.year)
+                ])].sort((a, b) => a - b);
 
-            new Morris.Line({
-                element: 'line-charts',
-                data: updateData,
-                xkey: 'y',
-                ykeys: ['a', 'b'],
-                labels: ['Total Sales', 'Total Revenue'],
-                lineColors: ['#ff9b44', '#fc6075'],
-                lineWidth: '3px',
-                resize: true,
-                redraw: true
+                var formattedData = tahun.map(year => {
+                    return {
+                        y: year,
+                        a: (data.pemeriksaanAnak.find(item => item.year == year) || {
+                            total: 0
+                        }).total,
+                        b: (data.pemeriksaanIbu.find(item => item.year == year) || {
+                            total: 0
+                        }).total,
+                        c: (data.pemeriksaanLansia.find(item => item.year == year) || {
+                            total: 0
+                        }).total,
+                        d: (data.pemeriksaanRemaja.find(item => item.year == year) || {
+                            total: 0
+                        }).total
+                    };
+                });
+
+                // Jika tidak ada data, tambahkan data default agar Morris.js tidak error
+                if (formattedData.length === 0) {
+                    formattedData.push({
+                        y: new Date().getFullYear(),
+                        a: 0,
+                        b: 0,
+                        c: 0,
+                        d: 0
+                    });
+                }
+
+                // Membuat line chart dengan Morris.js
+                new Morris.Line({
+                    element: 'line-charts',
+                    data: formattedData,
+                    xkey: 'y',
+                    ykeys: ['a', 'b', 'c', 'd'],
+                    labels: ['Pemeriksaan Anak', 'Pemeriksaan Ibu', 'Pemeriksaan Lansia', 'Pemeriksaan Remaja'],
+                    lineColors: ['#ff9b44', '#fc6075', '#008000', '#0000FF'],
+                    lineWidth: '3px',
+                    resize: true,
+                    redraw: true,
+                    parseTime: false
+                });
             });
         </script>
     </x-slot:script>

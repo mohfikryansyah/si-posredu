@@ -1,6 +1,6 @@
 <!-- Modal Component -->
-<x-modal name="delete_ibu" :show="false" maxWidth="2xl">
-    <form method="post" action="{{ route('ibu.destroy') }}" class="p-6">
+<x-modal name="delete_pemeriksaan_lansia" :show="false" maxWidth="2xl">
+    <form method="post" action="{{ route('pemeriksaanLansia.destroy') }}" class="p-6">
         @csrf
         @method('delete')
 
@@ -15,11 +15,11 @@
 
         <div class="mt-6 flex justify-end">
             <x-secondary-button x-on:click="$dispatch('close')">
-                {{ __('Tidak, batal') }}
+                {{ __('Batal') }}
             </x-secondary-button>
 
             <x-danger-button class="ms-3">
-                {{ __('Ya, Saya yakin!') }}
+                {{ __('Hapus') }}
             </x-danger-button>
         </div>
     </form>

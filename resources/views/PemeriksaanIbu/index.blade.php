@@ -35,43 +35,47 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($momsCek as $mom)
+                @foreach ($pemeriksaanIbu as $pemeriksaan)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th class="whitespace-nowrap text-orange-300">
                             <a class="hover:text-orange-400 duration-300"
-                                href="{{ route('pemeriksaanIbu-show', $mom->id) }}">{{ $mom->ibu->nama }}</a>
+                                href="{{ route('pemeriksaanIbu-show', $pemeriksaan->id) }}">{{ $pemeriksaan->ibu->nama }}</a>
                         </th>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->tanggal_pemeriksaan }}
+                            {{ date_format(date_create($pemeriksaan->tanggal_pemeriksaan), 'd/m/Y') }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->usia_kehamilan }}
+                            {{ $pemeriksaan->usia_kehamilan }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->tekanan_darah }}
+                            {{ $pemeriksaan->tekanan_darah }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $mom->tinggi_fundus }}
+                            {{ $pemeriksaan->tinggi_fundus }}
                         </td>
                         <td>
                             <div class="flex items-center">
-                                <a href="javascript:void(0);" x-data data-id="{{ $mom->id }}" data-ibu-id="{{ $mom->ibu->id }}"
-                                    data-employee-id="{{ $mom->employee_id }}"
-                                    data-tanggal-pemeriksaan="{{ $mom->tanggal_pemeriksaan }}"
-                                    data-berat-badan="{{ $mom->berat_badan }}"
-                                    data-usia-kehamilan="{{ $mom->usia_kehamilan }}"
-                                    data-tekanan-darah="{{ $mom->tekanan_darah }}"
-                                    data-tinggi-fundus="{{ $mom->tinggi_fundus }}"
-                                    data-denyut-jantung-janin="{{ $mom->denyut_jantung_janin }}"
-                                    data-keluhan="{{ $mom->keluhan }}"
-                                    data-pemberian-vitamin="{{ $mom->pemberian_vitamin }}"
-                                    data-catatan="{{ $mom->catatan }}"
+                                <a href="javascript:void(0);" x-data data-id="{{ $pemeriksaan->id }}" data-ibu-id="{{ $pemeriksaan->ibu->id }}"
+                                    data-employee-id="{{ $pemeriksaan->employee_id }}"
+                                    data-tanggal-pemeriksaan="{{ $pemeriksaan->tanggal_pemeriksaan }}"
+                                    data-berat-badan="{{ $pemeriksaan->berat_badan }}"
+                                    data-tinggi-badan="{{ $pemeriksaan->berat_badan }}"
+                                    data-usia-kehamilan="{{ $pemeriksaan->usia_kehamilan }}"
+                                    data-tekanan-darah="{{ $pemeriksaan->tekanan_darah }}"
+                                    data-tinggi-fundus="{{ $pemeriksaan->tinggi_fundus }}"
+                                    data-denyut-jantung-janin="{{ $pemeriksaan->denyut_jantung_janin }}"
+                                    data-lingkar-lengan-atas="{{ $pemeriksaan->lingkar_lengan_atas }}"
+                                    data-pemeriksaan-lab="{{ $pemeriksaan->pemeriksaan_lab }}"
+                                    data-suntik-tetanus-toksoid="{{ $pemeriksaan->suntik_tetanus_toksoid }}"
+                                    data-keluhan="{{ $pemeriksaan->keluhan }}"
+                                    data-pemberian-vitamin="{{ $pemeriksaan->pemberian_vitamin }}"
+                                    data-catatan="{{ $pemeriksaan->catatan }}"
                                     x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_ibu')"
                                     class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
-                                <a data-id={{ $mom->id }} data-nama="{{ $mom->ibu->nama }}"
+                                <a data-id={{ $pemeriksaan->id }} data-nama="{{ $pemeriksaan->ibu->nama }}"
                                     href="javascript:void(0);" x-data=""
                                     x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_ibu')"
                                     class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
@@ -92,7 +96,6 @@
     @include('PemeriksaanIbu.delete')
 
     <x-slot:script>
-        <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
         <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
         <script src="{{ asset('plugins/jquery/dataTables.tailwindcss.js') }}"></script>
         <script>
@@ -115,10 +118,14 @@
                     var employee_id = $(this).data('employee-id');
                     var tanggal_pemeriksaan = $(this).data('tanggal-pemeriksaan');
                     var berat_badan = $(this).data('berat-badan');
+                    var tinggi_badan = $(this).data('tinggi-badan');
                     var usia_kehamilan = $(this).data('usia-kehamilan');
                     var tekanan_darah = $(this).data('tekanan-darah');
                     var tinggi_fundus = $(this).data('tinggi-fundus');
                     var denyut_jantung_janin = $(this).data('denyut-jantung-janin');
+                    var lingkar_lengan_atas = $(this).data('lingkar-lengan-atas');
+                    var pemeriksaan_lab = $(this).data('pemeriksaan-lab');
+                    var suntik_tetanus_toksoid = $(this).data('suntik-tetanus-toksoid');
                     var keluhan = $(this).data('keluhan');
                     var pemberian_vitamin = $(this).data('pemberian-vitamin');
                     var catatan = $(this).data('catatan');
@@ -128,10 +135,14 @@
                     $('#edit_employee_id').val(employee_id).trigger('change');
                     $('#edit_tanggal_pemeriksaan').val(tanggal_pemeriksaan);
                     $('#edit_berat_badan').val(berat_badan);
+                    $('#edit_tinggi_badan').val(tinggi_badan);
                     $('#edit_usia_kehamilan').val(usia_kehamilan);
                     $('#edit_tekanan_darah').val(tekanan_darah);
                     $('#edit_tinggi_fundus').val(tinggi_fundus);
                     $('#edit_denyut_jantung_janin').val(denyut_jantung_janin);
+                    $('#edit_lingkar_lengan_atas').val(lingkar_lengan_atas);
+                    $('#edit_pemeriksaan_lab').val(pemeriksaan_lab);
+                    $('#edit_suntik_tetanus_toksoid').val(suntik_tetanus_toksoid).trigger('change');
                     $('#edit_keluhan').val(keluhan);
                     $('#edit_pemberian_vitamin').val(pemberian_vitamin);
                     $('#edit_catatan').val(catatan);

@@ -9,7 +9,7 @@
         <div
             class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 bg-transparent dark:bg-gray-900 rounded-t-lg">
             <!-- Button to open modal -->
-            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'add_pemeriksaan_lansia')"
+            <button x-data x-on:click.prevent="$dispatch('open-modal', 'add_pemeriksaan_lansia')"
                 class="openbtn bg-orange-400 text-white inline-flex items-center px-4 py-1.5 rounded-lg font-medium">
                 <svg class="me-1 -ms-1 w-5 h-5 font-bold" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -28,11 +28,6 @@
                 <tr>
                     <th scope="col">Nama</th>
                     <th scope="col">Tgl. Periksa</th>
-                    <th scope="col">Tekanan Darah</th>
-                    <th scope="col">Kolestrol</th>
-                    <th scope="col">Asam Urat</th>
-                    <th scope="col">Gula Darah</th>
-                    <th scope="col">Suhu Tubuh</th>
                     <th scope="col">Catatan</th>
                     <th scope="col">Petugas Pemeriksa</th>
                     <th scope="col">Aksi</th>
@@ -43,25 +38,11 @@
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th class="whitespace-nowrap">
-                            {{ $pemeriksaan->lansia->nama }}
+                            <a class="hover:text-orange-400 duration-300"
+                                href="{{ route('pemeriksaanLansia-show', $pemeriksaan->id) }}">{{ $pemeriksaan->lansia->nama }}</a>
                         </th>
                         <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $pemeriksaan->tanggal_pemeriksaan }}
-                        </td>
-                        <td class="text-center">
-                            {{ $pemeriksaan->tekanan_darah }}
-                        </td>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $pemeriksaan->kolestrol }}
-                        </td>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $pemeriksaan->asam_urat }}
-                        </td>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $pemeriksaan->gula_darah }}
-                        </td>
-                        <td class="whitespace-nowrap md:whitespace-normal">
-                            {{ $pemeriksaan->suhu_tubuh }}
+                            {{ date_format(date_create($pemeriksaan->tanggal_pemeriksaan), 'd/m/Y') }}
                         </td>
                         <td class="whitespace-nowrap md:whitespace-normal">
                             {{ $pemeriksaan->catatan }}
@@ -73,22 +54,22 @@
                             <div class="flex items-center">
                                 <a href="javascript:void(0);" x-data 
                                     data-id="{{ $pemeriksaan->id }}"
-                                    data-nama="{{ $pemeriksaan->lansia->nama }}" 
+                                    data-lansia-id="{{ $pemeriksaan->lansia->id }}" 
                                     data-tanggal-pemeriksaan="{{ $pemeriksaan->tanggal_pemeriksaan }}"
-                                    data-tekanan_darah="{{ $pemeriksaan->tekanan_darah }}" 
+                                    data-tekanan-darah="{{ $pemeriksaan->tekanan_darah }}" 
                                     data-kolestrol="{{ $pemeriksaan->kolestrol }}"
                                     data-asam-urat="{{ $pemeriksaan->asam_urat }}"
                                     data-gula-darah="{{ $pemeriksaan->gula_darah }}"
                                     data-suhu-tubuh="{{ $pemeriksaan->suhu_tubuh }}"
                                     data-catatan="{{ $pemeriksaan->catatan }}"
                                     data-employee-id="{{ $pemeriksaan->employee->id }}"
-                                    x-on:click="$dispatch('open-modal', 'edit_lansia')"
+                                    x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_lansia')"
                                     class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
                                 <a data-id={{ $pemeriksaan->id }} data-nama="{{ $pemeriksaan->nama }}"
                                     href="javascript:void(0);" x-data=""
-                                    x-on:click="$dispatch('open-modal', 'delete_lansia')"
+                                    x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_lansia')"
                                     class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
                                     <i class="fa-solid fa-trash-arrow-up"></i>
                                 </a>
@@ -101,9 +82,9 @@
     </div>
 
     <!-- MODAL --->
-    {{-- @include('Lansia.create')
-    @include('Lansia.edit')
-    @include('Lansia.delete') --}}
+    @include('PemeriksaanLansia.create')
+    @include('PemeriksaanLansia.edit')
+    @include('PemeriksaanLansia.delete')
 
     <x-slot:script>
         <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
@@ -115,22 +96,27 @@
         </script>
         <script>
             $(document).ready(function() {
-                $('table').on('click', '.editbtn', function() {
-                    var id = $(this).data('id');
-                    var name = $(this).data('nama');
-                    var ttl = $(this).data('tempat-tanggal-lahir');
-                    var alamat = $(this).data('alamat');
-                    var pekerjaan = $(this).data('pekerjaan');
-                    var golongan_darah = $(this).data('golongan-darah');
-                    var no_tlp = $(this).data('no-tlp');
+                $(".select2nama").select2({
+                    width: 'resolve' // need to override the changed default
+                });
+                $(".select2employee").select2({
+                    width: 'resolve' // need to override the changed default
+                });
 
-                    $('#edit_id').val(id);
-                    $('#edit_nama').val(name);
-                    $('#edit_tempat_tanggal_lahir').val(ttl);
-                    $('#edit_alamat').val(alamat);
-                    $('#edit_pekerjaan').val(pekerjaan);
-                    $('#edit_golongan_darah').val(golongan_darah);
-                    $('#edit_no_tlp').val(no_tlp);
+
+                $('table').on('click', '.editbtn', function() {
+                    var data = $(this).data();
+
+                    $('#edit_id').val(data.id);
+                    $('#edit_lansia_id').val(data.lansiaId).trigger('change');
+                    $('#edit_employee_id').val(data.employeeId).trigger('change');
+                    $('#edit_tanggal_pemeriksaan').val(data.tanggalPemeriksaan);
+                    $('#edit_tekanan_darah').val(data.tekananDarah);
+                    $('#edit_kolestrol').val(data.kolestrol);
+                    $('#edit_asam_urat').val(data.asamUrat);
+                    $('#edit_gula_darah').val(data.gulaDarah);
+                    $('#edit_suhu_tubuh').val(data.suhuTubuh);
+                    $('#edit_catatan').val(data.catatan);
                 });
 
                 $('table').on('click', '.deletebtn', function() {
