@@ -25,7 +25,7 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2 sm:col-span-1">
                     <label for="tempat_tanggal_lahir"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat, Tanggal
                         Lahir<span class="text-red-500">*</span></label>
@@ -34,6 +34,16 @@
                         placeholder="Contoh: Gorontalo, 11 April 2001" required
                         value="{{ old('tempat_tanggal_lahir') }}"></x-text-input>
                     @error('tempat_tanggal_lahir', 'add_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
+                            class="text-red-500">*</span></label>
+                    <x-number-input name="nik" id="nik"
+                        class="{{ $errors->add_ibu->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
+                        value="{{ old('nik') }}"></x-number-input>
+                    @error('nik', 'add_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

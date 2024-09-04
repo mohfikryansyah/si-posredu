@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ibu;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class IbuController extends Controller
 {
@@ -35,6 +36,7 @@ class IbuController extends Controller
         $validatedData = $request->validateWithBag('add_ibu', [
             'nama' => 'required|string|max:255',
             'nama_suami' => 'required|string|max:255',
+            'nik' => 'required|digits:16|unique:ibus,nik',
             'tempat_tanggal_lahir' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'pekerjaan' => 'required|string|max:255',
@@ -75,6 +77,11 @@ class IbuController extends Controller
         $validatedData = $request->validateWithBag('edit_ibu', [
             'nama' => 'required|string|max:255',
             'nama_suami' => 'required|string|max:255',
+            'nik' => [
+                'required',
+                'digits:16',
+                Rule::unique('ibus')->ignore($request->id),
+            ],
             'tempat_tanggal_lahir' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'pekerjaan' => 'required|string|max:255',

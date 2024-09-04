@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('anaks', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama');
+            $table->string('nik', 16)->unique();
             $table->string('tempat_tanggal_lahir');
             $table->string('jenis_kelamin');
             $table->string('nama_ibu');

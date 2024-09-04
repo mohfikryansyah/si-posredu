@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Anak;
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,16 @@ class PemeriksaanAnakFactory extends Factory
     public function definition(): array
     {
         return [
-            
+            'anak_id' => Anak::factory(),
+            'employee_id' => Employee::factory(),
+            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-5 month', '+5 year'),
+            'berat_badan' => fake()->randomFloat(1, 40, 60),
+            'tinggi_badan' => fake()->randomFloat(1, 150, 170),
+            'tekanan_darah' => fake()->randomNumber(3),
+            'suhu_tubuh' => fake()->randomNumber(2),
+            'status_imunisasi' => fake()->randomElement(['Ya', 'Tidak']),
+            'riwayat_penyakit' => fake()->randomElement(['Ada', 'Tidak ada']),
+            'catatan' => fake()->randomElement(['Ada', 'Tidak ada']),
         ];
     }
 }

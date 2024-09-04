@@ -16,7 +16,7 @@
                         Nama<span class="text-red-500">*</span></label>
                     <x-text-input name="nama" id="edit_nama"
                         class="{{ $errors->edit_ibu->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="Ketik Nama Ibu" required value="{{ old('nama', $mom->nama) }}"></x-text-input>
+                        placeholder="Ketik Nama Ibu" required value="{{ old('nama') }}"></x-text-input>
                     @error('nama', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -26,19 +26,29 @@
                         Nama Suami<span class="text-red-500">*</span></label>
                     <x-text-input name="nama_suami" id="edit_nama_suami"
                         class="{{ $errors->edit_ibu->has('nama_suami') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="Ketik Nama Suami" required value="{{ old('nama_suami', $mom->nama_suami) }}"></x-text-input>
+                        placeholder="Ketik Nama Suami" required value="{{ old('nama_suami') }}"></x-text-input>
                     @error('nama_suami', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2 sm:col-span-1">
                     <label for="edit_tempat_tanggal_lahir"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat, Tanggal
                         Lahir<span class="text-red-500">*</span></label>
                     <x-text-input name="tempat_tanggal_lahir" id="edit_tempat_tanggal_lahir"
                         class="{{ $errors->edit_ibu->has('tempat_tanggal_lahir') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="Contoh: Gorontalo, 11 April 2001" required value="{{ old('tempat_tanggal_lahir', $mom->tempat_tanggal_lahir) }}"></x-text-input>
+                        placeholder="Contoh: Gorontalo, 11 April 2001" required value="{{ old('tempat_tanggal_lahir') }}"></x-text-input>
                     @error('tempat_tanggal_lahir', 'edit_ibu')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
+                            class="text-red-500">*</span></label>
+                    <x-number-input name="nik" id="nik"
+                        class="{{ $errors->edit_ibu->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
+                        value="{{ old('nik') }}"></x-number-input>
+                    @error('nik', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
@@ -48,7 +58,7 @@
                             class="text-red-500">*</span></label>
                     <x-text-input name="alamat" id="edit_alamat"
                         class="{{ $errors->edit_ibu->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
-                        required value="{{ old('alamat', $mom->alamat) }}"></x-text-input>
+                        required value="{{ old('alamat') }}"></x-text-input>
                     @error('alamat', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -59,7 +69,7 @@
                             class="text-red-500">*</span></label>
                     <x-date-input name="tanggal_pendaftaran" id="edit_tanggal_pendaftaran"
                         class="{{ $errors->edit_ibu->has('tanggal_pendaftaran') ? 'border-red-500' : 'border-gray-300' }}"
-                        required value="{{ old('tanggal_pendaftaran', $mom->tanggal_pendaftaran) }}"></x-date-input>
+                        required value="{{ old('tanggal_pendaftaran') }}"></x-date-input>
                     @error('tanggal_pendaftaran', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -70,7 +80,7 @@
                             class="text-red-500">*</span></label>
                     <x-text-input name="pekerjaan" id="edit_pekerjaan"
                         class="{{ $errors->edit_ibu->has('pekerjaan') ? 'border-red-500' : 'border-gray-300' }}"
-                        required value="{{ old('pekerjaan', $mom->pekerjaan) }}"></x-text-input>
+                        required value="{{ old('pekerjaan') }}"></x-text-input>
                     @error('pekerjaan', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -99,7 +109,7 @@
                         HP<span class="text-red-500">*</span></label>
                     <x-number-input name="no_tlp" id="edit_no_tlp"
                         class="{{ $errors->edit_ibu->has('no_tlp') ? 'border-red-500' : 'border-gray-300' }}"
-                        required value="{{ old('no_tlp', $mom->no_tlp) }}"></x-number-input>
+                        required value="{{ old('no_tlp') }}"></x-number-input>
                     @error('no_tlp', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -110,7 +120,7 @@
                             class="text-red-500">*</span></label>
                     <x-number-input name="nomor_kehamilan" id="edit_nomor_kehamilan"
                         class="{{ $errors->edit_ibu->has('nomor_kehamilan') ? 'border-red-500' : 'border-gray-300' }}"
-                        required value="{{ old('nomor_kehamilan', $mom->nomor_kehamilan) }}"></x-number-input>
+                        required value="{{ old('nomor_kehamilan') }}"></x-number-input>
                     @error('nomor_kehamilan', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror

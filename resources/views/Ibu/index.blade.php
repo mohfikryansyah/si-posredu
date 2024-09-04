@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold md:text-xl text-lg text-gray-800 leading-tight">
-            {{ __('Data Ibu') }}
+            {{ __('Data Ibu Hamil') }}
         </h2>
     </x-slot>
 
@@ -40,6 +40,7 @@
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th class="whitespace-nowrap">
                             <a href="javascript:void(0);" x-data data-id="{{ $mom->id }}"
+                                data-nik="{{ $mom->nik }}"
                                 data-nama="{{ $mom->nama }}" data-nama-suami="{{ $mom->nama_suami }}"
                                 data-tempat-tanggal-lahir="{{ $mom->tempat_tanggal_lahir }}"
                                 data-alamat="{{ $mom->alamat }}" data-pekerjaan="{{ $mom->pekerjaan }}"
@@ -66,6 +67,7 @@
                         <td>
                             <div class="flex items-center">
                                 <a href="javascript:void(0);" x-data data-id="{{ $mom->id }}"
+                                    data-nik="{{ $mom->nik }}"
                                     data-nama="{{ $mom->nama }}" data-nama-suami="{{ $mom->nama_suami }}"
                                     data-tempat-tanggal-lahir="{{ $mom->tempat_tanggal_lahir }}"
                                     data-alamat="{{ $mom->alamat }}" data-pekerjaan="{{ $mom->pekerjaan }}"
@@ -111,6 +113,7 @@
                     var data = $(this).data();
 
                     $('#edit_id').val(data.id);
+                    $('#edit_nik').val(data.nik);
                     $('#edit_nama').val(data.nama);
                     $('#edit_nama_suami').val(data.namaSuami);
                     $('#edit_tempat_tanggal_lahir').val(data.tempatTanggalLahir);
@@ -126,6 +129,7 @@
                     var data = $(this).data();
 
                     $('#show_id').val(data.id);
+                    $('#show_nik').val(data.nik);
                     $('#show_nama').val(data.nama);
                     $('#show_nama_suami').val(data.namaSuami);
                     $('#show_tempat_tanggal_lahir').val(data.tempatTanggalLahir);

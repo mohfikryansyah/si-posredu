@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold md:text-xl text-lg text-orange-400 leading-tight">
+        <h2 class="font-semibold md:text-xl text-lg text-gray-800 leading-tight">
             {{ __('Data Pemeriksaan Ibu Hamil') }}
         </h2>
     </x-slot>
@@ -38,7 +38,7 @@
                 @foreach ($pemeriksaanIbu as $pemeriksaan)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="whitespace-nowrap text-orange-300">
+                        <th class="whitespace-nowrap">
                             <a class="hover:text-orange-400 duration-300"
                                 href="{{ route('pemeriksaanIbu-show', $pemeriksaan->id) }}">{{ $pemeriksaan->ibu->nama }}</a>
                         </th>

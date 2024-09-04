@@ -1,11 +1,11 @@
 <!-- Modal Component -->
-<x-modal name="delete_ibu" :show="false" maxWidth="2xl">
-    <form method="post" action="{{ route('ibu-hamil.destroy') }}" class="p-6">
+<x-modal name="delete_layanan" :show="false" maxWidth="xl">
+    <form method="POST" action="{{ route('jadwal-pelayanan.destroy') }}" class="p-6">
         @csrf
         @method('delete')
 
         <h2 class="text-lg font-medium text-gray-900">
-            Apakah anda yakin untuk menghapus data <span id="delete_nama"></span> ?
+            Apakah anda yakin untuk menghapus jadwal layanan <span id="delete_nama"></span> ?
         </h2>
         <p class="mt-1 text-sm text-gray-600">
             Setelah data dihapus, semua sumber daya dan datanya akan dihapus secara permanen.

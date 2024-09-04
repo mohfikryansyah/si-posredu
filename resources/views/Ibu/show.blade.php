@@ -24,11 +24,8 @@
                     <x-text-input disabled name="nama_suami" id="show_nama_suami"
                         class="{{ $errors->show_ibu->has('nama_suami') ? 'border-red-500' : 'border-gray-300' }}"
                         placeholder="Ketik Nama Suami" required value="{{ old('nama_suami') }}"></x-text-input>
-                    @error('nama_suami', 'show_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2 sm:col-span-1">
                     <label for="show_tempat_tanggal_lahir"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat, Tanggal
                         Lahir<span class="text-red-500">*</span></label>
@@ -36,9 +33,13 @@
                         class="{{ $errors->show_ibu->has('tempat_tanggal_lahir') ? 'border-red-500' : 'border-gray-300' }}"
                         placeholder="Contoh: Gorontalo, 11 April 2001" required
                         value="{{ old('tempat_tanggal_lahir') }}"></x-text-input>
-                    @error('tempat_tanggal_lahir', 'show_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
+                            class="text-red-500">*</span></label>
+                    <x-number-input name="nik" id="nik"
+                        class="{{ $errors->show_ibu->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
+                        value="{{ old('nik') }}"></x-number-input>
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                     <label for="show_alamat"
@@ -47,9 +48,6 @@
                     <x-text-input disabled name="alamat" id="show_alamat"
                         class="{{ $errors->show_ibu->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
                         placeholder="Ketik Alamat" required value="{{ old('alamat') }}"></x-text-input>
-                    @error('alamat', 'show_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                     <label for="show_tanggal_pendaftaran"
@@ -58,9 +56,6 @@
                     <x-date-input disabled name="tanggal_pendaftaran" id="show_tanggal_pendaftaran"
                         class="{{ $errors->edit_ibu->has('tanggal_pendaftaran') ? 'border-red-500' : 'border-gray-300' }}"
                         required value="{{ old('tanggal_pendaftaran') }}"></x-date-input>
-                    @error('tanggal_pendaftaran', 'edit_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                     <label for="show_pekerjaan"
@@ -69,9 +64,6 @@
                     <x-text-input disabled name="pekerjaan" id="show_pekerjaan"
                         class="{{ $errors->show_ibu->has('pekerjaan') ? 'border-red-500' : 'border-gray-300' }}"
                         placeholder="Contoh: Petani" required value="{{ old('pekerjaan') }}"></x-text-input>
-                    @error('pekerjaan', 'show_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                     <label for="show_golongan_darah"
@@ -88,9 +80,6 @@
                             @endif
                         @endforeach
                     </select>
-                    @error('golongan_darah', 'show_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                     <label for="show_no_tlp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No.
@@ -98,9 +87,6 @@
                     <x-number-input disabled name="no_tlp" id="show_no_tlp"
                         class="{{ $errors->show_ibu->has('no_tlp') ? 'border-red-500' : 'border-gray-300' }}"
                         placeholder="08xxxxxxxxxx" required value="{{ old('no_tlp') }}"></x-number-input>
-                    @error('no_tlp', 'show_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                     <label for="show_nomor_kehamilan"
@@ -109,9 +95,6 @@
                     <x-text-input disabled name="nomor_kehamilan" id="show_nomor_kehamilan"
                         class="{{ $errors->show_ibu->has('nomor_kehamilan') ? 'border-red-500' : 'border-gray-300' }}"
                         required value="{{ old('nomor_kehamilan') }}"></x-text-input>
-                    @error('nomor_kehamilan', 'show_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
                 </div>
             </div>
             <div class="mt-6 flex justify-end">

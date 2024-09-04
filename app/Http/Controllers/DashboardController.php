@@ -15,64 +15,35 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $currentYear = Carbon::now()->year + 4;
+        $currentYear = now()->year;
+        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-        // Mengambil data pemeriksaan anak per tahun
-        $pemeriksaanAnakPerTahun = PemeriksaanAnak::select(DB::raw('YEAR(tanggal_pemeriksaan) as year'), DB::raw('count(*) as total'))
-            ->whereBetween(DB::raw('YEAR(tanggal_pemeriksaan)'), [$currentYear - 5, $currentYear])
-            ->groupBy('year')
-            ->orderBy('year', 'asc')
-            ->get();
+        $dataIbu = [];
+        $dataAnak = [];
+        $dataRemaja = [];
+        $dataLansia = [];
 
-        // Mengambil data pemeriksaan ibu per tahun
-        $pemeriksaanIbuPerTahun = PemeriksaanIbu::select(DB::raw('YEAR(tanggal_pemeriksaan) as year'), DB::raw('count(*) as total'))
-            ->whereBetween(DB::raw('YEAR(tanggal_pemeriksaan)'), [$currentYear - 5, $currentYear])
-            ->groupBy('year')
-            ->orderBy('year', 'asc')
-            ->get();
+        foreach (range(1, 12) as $month) {
+            $dataIbu[] = PemeriksaanIbu::whereYear('tanggal_pemeriksaan', $currentYear)->whereMonth('tanggal_pemeriksaan', $month)->count();
 
-        // Mengambil data pemeriksaan lansia per tahun
-        $pemeriksaanLansiaPerTahun = PemeriksaanLansia::select(DB::raw('YEAR(tanggal_pemeriksaan) as year'), DB::raw('count(*) as total'))
-            ->whereBetween(DB::raw('YEAR(tanggal_pemeriksaan)'), [$currentYear - 5, $currentYear])
-            ->groupBy('year')
-            ->orderBy('year', 'asc')
-            ->get();
+            $dataAnak[] = PemeriksaanAnak::whereYear('tanggal_pemeriksaan', $currentYear)->whereMonth('tanggal_pemeriksaan', $month)->count();
 
-        // Mengambil data pemeriksaan remaja per tahun
-        $pemeriksaanRemajaPerTahun = PemeriksaanRemaja::select(DB::raw('YEAR(tanggal_pemeriksaan) as year'), DB::raw('count(*) as total'))
-            ->whereBetween(DB::raw('YEAR(tanggal_pemeriksaan)'), [$currentYear - 5, $currentYear])
-            ->groupBy('year')
-            ->orderBy('year', 'asc')
-            ->get();
+            $dataRemaja[] = PemeriksaanRemaja::whereYear('tanggal_pemeriksaan', $currentYear)->whereMonth('tanggal_pemeriksaan', $month)->count();
 
-        // Menggabungkan data untuk view
+            $dataLansia[] = PemeriksaanLansia::whereYear('tanggal_pemeriksaan', $currentYear)->whereMonth('tanggal_pemeriksaan', $month)->count();
+        }
+
+        $dataIbus = PemeriksaanIbu::count();
+        $dataAnaks = PemeriksaanAnak::count();
+        $dataRemajas = PemeriksaanRemaja::count();
+        $dataLansias = PemeriksaanLansia::count();
+
         $data = [
-            'pemeriksaanAnak' => $pemeriksaanAnakPerTahun->map(function ($item) {
-                return [
-                    'year' => $item->year,
-                    'total' => $item->total,
-                ];
-            }),
-            'pemeriksaanIbu' => $pemeriksaanIbuPerTahun->map(function ($item) {
-                return [
-                    'year' => $item->year,
-                    'total' => $item->total,
-                ];
-            }),
-            'pemeriksaanLansia' => $pemeriksaanLansiaPerTahun->map(function ($item) {
-                return [
-                    'year' => $item->year,
-                    'total' => $item->total,
-                ];
-            }),
-            'pemeriksaanRemaja' => $pemeriksaanRemajaPerTahun->map(function ($item) {
-                return [
-                    'year' => $item->year,
-                    'total' => $item->total,
-                ];
-            }),
+            'ibu' => $dataIbus,
+            'anak' => $dataAnaks,
+            'remaja' => $dataRemajas,
+            'lansia' => $dataLansias,
         ];
-
         // dd($data);
 
         // Menghitung jumlah pemeriksaan ibu bulan ini
@@ -80,7 +51,7 @@ class DashboardController extends Controller
             ->whereYear('tanggal_pemeriksaan', now()->year)
             ->count();
 
-        // dd($pemeriksaanBulanIni);    
+        // dd($pemeriksaanBulanIni);
 
         // Menghitung jumlah pemeriksaan ibu bulan kemarin
         $pemeriksaanBulanKemarin = PemeriksaanIbu::whereMonth('tanggal_pemeriksaan', now()->subMonth()->month)
@@ -101,6 +72,11 @@ class DashboardController extends Controller
             'data' => $data,
             'persentasePerubahan' => $persentasePerubahan,
             'pemeriksaanBulanIni' => $pemeriksaanBulanIni,
+            'months' => $months,
+            'dataIbu' => $dataIbu,
+            'dataAnak' => $dataAnak,
+            'dataRemaja' => $dataRemaja,
+            'dataLansia' => $dataLansia,
         ]);
     }
 }

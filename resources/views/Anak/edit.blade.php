@@ -34,6 +34,16 @@
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
+                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
+                            class="text-red-500">*</span></label>
+                    <x-number-input name="nik" id="nik"
+                        class="{{ $errors->edit_anak->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
+                        value="{{ old('nik') }}"></x-number-input>
+                    @error('nik', 'edit_anak')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
                     <label for="nama_ibu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama Ibu<span class="text-red-500">*</span></label>
                     <x-text-input name="nama_ibu" id="edit_nama_ibu"
@@ -75,17 +85,6 @@
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="alamat"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat<span
-                            class="text-red-500">*</span></label>
-                    <x-text-input name="alamat" id="edit_alamat"
-                        class="{{ $errors->edit_anak->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="Ketik Alamat" required value="{{ old('alamat') }}"></x-text-input>
-                    @error('alamat', 'edit_anak')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-span-2 sm:col-span-1">
                     <label for="jenis_kelamin"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin<span
                             class="text-red-500">*</span></label>
@@ -101,6 +100,17 @@
                         @endforeach
                     </select>
                     @error('jenis_kelamin', 'edit_anak')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2">
+                    <label for="alamat"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat<span
+                            class="text-red-500">*</span></label>
+                    <x-text-input name="alamat" id="edit_alamat"
+                        class="{{ $errors->edit_anak->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Alamat" required value="{{ old('alamat') }}"></x-text-input>
+                    @error('alamat', 'edit_anak')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

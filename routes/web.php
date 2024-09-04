@@ -1,15 +1,20 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Post;
+use App\Models\Category;
+use App\Models\Pelayanan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IbuController;
 use App\Http\Controllers\AnakController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\LansiaController;
 use App\Http\Controllers\RemajaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DashboardController;
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\PemeriksaanIbuController;
 use App\Http\Controllers\PemeriksaanAnakController;
 use App\Http\Controllers\PemeriksaanLansiaController;
@@ -20,10 +25,13 @@ Route::get('/', function () {
     $data = json_encode($dataPetugas);
     return view('home', [
         'data' => $data,
+        'pelayanans' => Pelayanan::latest()->take(2)->get(),
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::resource('/employee', EmployeeController::class)->middleware(['auth', 'verified']);
 
@@ -93,5 +101,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pemeriksaan-remaja', [PemeriksaanRemajaController::class, 'destroy'])->name('pemeriksaanRemaja.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::resource('/categories', CategoryController::class)->except('destroy');
+    Route::delete('/categories', [CategoryController::class, 'destroy'])->name('category.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/posts', PostController::class)->except('destroy');
+    Route::delete('/posts', [PostController::class, 'destroy'])->name('post.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/jadwal-pelayanan', PelayananController::class)->except('destroy');
+    Route::delete('/jadwal-pelayanan', [PelayananController::class, 'destroy'])->name('jadwal-pelayanan.destroy');
+});
 
 require __DIR__ . '/auth.php';

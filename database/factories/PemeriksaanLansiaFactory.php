@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Employee;
+use App\Models\Lansia;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,15 @@ class PemeriksaanLansiaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'lansia_id' => Lansia::factory(),
+            'employee_id' => Employee::factory(),
+            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-5 month', '+5 year'),
+            'tekanan_darah' => fake()->randomNumber(3),
+            'suhu_tubuh' => fake()->randomNumber(2),
+            'kolestrol' => fake()->randomNumber(2),
+            'asam_urat' => fake()->randomNumber(2),
+            'gula_darah' => fake()->randomNumber(2),
+            'catatan' => fake()->randomElement(['Ada', 'Tidak ada']),
         ];
     }
 }

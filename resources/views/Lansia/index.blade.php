@@ -61,6 +61,7 @@
                             <div class="flex items-center">
                                 <a href="javascript:void(0);" x-data 
                                     data-id="{{ $lansia->id }}"
+                                    data-nik="{{ $lansia->nik }}"
                                     data-nama="{{ $lansia->nama }}" 
                                     data-tempat-tanggal-lahir="{{ $lansia->tempat_tanggal_lahir }}"
                                     data-alamat="{{ $lansia->alamat }}" 
@@ -101,21 +102,16 @@
         <script>
             $(document).ready(function() {
                 $('table').on('click', '.editbtn', function() {
-                    var id = $(this).data('id');
-                    var name = $(this).data('nama');
-                    var ttl = $(this).data('tempat-tanggal-lahir');
-                    var alamat = $(this).data('alamat');
-                    var pekerjaan = $(this).data('pekerjaan');
-                    var golongan_darah = $(this).data('golongan-darah');
-                    var no_tlp = $(this).data('no-tlp');
+                    var data = $(this).data()
 
-                    $('#edit_id').val(id);
-                    $('#edit_nama').val(name);
-                    $('#edit_tempat_tanggal_lahir').val(ttl);
-                    $('#edit_alamat').val(alamat);
-                    $('#edit_pekerjaan').val(pekerjaan);
-                    $('#edit_golongan_darah').val(golongan_darah);
-                    $('#edit_no_tlp').val(no_tlp);
+                    $('#edit_id').val(data.id);
+                    $('#edit_nama').val(data.nama);
+                    $('#edit_nik').val(data.nik);
+                    $('#edit_tempat_tanggal_lahir').val(data.tempatTanggalLahir);
+                    $('#edit_alamat').val(data.alamat);
+                    $('#edit_pekerjaan').val(data.pekerjaan);
+                    $('#edit_golongan_darah').val(data.golonganDarah);
+                    $('#edit_no_tlp').val(data.noTlp);
                 });
 
                 $('table').on('click', '.deletebtn', function() {

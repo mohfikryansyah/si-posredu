@@ -5,7 +5,7 @@
         <ul class="space-y-2 font-medium">
             <li>
                 <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-house w-5"></i>
                     <span class="ms-3">{{ __('Dashboard') }}</span>
                 </x-sidebar-link>
             </li>
@@ -21,28 +21,29 @@
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </x-dropdown>
-                <ul id="posyandu" class="{{ Route::is(['ibu', 'pemeriksaanIbu*', 'anak', 'pemeriksaanAnak']) ? '' : 'hidden' }} py-2 space-y-2">
+                <ul id="posyandu"
+                    class="{{ Route::is(['ibu', 'pemeriksaanIbu*', 'anak', 'pemeriksaanAnak']) ? '' : 'hidden' }} py-2 space-y-2">
                     <li>
                         <x-dropdown-link href="{{ route('ibu') }}" :active="request()->routeIs('ibu')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Ibu Hamil') }}</span>
                         </x-dropdown-link>
                     </li>
                     <li>
                         <x-dropdown-link href="{{ route('pemeriksaanIbu') }}" :active="request()->routeIs('pemeriksaanIbu*')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Pemeriksaan Ibu Hamil') }}</span>
                         </x-dropdown-link>
                     </li>
                     <li>
                         <x-dropdown-link href="{{ route('anak') }}" :active="request()->routeIs('anak')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Anak') }}</span>
                         </x-dropdown-link>
                     </li>
                     <li>
                         <x-dropdown-link href="{{ route('pemeriksaanAnak') }}" :active="request()->routeIs('pemeriksaanAnak')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Pemeriksaan Anak') }}</span>
                         </x-dropdown-link>
                     </li>
@@ -60,16 +61,17 @@
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </x-dropdown>
-                <ul id="posremaja" class="{{ Route::is(['remaja', 'pemeriksaanRemaja*']) ? '' : 'hidden' }} py-2 space-y-2">
+                <ul id="posremaja"
+                    class="{{ Route::is(['remaja', 'pemeriksaanRemaja*']) ? '' : 'hidden' }} py-2 space-y-2">
                     <li>
                         <x-dropdown-link href="{{ route('remaja') }}" :active="request()->routeIs('remaja')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Remaja') }}</span>
                         </x-dropdown-link>
                     </li>
                     <li>
                         <x-dropdown-link href="{{ route('pemeriksaanRemaja') }}" :active="request()->routeIs('pemeriksaanRemaja*')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Pemeriksaan Remaja') }}</span>
                         </x-dropdown-link>
                     </li>
@@ -87,20 +89,43 @@
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </x-dropdown>
-                <ul id="posredu" class="{{ Route::is(['lansia', 'pemeriksaanLansia*']) ? '' : 'hidden' }} py-2 space-y-2">
+                <ul id="posredu"
+                    class="{{ Route::is(['lansia', 'pemeriksaanLansia*']) ? '' : 'hidden' }} py-2 space-y-2">
                     <li>
                         <x-dropdown-link href="{{ route('lansia') }}" :active="request()->routeIs('lansia')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Lansia') }}</span>
                         </x-dropdown-link>
                     </li>
                     <li>
                         <x-dropdown-link href="{{ route('pemeriksaanLansia') }}" :active="request()->routeIs('pemeriksaanLansia*')">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Pemeriksaan Lansia') }}</span>
                         </x-dropdown-link>
                     </li>
                 </ul>
+            </li>
+        </ul>
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+            <li>
+                <x-sidebar-link :href="route('jadwal-pelayanan.index')" :active="request()->routeIs('jadwal-pelayanan.index')">
+                    <i class="fa-regular fa-clock w-5"></i>
+                    <span class="ms-3">{{ __('Jadwal Pelayanan') }}</span>
+                </x-sidebar-link>
+            </li>
+        </ul>
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+            <li>
+                <x-sidebar-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                    <i class="fa-solid fa-list w-5"></i>
+                    <span class="ms-3">{{ __('Kategori') }}</span>
+                </x-sidebar-link>
+            </li>
+            <li>
+                <x-sidebar-link :href="route('posts.index')" :active="request()->routeIs('posts*')">
+                    <i class="fa-regular fa-newspaper w-5"></i>
+                    <span class="ms-3">{{ __('Artikel') }}</span>
+                </x-sidebar-link>
             </li>
         </ul>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">

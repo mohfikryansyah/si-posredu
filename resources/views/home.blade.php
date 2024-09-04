@@ -34,7 +34,7 @@
                             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-100 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="#jadwal_pelayanan"
                             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-100 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
                     </li>
                     <li>
@@ -77,8 +77,8 @@
                     </div>
                 </div>
                 <div class="py-8 w-full items-center justify-center flex">
-                    <img src="{{ asset('images/kesehatan.png') }}" id="bayi" class="animate-bounce"
-                        alt="" srcset="{{ asset('images/kesehatan.png') }}">
+                    <img src="{{ asset('images/kesehatan.png') }}" id="bayi" class="animate-bounce" alt=""
+                        srcset="{{ asset('images/kesehatan.png') }}">
                 </div>
             </div>
         </div>
@@ -92,81 +92,41 @@
         </svg>
     </div>
 
-    <div class="w-full mt-60 mb-16">
+    <div class="w-full mt-60 mb-28">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-center text-4xl mb-10 font-black font-nunito">PROFIL POSREDU</h1>
-
+            <p class="text-xl mb-3 text-gray-700">Posredu adalah sebuah inisiatif kesehatan terpadu yang menggabungkan
+                tiga layanan
+                utama dalam satu platform: Posyandu, Posremaja, dan Posbindu. Program ini bertujuan untuk menyediakan
+                layanan kesehatan yang menyeluruh bagi semua kelompok usia, mulai dari balita hingga lansia, dengan
+                pendekatan yang holistik dan terintegrasi.
+            </p>
+            <p class="text-xl text-gray-700">Posredu hadir untuk menjawab kebutuhan masyarakat akan pelayanan kesehatan
+                yang
+                terintegrasi dan mudah diakses, dengan fokus pada pencegahan dan edukasi. Melalui Posredu, kami
+                berkomitmen untuk menjaga kesehatan seluruh anggota keluarga Anda, dari yang termuda hingga yang tertua.
+            </p>
         </div>
     </div>
 
-    <div class="w-full mt-60 mb-16">
+    <div id="jadwal_pelayanan" class="w-full mb-16">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-center text-4xl mb-10 font-black font-nunito">JADWAL PELAYANAN</h1>
-            <ol class="items-center sm:flex md:mx-0 mx-5">
-                <li class="relative mb-6 sm:mb-0">
-                    <div class="flex items-center">
-                        <div
-                            class="z-10 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                            <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
+            <div class="md:flex space-x-10 justify-center">
+                <img src="{{ asset('images/pelayanan.png') }}" class="w-96 h-96" alt=""
+                    srcset="{{ asset('images/pelayanan.png') }}">
+                <div>
+                    @foreach ($pelayanans as $pelayanan)
+                        <div class="mb-3">
+                            <h1 class="text-purple-500 text-2xl font-medium">
+                                {{ $pelayanan->nama . ' - ' . '24 Maret 2004' }}</h1>
+                            <h4 class="text-gray-500 text-md font-medium">
+                                {{ 'Mulai pukul ' . $pelayanan->start . ' - ' . $pelayanan->end . ' WITA' }}</h4>
+                            <p class="text-gray-800 text-lg mt-2">{{ $pelayanan->deskripsi }}</p>
                         </div>
-                        <div class="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-                    </div>
-                    <div class="mt-3 sm:pe-8">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Imunisasi BCG</h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">24
-                            Maret 2024 - Jam Layanan 20.00 WIB</time>
-                        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Imunisasi BCG (Bacillus
-                            Calmette-Guérin) adalah vaksin yang digunakan untuk melindungi terhadap penyakit
-                            tuberkulosis (TB).</p>
-                    </div>
-                </li>
-                <li class="relative mb-6 sm:mb-0">
-                    <div class="flex items-center">
-                        <div
-                            class="z-10 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                            <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                        </div>
-                        <div class="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-                    </div>
-                    <div class="mt-3 sm:pe-8">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Imunisasi BCG</h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">24
-                            Maret 2024 - Jam Layanan 20.00 WIB</time>
-                        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Imunisasi BCG (Bacillus
-                            Calmette-Guérin) adalah vaksin yang digunakan untuk melindungi terhadap penyakit
-                            tuberkulosis (TB).</p>
-                    </div>
-                </li>
-                <li class="relative mb-6 sm:mb-0">
-                    <div class="flex items-center">
-                        <div
-                            class="z-10 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                            <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                        </div>
-                        <div class="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-                    </div>
-                    <div class="mt-3 sm:pe-8">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Imunisasi BCG</h3>
-                        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">24
-                            Maret 2024 - Jam Layanan 20.00 WIB</time>
-                        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Imunisasi BCG (Bacillus
-                            Calmette-Guérin) adalah vaksin yang digunakan untuk melindungi terhadap penyakit
-                            tuberkulosis (TB).</p>
-                    </div>
-                </li>
-            </ol>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 

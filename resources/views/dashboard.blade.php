@@ -127,22 +127,16 @@
 
     <!-- CHART -->
     <div class="grid md:grid-cols-2 grid-cols-1 gap-5">
-        <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5">
-            <h2 class="text-center text-gray-700 font-semibold md:text-xl text-lg mb-3">
-                Data Petugas
-            </h2>
-            <div id="bar-charts" class="h-100"></div>
+        <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5 relative">
+            <div id="doughnut-chart" class="w-auto h-[400px]"></div>
         </div>
-
-        <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5">
-            <h2 class="text-center text-gray-700 font-semibold md:text-xl text-lg mb-3">
-                Data Pemeriksaan
-            </h2>
-            <div id="line-charts" class="h-100"></div>
+        <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5 relative">
+            <h2 class="text-lg font-bold text-center text-gray-600">Pemeriksaan Perbulan</h2>
+            <div id="share-dataset" class="w-auto h-[400px]"></div>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white">
+    {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white">
         <div class="border-r border-gray-200">
             <div class="grid grid-rows-3 grid-cols-1 px-4">
                 <div class="row-span-1 flex justify-between mt-3">
@@ -160,7 +154,7 @@
                 </div>
                 <div class="row-span-1 mb-3 mt-1 items-center">
                     <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
-                        <div class="bg-blue-600 h-1.5 rounded-full progress-bar"
+                        <div class="bg-blue-600 h-1.5 rounded-full progress-bar overflow-hidden"
                             data-percentage="{{ $persentasePerubahan }}" style="width: 0;"></div>
                     </div>
                     <h1 class="text-gray-400 text-sm mt-1">Overall Pemeriksaan Ibu
@@ -171,116 +165,198 @@
         <div class="border-r border-gray-200 font-medium p-4"></div>
         <div class="border-r border-gray-200 font-medium p-4"></div>
         <div class="font-medium p-4"></div>
-    </div>
-
-    <div class="flex items-center justify-center h-48 mb-4 rounded bg-white mt-5 dark:bg-gray-800">
-        <p class="text-2xl text-gray-400 dark:text-gray-500">
-            <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 1v16M1 9h16" />
-            </svg>
-        </p>
-    </div>
-
+    </div> --}}
 
     <x-slot:script>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <script src="{{ asset('plugins/clock/clock.js') }}"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                let progressBar = document.querySelector('.progress-bar');
-                let targetPercentage = parseFloat(progressBar.getAttribute('data-percentage'));
-                let currentPercentage = 0;
+            var chartDom = document.getElementById('share-dataset');
+            var myCharts = echarts.init(chartDom);
+            var option;
 
-                function updateProgressBar(percentage) {
-                    progressBar.style.width = percentage + '%';
-                    // progressBar.textContent = percentage + '%';
+            var months = @json($months);
+            var dataIbu = @json($dataIbu);
+            var dataAnak = @json($dataAnak);
+            var dataRemaja = @json($dataRemaja);
+            var dataLansia = @json($dataLansia);
 
-                    // Change color based on percentage
-                    if (percentage < 33) {
-                        progressBar.style.backgroundColor = '#f44336'; // Red
-                    } else if (percentage < 66) {
-                        progressBar.style.backgroundColor = '#ff9800'; // Orange
-                    } else if (percentage < 100) {
-                        progressBar.style.backgroundColor = '#4caf50'; // Green
-                    } else {
-                        progressBar.style.backgroundColor = '#2196f3'; // Blue for 100%
-                    }
-                }
-
-                let interval = setInterval(function() {
-                    if (currentPercentage >= targetPercentage) {
-                        clearInterval(interval);
-                    } else {
-                        currentPercentage++;
-                        updateProgressBar(currentPercentage);
-                    }
-                }, 20);
-            });
-        </script>
-        <script>
-            $(function() {
-                // Data dari Laravel, pastikan setiap array pemeriksaan terdefinisi atau gunakan array kosong jika tidak ada data
-                var data = {
-                    pemeriksaanAnak: {!! json_encode($data['pemeriksaanAnak'] ?? []) !!},
-                    pemeriksaanIbu: {!! json_encode($data['pemeriksaanIbu'] ?? []) !!},
-                    pemeriksaanLansia: {!! json_encode($data['pemeriksaanLansia'] ?? []) !!},
-                    pemeriksaanRemaja: {!! json_encode($data['pemeriksaanRemaja'] ?? []) !!}
+            setTimeout(function() {
+                option = {
+                    legend: {
+                        bottom: 'bottom',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        showContent: false
+                    },
+                    dataset: {
+                        source: [
+                            ['tahun', ...months],
+                            ['Ibu', ...dataIbu],
+                            ['Anak', ...dataAnak],
+                            ['Remaja', ...dataRemaja],
+                            ['Lansia', ...dataLansia]
+                        ]
+                    },
+                    xAxis: {
+                        type: 'category'
+                    },
+                    yAxis: {
+                        gridIndex: 0
+                    },
+                    grid: {
+                        top: '50%'
+                    },
+                    series: [{
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'pie',
+                            id: 'pie',
+                            radius: '30%',
+                            center: ['50%', '25%'],
+                            emphasis: {
+                                focus: 'self'
+                            },
+                            label: {
+                                formatter: '{b}: {@January} ({d}%)' // default value is January, will update later
+                            },
+                            encode: {
+                                itemName: 'tahun',
+                                value: months[0], // default value is January, will update later
+                                tooltip: months[0]
+                            }
+                        }
+                    ]
                 };
 
-                // Menggabungkan data pemeriksaan untuk semua kategori
-                var tahun = [...new Set([
-                    ...data.pemeriksaanAnak.map(item => item.year),
-                    ...data.pemeriksaanIbu.map(item => item.year),
-                    ...data.pemeriksaanLansia.map(item => item.year),
-                    ...data.pemeriksaanRemaja.map(item => item.year)
-                ])].sort((a, b) => a - b);
-
-                var formattedData = tahun.map(year => {
-                    return {
-                        y: year,
-                        a: (data.pemeriksaanAnak.find(item => item.year == year) || {
-                            total: 0
-                        }).total,
-                        b: (data.pemeriksaanIbu.find(item => item.year == year) || {
-                            total: 0
-                        }).total,
-                        c: (data.pemeriksaanLansia.find(item => item.year == year) || {
-                            total: 0
-                        }).total,
-                        d: (data.pemeriksaanRemaja.find(item => item.year == year) || {
-                            total: 0
-                        }).total
-                    };
+                myCharts.on('updateAxisPointer', function(event) {
+                    const xAxisInfo = event.axesInfo[0];
+                    if (xAxisInfo) {
+                        const dimension = xAxisInfo.value;
+                        myCharts.setOption({
+                            series: {
+                                id: 'pie',
+                                data: [{
+                                        value: dataIbu[dimension],
+                                        name: 'Ibu'
+                                    },
+                                    {
+                                        value: dataAnak[dimension],
+                                        name: 'Anak'
+                                    },
+                                    {
+                                        value: dataRemaja[dimension],
+                                        name: 'Remaja'
+                                    },
+                                    {
+                                        value: dataLansia[dimension],
+                                        name: 'Lansia'
+                                    }
+                                ]
+                            }
+                        });
+                    }
                 });
 
-                // Jika tidak ada data, tambahkan data default agar Morris.js tidak error
-                if (formattedData.length === 0) {
-                    formattedData.push({
-                        y: new Date().getFullYear(),
-                        a: 0,
-                        b: 0,
-                        c: 0,
-                        d: 0
-                    });
-                }
-
-                // Membuat line chart dengan Morris.js
-                new Morris.Line({
-                    element: 'line-charts',
-                    data: formattedData,
-                    xkey: 'y',
-                    ykeys: ['a', 'b', 'c', 'd'],
-                    labels: ['Pemeriksaan Anak', 'Pemeriksaan Ibu', 'Pemeriksaan Lansia', 'Pemeriksaan Remaja'],
-                    lineColors: ['#ff9b44', '#fc6075', '#008000', '#0000FF'],
-                    lineWidth: '3px',
-                    resize: true,
-                    redraw: true,
-                    parseTime: false
-                });
+                myCharts.setOption(option);
             });
+
+            option && myCharts.setOption(option);
+        </script>
+        <script>
+            var data = @json($data);
+            var chartDom = document.getElementById('doughnut-chart');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            var option = {
+                title: {
+                    text: 'Total Pemeriksaan',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    bottom: 'bottom',
+                },
+                series: [{
+                    name: 'Jumlah Pemeriksaan',
+                    type: 'pie',
+                    radius: ['40%', '70%'], // Membuat chart menjadi doughnut
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10, // Membuat sudut menjadi rounded
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '35',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                            value: data.ibu,
+                            name: 'Ibu'
+                        },
+                        {
+                            value: data.anak,
+                            name: 'Anak'
+                        },
+                        {
+                            value: data.remaja,
+                            name: 'Remaja'
+                        },
+                        {
+                            value: data.lansia,
+                            name: 'Lansia'
+                        }
+                    ]
+                }]
+            };
+
+            // Set opsi dan render chart
+            myChart.setOption(option);
         </script>
     </x-slot:script>
 </x-app-layout>

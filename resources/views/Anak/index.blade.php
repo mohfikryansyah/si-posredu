@@ -30,9 +30,7 @@
                     <th scope="col">Lahir</th>
                     <th scope="col">Jenis Kelamin</th>
                     <th scope="col">Nama Ibu</th>
-                    <th scope="col">Nama Ayah</th>
                     <th scope="col">Alamat</th>
-                    <th scope="col">No. Tlp</th>
                     <th scope="col">Tgl. Mendaftar</th>
                     <th scope="col">Aksi</th>
                 </tr>
@@ -41,33 +39,39 @@
                 @foreach ($children as $child)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th class="whitespace-nowrap" title="{{ $child->nama }}">
-                            {{ Str::limit($child->nama, 21) }}
+                        <th class="whitespace-nowrap">
+                            <a href="javascript:void(0);" x-data data-id="{{ $child->id }}"
+                                data-nik="{{ $child->nik }}"
+                                data-nama="{{ $child->nama }}" data-nama-ibu="{{ $child->nama_ibu }}"
+                                data-nama-ayah="{{ $child->nama_ayah }}"
+                                data-jenis-kelamin="{{ $child->jenis_kelamin }}"
+                                data-tempat-tanggal-lahir="{{ $child->tempat_tanggal_lahir }}"
+                                data-alamat="{{ $child->alamat }}" data-no-tlp="{{ $child->no_tlp }}"
+                                data-tanggal-pendaftaran="{{ $child->tanggal_pendaftaran }}"
+                                x-on:click="$dispatch('open-modal', 'show_anak')"
+                                class="showbtn hover:text-orange-400">
+                                {{ $child->nama }}
+                            </a>
                         </th>
-                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->tempat_tanggal_lahir }}">
-                            {{ Str::limit($child->tempat_tanggal_lahir, 21) }}
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $child->tempat_tanggal_lahir }}
                         </td>
-                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->jenis_kelamin }}">
+                        <td class="whitespace-nowrap md:whitespace-normal">
                             {{ $child->jenis_kelamin }}
                         </td>
-                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->nama_ibu }}">
-                            {{ Str::limit($child->nama_ibu, 15) }}
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $child->nama_ibu }}
                         </td>
-                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->nama_ayah }}">
-                            {{ Str::limit($child->nama_ayah, 15) }}
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $child->alamat }}
                         </td>
-                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->alamat }}">
-                            {{ Str::limit($child->alamat, 15) }}
-                        </td>
-                        <td class="whitespace-nowrap md:whitespace-normal" title="{{ $child->no_tlp }}">
-                            {{ Str::limit($child->no_tlp, 13, ' ') }}
-                        </td>
-                        <td title="{{ $child->tanggal_pendaftaran }}">
+                        <td>
                             {{ $child->tanggal_pendaftaran }}
                         </td>
                         <td>
                             <div class="flex items-center">
                                 <a href="javascript:void(0);" x-data data-id="{{ $child->id }}"
+                                    data-nik="{{ $child->nik }}"
                                     data-nama="{{ $child->nama }}" data-nama-ibu="{{ $child->nama_ibu }}"
                                     data-nama-ayah="{{ $child->nama_ayah }}"
                                     data-jenis-kelamin="{{ $child->jenis_kelamin }}"
@@ -95,6 +99,7 @@
     @include('Anak.create')
     @include('Anak.edit')
     @include('Anak.delete')
+    @include('Anak.show')
 
     <x-slot:script>
         <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
@@ -107,27 +112,33 @@
         <script>
             $(document).ready(function() {
                 $('table').on('click', '.editbtn', function() {
-                    var id = $(this).data('id');
-                    var name = $(this).data('nama');
-                    var name_ibu = $(this).data('nama-ibu');
-                    var name_ayah = $(this).data('nama-ayah');
-                    var ttl = $(this).data('tempat-tanggal-lahir');
-                    var alamat = $(this).data('alamat');
-                    var no_tlp = $(this).data('no-tlp');
-                    var jenis_kelamin = $(this).data('jenis-kelamin');
-                    var tanggal_pendaftaran = $(this).data('tanggal-pendaftaran');
-                    console.log(jenis_kelamin);
+                    var data = $(this).data();
 
+                    $('#edit_id').val(data.id);
+                    $('#edit_nik').val(data.nik);
+                    $('#edit_nama').val(data.nama);
+                    $('#edit_nama_ibu').val(data.namaIbu);
+                    $('#edit_nama_ayah').val(data.namaAyah);
+                    $('#edit_tempat_tanggal_lahir').val(data.tempatTanggalLahir);
+                    $('#edit_alamat').val(data.alamat);
+                    $('#edit_no_tlp').val(data.noTlp);
+                    $('#edit_jenis_kelamin').val(data.jenisKelamin);
+                    $('#edit_tanggal_pendaftaran').val(data.tanggalPendaftaran);
+                });
 
-                    $('#edit_id').val(id);
-                    $('#edit_nama').val(name);
-                    $('#edit_nama_ibu').val(name_ibu);
-                    $('#edit_nama_ayah').val(name_ayah);
-                    $('#edit_tempat_tanggal_lahir').val(ttl);
-                    $('#edit_alamat').val(alamat);
-                    $('#edit_no_tlp').val(no_tlp);
-                    $('#edit_jenis_kelamin').val(jenis_kelamin);
-                    $('#edit_tanggal_pendaftaran').val(tanggal_pendaftaran);
+                $('table').on('click', '.showbtn', function() {
+                    var data = $(this).data();
+
+                    $('#show_id').val(data.id);
+                    $('#show_nik').val(data.nik);
+                    $('#show_nama').val(data.nama);
+                    $('#show_nama_ibu').val(data.namaIbu);
+                    $('#show_nama_ayah').val(data.namaAyah);
+                    $('#show_tempat_tanggal_lahir').val(data.tempatTanggalLahir);
+                    $('#show_alamat').val(data.alamat);
+                    $('#show_no_tlp').val(data.noTlp);
+                    $('#show_jenis_kelamin').val(data.jenisKelamin);
+                    $('#show_tanggal_pendaftaran').val(data.tanggalPendaftaran);
                 });
 
                 $('table').on('click', '.deletebtn', function() {

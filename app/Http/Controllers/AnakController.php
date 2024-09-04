@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anak;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AnakController extends Controller
 {
@@ -36,6 +37,7 @@ class AnakController extends Controller
             'nama' => 'required|max:255',
             'nama_ibu' => 'required|max:255',
             'nama_ayah' => 'required|max:255',
+            'nik' => 'required|digits:16|unique:anaks,nik',
             'tempat_tanggal_lahir' => 'required|max:255',
             'alamat' => 'required|max:255',
             'no_tlp' => 'required|max:255',
@@ -71,6 +73,11 @@ class AnakController extends Controller
         $validatedData = $request->validateWithBag('edit_anak', [
             'nama' => 'required|max:255',
             'nama_ibu' => 'required|max:255',
+            'nik' => [
+                'required',
+                'digits:16',
+                Rule::unique('anaks')->ignore($request->id),
+            ],
             'nama_ayah' => 'required|max:255',
             'tempat_tanggal_lahir' => 'required|max:255',
             'alamat' => 'required|max:255',

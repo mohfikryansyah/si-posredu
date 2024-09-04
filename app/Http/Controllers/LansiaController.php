@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lansia;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LansiaController extends Controller
 {
@@ -36,6 +37,7 @@ class LansiaController extends Controller
         $validatedData = $request->validateWithBag('add_lansia', [
             'nama' => 'required|string|max:255',
             'tempat_tanggal_lahir' => 'required|string|max:255',
+            'nik' => 'required|digits:16|unique:lansias,nik',
             'golongan_darah' => 'required|string|max:3',
             'alamat' => 'required|string|max:255',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
@@ -72,6 +74,11 @@ class LansiaController extends Controller
         $validatedData = $request->validateWithBag('edit_lansia', [
             'nama' => 'required|string|max:255',
             'tempat_tanggal_lahir' => 'required|string|max:255',
+            'nik' => [
+                'required',
+                'digits:16',
+                Rule::unique('lansias')->ignore($request->id),
+            ],
             'golongan_darah' => 'required|string|max:3',
             'alamat' => 'required|string|max:255',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
