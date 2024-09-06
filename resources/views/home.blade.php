@@ -157,7 +157,7 @@
                             @endif
                         </div>
                         <div class="px-5 py-3">
-                            <a href="{{ route('blog.show', ['post' => $post->id]) }}" class="text-gray-800 font-medium text-xl hover:text-blue-400 duration-150">{{ Str::limit($post->title, 87) }}</a>
+                            <a href="{{ route('blog.show', ['post' => $post->slug]) }}" class="text-gray-800 font-medium text-xl hover:text-blue-400 duration-150">{{ Str::limit($post->title, 87) }}</a>
                             <h2 class="text-gray-500 mt-3 text-sm">{{ date_format($post->created_at, 'd F, Y') }}</h2>
                             <div id="body-artikel" class="my-3 text-gray-800 text-md">
                                 {!! Str::limit($post->body, 245) !!}
