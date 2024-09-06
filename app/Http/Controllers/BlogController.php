@@ -43,8 +43,6 @@ class BlogController extends Controller
     public function show($post)
     {
         $post = Post::with('category')->where('slug', $post)->first();
-        // dd($post->category->id);
-        dd($post);
         $post->increment('views');
         $postTerkait = Post::with('category')
             ->where('category_id', $post->category->id)
