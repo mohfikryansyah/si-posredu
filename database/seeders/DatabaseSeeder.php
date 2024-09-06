@@ -27,17 +27,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(2)->create();
-        // Employee::factory(3)->create();
-        // Ibu::factory(50)->create();
-        // PemeriksaanIbu::factory(192)->create();
-        // PemeriksaanLansia::factory(156)->create();
-        // PemeriksaanAnak::factory(187)->create();
-        // PemeriksaanRemaja::factory(120)->create();
-        // Anak::factory(10)->create();
-        // Lansia::factory(50)->create();
-        // Remaja::factory(50)->create();
-        Category::factory(2)->create();
+        User::factory(2)->create();
+        Employee::factory(3)->create();
+        Ibu::factory(50)->create();
+        PemeriksaanIbu::factory(192)->create();
+        PemeriksaanLansia::factory(156)->create();
+        PemeriksaanAnak::factory(187)->create();
+        PemeriksaanRemaja::factory(120)->create();
+        Anak::factory(10)->create();
+        Lansia::factory(50)->create();
+        Remaja::factory(50)->create();
+        // Category::factory(2)->create();
         Post::factory(50)->create();
         Contact::factory(1)->create();
 
