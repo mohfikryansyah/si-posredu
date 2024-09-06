@@ -33,7 +33,7 @@ class PelayananController extends Controller
         // dd($request->all());
         $validatedData = $request->validateWithBag('add_pelayanan', [
             'nama' => 'required|max:50',
-            'deskripsi' => 'required|max:255',
+            'deskripsi' => 'required|max:400',
             'tanggal_pelayanan' => 'required|date',
             'start' => 'required',
             'end' => 'required',
@@ -69,7 +69,7 @@ class PelayananController extends Controller
     {
         $validatedData = $request->validateWithBag('edit_pelayanan', [
             'nama' => 'required|max:50',
-            'deskripsi' => 'required|max:255',
+            'deskripsi' => 'required|max:400',
             'tanggal_pelayanan' => 'required|date',
             'start' => 'required',
             'end' => 'required',

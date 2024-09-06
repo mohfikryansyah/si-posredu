@@ -48,7 +48,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-auto">
+        <div class="col-sm-auto md:mt-0 mt-5">
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <h1 class="bg-orange-400 px-5 py-2.5 text-gray-100 font-medium">Buat Kategori</h1>
                 <div class="p-5">

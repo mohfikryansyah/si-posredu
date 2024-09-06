@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Contact extends Model
 {
     use HasFactory, HasUuids;
 
@@ -14,9 +14,4 @@ class Category extends Model
     protected $primaryKey = 'id';
     // public $incrementing = false;
     protected $keyType = 'string';
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
 }

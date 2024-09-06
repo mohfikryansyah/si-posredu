@@ -75,7 +75,7 @@ class CategoryController extends Controller
         $validatedData['slug'] = Str::of($request->title)->slug('-');
 
         Category::where('id', $category->id)->update($validatedData);
-        return redirect()->route('categories.index')->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('categories.index')->with('success', 'Data berhasil diubah!');
     }
 
     /**

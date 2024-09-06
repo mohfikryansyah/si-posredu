@@ -2,14 +2,17 @@
 
 use Carbon\Carbon;
 use App\Models\Post;
+use App\Models\Contact;
 use App\Models\Category;
 use App\Models\Pelayanan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IbuController;
 use App\Http\Controllers\AnakController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LansiaController;
 use App\Http\Controllers\RemajaController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
@@ -26,8 +29,15 @@ Route::get('/', function () {
     return view('home', [
         'data' => $data,
         'pelayanans' => Pelayanan::latest()->take(2)->get(),
+        'posts' => Post::with('category')->latest()->take(6)->get(),
+        'kontak' => Contact::first(),
     ]);
 });
+
+Route::get('blog', [BlogController::class, 'index'])->name('blog');
+Route::get('blog/load-more', [BlogController::class, 'loadMore'])->name('blog.loadMore');
+Route::get('blog/read/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('blog/search', [BlogController::class, 'search'])->name('blog.search');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -114,6 +124,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('/jadwal-pelayanan', PelayananController::class)->except('destroy');
     Route::delete('/jadwal-pelayanan', [PelayananController::class, 'destroy'])->name('jadwal-pelayanan.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/kontak', ContactController::class)->except('destroy');
+    Route::delete('/kontak', [ContactController::class, 'destroy'])->name('kontak.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -78,18 +78,18 @@
                 </ul>
             </li>
             <li>
-                <x-dropdown aria-controls="posredu" data-collapse-toggle="posredu">
+                <x-dropdown aria-controls="posbindu" data-collapse-toggle="posbindu">
                     <p class="text-gray-500 w-5">
                         <i class="fa-solid fa-person-cane"></i>
                     </p>
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-gray-500">Posredu</span>
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-gray-500">Posbindu</span>
                     <svg class="w-3 h-3 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
                 </x-dropdown>
-                <ul id="posredu"
+                <ul id="posbindu"
                     class="{{ Route::is(['lansia', 'pemeriksaanLansia*']) ? '' : 'hidden' }} py-2 space-y-2">
                     <li>
                         <x-dropdown-link href="{{ route('lansia') }}" :active="request()->routeIs('lansia')">
@@ -125,6 +125,14 @@
                 <x-sidebar-link :href="route('posts.index')" :active="request()->routeIs('posts*')">
                     <i class="fa-regular fa-newspaper w-5"></i>
                     <span class="ms-3">{{ __('Artikel') }}</span>
+                </x-sidebar-link>
+            </li>
+        </ul>
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+            <li>
+                <x-sidebar-link :href="route('kontak.index')" :active="request()->routeIs('kontak.index')">
+                    <i class="fa-solid fa-list w-5"></i>
+                    <span class="ms-3">{{ __('Kontak') }}</span>
                 </x-sidebar-link>
             </li>
         </ul>

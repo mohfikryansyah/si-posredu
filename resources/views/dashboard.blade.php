@@ -7,39 +7,6 @@
 
             <span id="tanggalwaktu" class="text-gray-400 md:text-lg text-md"></span>
         </div>
-        <script>
-            function updateClock() {
-                // Dapatkan objek Date untuk waktu saat ini
-                var now = new Date();
-
-                // Ekstrak jam, menit, dan detik dari objek Date
-                var hours = now.getHours();
-                var minutes = now.getMinutes();
-                var seconds = now.getSeconds();
-
-                // Format waktu dalam format 12 jam
-                var ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12;
-                hours = hours ? hours : 12; // Jam 0 akan dianggap sebagai 12
-
-                // Buat string waktu dalam format HH:mm:ss AM/PM
-                var timeString = hours + ':' + addLeadingZero(minutes) + ':' + addLeadingZero(seconds) + ' ' + ampm;
-
-                // Tampilkan waktu di dalam elemen dengan id "digitalClock"
-                document.getElementById('tanggalwaktu').innerText = timeString;
-            }
-
-            function addLeadingZero(number) {
-                // Tambahkan nol di depan angka jika angka < 10
-                return number < 10 ? '0' + number : number;
-            }
-
-            // Panggil fungsi updateClock setiap detik
-            setInterval(updateClock, 1000);
-
-            // Inisialisasi jam pada saat halaman dimuat
-            updateClock();
-        </script>
     </x-slot>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-6 gap-4 my-4">
@@ -136,36 +103,49 @@
         </div>
     </div>
 
-    {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white">
-        <div class="border-r border-gray-200">
-            <div class="grid grid-rows-3 grid-cols-1 px-4">
-                <div class="row-span-1 flex justify-between mt-3">
-                    <h1 class="font-medium">Pemeriksaan Ibu</h1>
-                    @if ($persentasePerubahan > 0)
-                        <h1 class="font-medium text-green-400">{{ round($persentasePerubahan, 2) }}%</h1>
-                    @elseif ($persentasePerubahan < 0)
-                        <h1 class="font-medium text-red-400">{{ round($persentasePerubahan, 2) }}%</h1>
-                    @else
-                        <h1 class="font-medium text-yellow-400">{{ round($persentasePerubahan, 2) }}%</h1>
-                    @endif
-                </div>
-                <div class="row-span-1">
-                    <h1 class="text-4xl font-bold">{{ $pemeriksaanBulanIni }}</h1>
-                </div>
-                <div class="row-span-1 mb-3 mt-1 items-center">
-                    <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
-                        <div class="bg-blue-600 h-1.5 rounded-full progress-bar overflow-hidden"
-                            data-percentage="{{ $persentasePerubahan }}" style="width: 0;"></div>
+    <div class="md:grid grid-cols-3">
+        <div id="statistik_pemeriksaan" class="bg-white p-5">
+            <h1 class="text-gray-600 text-lg font-bold mb-5">Statistik Pemeriksaan Bulan Ini</h1>
+            <div class="space-y-5">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-blue-200 rounded-full dark:bg-blue-900 dark:ring-gray-900 shrink-0">
+                            <span class="flex w-3 h-3 bg-blue-400 rounded-full"></span>
+                        </div>
+                        <p class="ms-2 font-medium">Pemeriksaan Ibu</p>
                     </div>
-                    <h1 class="text-gray-400 text-sm mt-1">Overall Pemeriksaan Ibu
-                        {{ count(App\Models\PemeriksaanIbu::all()) }}</h1>
+                    <p class="font-medium">{{ $pemeriksaanBulanIni['ibu'] }}</p>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-green-200 rounded-full dark:bg-green-900 dark:ring-gray-900 shrink-0">
+                            <span class="flex w-3 h-3 bg-green-400 rounded-full"></span>
+                        </div>
+                        <p class="ms-2 font-medium">Pemeriksaan Anak</p>
+                    </div>
+                    <p class="font-medium">{{ $pemeriksaanBulanIni['anak'] }}</p>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-yellow-200 rounded-full dark:bg-yellow-900 dark:ring-gray-900 shrink-0">
+                            <span class="flex w-3 h-3 bg-yellow-400 rounded-full"></span>
+                        </div>
+                        <p class="ms-2 font-medium">Pemeriksaan Remaja</p>
+                    </div>
+                    <p class="font-medium">{{ $pemeriksaanBulanIni['remaja'] }}</p>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-red-200 rounded-full dark:bg-red-900 dark:ring-gray-900 shrink-0">
+                            <span class="flex w-3 h-3 bg-red-400 rounded-full"></span>
+                        </div>
+                        <p class="ms-2 font-medium">Pemeriksaan Lansia</p>
+                    </div>
+                    <p class="font-medium">{{ $pemeriksaanBulanIni['lansia'] }}</p>
                 </div>
             </div>
         </div>
-        <div class="border-r border-gray-200 font-medium p-4"></div>
-        <div class="border-r border-gray-200 font-medium p-4"></div>
-        <div class="font-medium p-4"></div>
-    </div> --}}
+    </div>
 
     <x-slot:script>
         <script src="{{ asset('plugins/clock/clock.js') }}"></script>
@@ -294,7 +274,7 @@
             option && myCharts.setOption(option);
         </script>
         <script>
-            var data = @json($data);
+            var data = @json($dataPemeriksaan);
             var chartDom = document.getElementById('doughnut-chart');
             var myChart = echarts.init(chartDom);
             var option;

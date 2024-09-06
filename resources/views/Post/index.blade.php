@@ -32,6 +32,7 @@
                         <th scope="col">Judul</th>
                         <th scope="col">Kategori</th>
                         <th scope="col">Tanggal Dibuat</th>
+                        <th scope="col">Views</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -48,6 +49,9 @@
                             </td>
                             <td class="whitespace-nowrap">
                                 {{ date_format(date_create($post->created_at), 'd M, Y') }}
+                            </td>
+                            <td class="whitespace-nowrap">
+                                {{ $post->views }}
                             </td>
                             <td>
                                 <div class="flex items-center">

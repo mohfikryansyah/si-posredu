@@ -8,11 +8,13 @@
     </header>
 
     <div class="bg-white rounded-lg shadow max-w-3xl mt-5 p-5">
-        <form action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST" class="w-full mx-auto">
+        <form action="{{ route('posts.update', ['post' => $post->id]) }}" method="POST" enctype="multipart/form-data"
+            class="w-full mx-auto">
             @method('PUT')
             @csrf
             <div class="mb-5">
-                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul</label>
+                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul<span
+                        class="text-red-500">*</span></label>
                 <x-text-input name="title" id="title"
                     class="{{ $errors->edit_post->has('title') ? 'border-red-500' : 'border-gray-300' }}"
                     value="{{ old('title', $post->title) }}"></x-text-input>
@@ -20,11 +22,7 @@
                     <p class="text-red-500 text-xs">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="hidden">
-                <x-text-input name="slug" id="slug"
-                    class="{{ $errors->edit_post->has('slug') ? 'border-red-500' : 'border-gray-300' }}"
-                    value="{{ old('slug', $post->slug) }}"></x-text-input>
-            </div>
+            <input type="hidden" name="slug" id="slug" value="{{ old('slug', $post->slug) }}">
             <div class="mb-5">
                 <label for="category_id"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori<span
@@ -46,6 +44,15 @@
                 @enderror
             </div>
             <div class="mb-5">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="thumbnail">Unggah
+                    Gambar</label>
+                <input
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    aria-describedby="thumbnail_help" id="thumbnail" name="thumbnail" type="file">
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="thumbnail_help">PNG, JPG or JPEG (MAX. 2048
+                    KB).</p>
+            </div>
+            <div class="mb-5">
                 <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Artikel<span
                         class="text-red-500">*</span></p>
                 <div id="editor" class="rounded-b-lg">{!! old('body', $post->body) !!}</div>
@@ -61,6 +68,10 @@
     <x-slot:script>
         <script>
             $(document).ready(function() {
+                $(".select2kategori").select2({
+                    width: 'resolve' // need to override the changed default
+                });
+
                 var quill = new Quill('#editor', {
                     theme: 'snow'
                 });

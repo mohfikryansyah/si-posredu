@@ -20,6 +20,11 @@
   background-color: #ffebda;
 }
 
+#body-artikel ol li {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
 @charset "UTF-8";
 :root {
 --dt-row-selected: 13, 110, 253;

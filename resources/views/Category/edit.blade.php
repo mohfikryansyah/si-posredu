@@ -1,10 +1,10 @@
 <x-app-layout>
-    <div class="grid grid-cols-3 gap-5">
+    <div class="md:grid grid-cols-3 gap-5">
         <div class="col-span-2">
             <header class="w-full bg-white rounded-lg shadow">
                 <div class="py-6 px-4">
                     <h2 class="font-semibold md:text-xl text-lg text-gray-800 leading-tight">
-                        {{ __('Data category') }}
+                        {{ __('Data Kategori') }}
                     </h2>
                 </div>
             </header>
@@ -44,7 +44,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-auto">
+        <div class="col-sm-auto md:mt-0 mt-5">
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <h1 class="bg-orange-400 px-5 py-2.5 text-gray-100 font-medium">Ubah Kategori</h1>
                 <div class="p-5">
@@ -67,6 +67,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- MODAL --->
     @include('Category.delete')

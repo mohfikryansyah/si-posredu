@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -35,13 +36,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validatedData = $request->validateWithBag('add_post', [
             'title' => 'required|max:255|unique:posts,title',
             'category_id' => 'required',
             'body' => 'required',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg|max:2048', // Validasi gambar
         ]);
 
         $validatedData['slug'] = Str::of($request->title)->slug('-');
+
+        // Jika gambar valid, simpan file-nya
+        if ($request->hasFile('thumbnail')) {
+            $imagePath = $request->file('thumbnail')->store('thumbnails', 'public');
+            $validatedData['thumbnail'] = $imagePath;
+        }
 
         Post::create($validatedData);
         return redirect()->route('posts.index')->with('success', 'Data berhasil disimpan!');
@@ -75,18 +84,33 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        // dd($request->all());
         $validatedData = $request->validateWithBag('edit_post', [
-            'title' => ['required', 'max:255'],
-            'slug' => ['required', 'max:255', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'title' => 'required|max:255|unique:posts,title,' . $post->id, // Abaikan validasi unik untuk post yang sedang diupdate
             'category_id' => 'required',
             'body' => 'required',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Gambar tidak wajib, hanya jika ada
         ]);
 
+        // Generate slug baru jika title berubah
         $validatedData['slug'] = Str::of($request->title)->slug('-');
 
+        // Cek apakah gambar baru diunggah
+        if ($request->hasFile('thumbnail')) {
+            // Hapus gambar lama jika ada
+            if ($post->thumbnail) {
+                Storage::disk('public')->delete($post->thumbnail);
+            }
+
+            // Simpan gambar baru
+            $imagePath = $request->file('thumbnail')->store('thumbnails', 'public');
+            $validatedData['thumbnail'] = $imagePath;
+        }
+
+        // Update data post
         Post::where('id', $post->id)->update($validatedData);
-        return redirect()->route('posts.index')->with('success', 'Data berhasil diubah!');
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('posts.index')->with('success', 'Data berhasil diperbarui!');
     }
 
     /**

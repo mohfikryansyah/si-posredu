@@ -25,7 +25,9 @@
             <p class="text-gray-400 text-sm my-3">Dibuat pada {{ date_format($post->created_at, 'd F, Y') }}</p>
             <p class="text-gray-400 text-sm my-3">Kategori: {{ $post->category->title }}</p>
         </div>
-        {!! $post->body !!}
+        <div id="body-artikel" class="text-gray-400">
+            {!! $post->body !!}
+        </div>
     </div>
 
     @include('Post.delete')

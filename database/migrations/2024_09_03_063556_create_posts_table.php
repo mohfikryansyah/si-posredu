@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('category_id');
+            $table->unsignedBigInteger('views')->default(0);
             $table->string('title');
+            $table->string('thumbnail')->nullable();
             $table->longText('body');
             $table->string('slug')->unique();
             $table->timestamps();
