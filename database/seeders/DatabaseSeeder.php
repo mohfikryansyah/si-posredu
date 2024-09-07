@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Anak;
+use App\Models\AppSetting;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Ibu;
@@ -37,7 +38,6 @@ class DatabaseSeeder extends Seeder
         Anak::factory(10)->create();
         Lansia::factory(50)->create();
         Remaja::factory(50)->create();
-        // Category::factory(2)->create();
         Post::factory(50)->create();
         Contact::factory(1)->create();
 
@@ -45,6 +45,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Fiqriansyah',
             'email' => 'fiqriansyah@gmail.com',
             'password' => Hash::make('fiqriansyah2001')
+        ]);
+
+        AppSetting::create([
+            'app_name' => 'POSREDU',
+            'visi' => '"Menjadi pusat layanan kesehatan yang unggul dan terpercaya dalam memberikan perawatan holistik untuk anak, ibu hamil, remaja, dan lansia, guna meningkatkan kualitas hidup dan kesejahteraan komunitas."',
+            'misi1' => 'Memberikan layanan kesehatan berkualitas: Menyediakan layanan kesehatan yang komprehensif dan berkualitas tinggi untuk anak, ibu hamil, remaja, dan lansia dengan pendekatan yang berpusat pada pasien.',
+            'misi2' => 'Memberikan layanan kesehatan berkualitas: Menyediakan layanan kesehatan yang komprehensif dan berkualitas tinggi untuk anak, ibu hamil, remaja, dan lansia dengan pendekatan yang berpusat pada pasien.',
+            'misi3' => 'Memberikan layanan kesehatan berkualitas: Menyediakan layanan kesehatan yang komprehensif dan berkualitas tinggi untuk anak, ibu hamil, remaja, dan lansia dengan pendekatan yang berpusat pada pasien.',
+            'lokasi' => 'Bunto, Kec. Popayato Tim., Kabupaten Pohuwato, Gorontalo 96467',
+            'email' => 'admin@posredu.com',
+            'no_tlp' => '082290142211',
         ]);
 
     }

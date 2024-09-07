@@ -127,12 +127,18 @@
                     <span class="ms-3">{{ __('Artikel') }}</span>
                 </x-sidebar-link>
             </li>
+            <li>
+                <x-sidebar-link :href="route('gallery.index')" :active="request()->routeIs('gallery*')">
+                    <i class="fa-solid fa-camera"></i>
+                    <span class="ms-3">{{ __('Dokumentasi Kegiatan') }}</span>
+                </x-sidebar-link>
+            </li>
         </ul>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-                <x-sidebar-link :href="route('kontak.index')" :active="request()->routeIs('kontak.index')">
+                <x-sidebar-link :href="route('app-setting.index')" :active="request()->routeIs('app-setting.index')">
                     <i class="fa-solid fa-list w-5"></i>
-                    <span class="ms-3">{{ __('Kontak') }}</span>
+                    <span class="ms-3">{{ __('Pengaturan Aplikasi') }}</span>
                 </x-sidebar-link>
             </li>
         </ul>

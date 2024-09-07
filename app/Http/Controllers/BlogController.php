@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppSetting;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -14,13 +15,17 @@ class BlogController extends Controller
             'posts' => Post::with('category')->where('id', '<>', $this->getPopulerPost())->latest()->paginate(5),
             'populer' => Post::with('category')->orderBy('views', 'desc')->first(),
             'categories' => $this->getCategories(),
+            'app' => AppSetting::first(),
         ]);
     }
 
     private function getPopulerPost()
     {
         $populer = Post::with('category')->orderBy('views', 'desc')->first();
-        return $populer->id;
+        if($populer){
+            return $populer->id;
+        }
+        return null;
     }
 
     private function getCategories()
@@ -87,8 +92,9 @@ class BlogController extends Controller
         $results = $query->get();
 
         $categories = $this->getCategories();
+        // dd($keyword);
 
         // Kembalikan hasil pencarian ke view
-        return view('Blog.result-search', compact('results', 'category', 'categories'));
+        return view('Blog.result-search', compact('results', 'category', 'categories', 'keyword'));
     }
 }

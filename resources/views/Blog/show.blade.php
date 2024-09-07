@@ -1,7 +1,7 @@
 <x-guest-layout>
     @include('Blog.partials.navbar')
-    <div class="mt-10">
-        @include('Blog.partials.search')
+    <div class="mt-10 px-5">
+        <x-artikel-search :categories="$categories"></x-artikel-search>
     </div>
 
     <div id="tes" class="max-w-screen-xl md:mt-14 mx-auto mb-10 md:p-0">
@@ -68,7 +68,11 @@
     </div>
 
     <div class="max-w-screen-xl mx-auto mb-28 rounded-lg">
-        <h1 class="text-2xl md:pl-0 pl-5 font-bold text-gray-800 md:mb-3 mb-1">Artikel Terbaru</h1>
+        <div class="group mb-5">
+            <h1 class="text-2xl font-bold text-gray-800 md:mb-3 mb-1">Artikel Terbaru</h1>
+            <div class="h-[5px] rounded-lg group-hover:w-32 transition-all duration-500 w-20 bg-red-500">
+            </div>
+        </div>
         <div id="post-container" class="md:grid grid-cols-5 gap-5 md:p-0 px-5 pb-5 md:space-y-0 space-y-3">
             @forelse ($posts as $post)
                 <div class="rounded-lg overflow-hidden">

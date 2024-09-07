@@ -1,7 +1,7 @@
 <x-guest-layout>
     @include('Blog.partials.navbar')
-    <div class="my-10">
-        @include('Blog.partials.search')
+    <div class="my-10 px-5">
+        <x-artikel-search :categories="$categories" :category="$category" :value="$keyword"></x-artikel-search>
     </div>
     <div class="max-w-screen-xl mx-auto mb-28 mt-20 rounded-lg">
         <h1 class="text-2xl md:pl-0 pl-5 font-bold text-gray-800 md:mb-3 mb-1">Search : {{ $category }}</h1>

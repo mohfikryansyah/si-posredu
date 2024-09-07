@@ -21,6 +21,7 @@ module.exports = {
                 akshar: ['Akshar', 'sans-serif'],
                 nunito: ['Nunito'],
                 inter: ['Inter', 'sans-serif'],
+                atma: ['Atma', 'display'],
             },
             keyframes: {
                 bounce: {

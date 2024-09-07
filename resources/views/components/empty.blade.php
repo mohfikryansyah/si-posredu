@@ -1,4 +1,4 @@
-<div class="w-full mx-auto col-span-3 h-[250px] flex items-center justify-center bg-gray-100 rounded-lg">
+<div class="w-full mx-auto col-span-full h-[250px] flex items-center justify-center bg-gray-100 rounded-lg">
     <div class="max-w-3xl">
         <div
             class="mx-auto w-14 h-14 mb-4 text-gray-500 bg-gray-200 rounded-full relative flex justify-center items-center text-sm">
