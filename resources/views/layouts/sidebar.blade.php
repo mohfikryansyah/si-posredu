@@ -137,7 +137,7 @@
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
                 <x-sidebar-link :href="route('app-setting.index')" :active="request()->routeIs('app-setting.index')">
-                    <i class="fa-solid fa-list w-5"></i>
+                    <i class="fa-solid fa-gears w-5"></i>
                     <span class="ms-3">{{ __('Pengaturan Aplikasi') }}</span>
                 </x-sidebar-link>
             </li>

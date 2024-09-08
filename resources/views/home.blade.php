@@ -98,37 +98,37 @@
     <div id="profil" class="w-full md:mt-36 pt-20 mt-28 px-5">
         <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-anchor-placement="top-center">
             <h1 class="text-center md:text-4xl text-2xl mb-6 font-black font-nunito">PROFIL POSREDU</h1>
-            <p class="text-lg mb-3 text-gray-700">Posredu adalah sebuah inisiatif kesehatan terpadu yang menggabungkan
+            <p class="text-lg mb-3 text-gray-700 text-center">Posredu adalah sebuah inisiatif kesehatan terpadu yang menggabungkan
                 tiga layanan
                 utama dalam satu platform: Posyandu, Posremaja, dan Posbindu. Program ini bertujuan untuk menyediakan
                 layanan kesehatan yang menyeluruh bagi semua kelompok usia, mulai dari balita hingga lansia, dengan
                 pendekatan yang holistik dan terintegrasi.
             </p>
-            <p class="text-lg text-gray-700">Posredu hadir untuk menjawab kebutuhan masyarakat akan pelayanan kesehatan
+            <p class="text-lg text-gray-700 text-center">Posredu hadir untuk menjawab kebutuhan masyarakat akan pelayanan kesehatan
                 yang
                 terintegrasi dan mudah diakses, dengan fokus pada pencegahan dan edukasi. Melalui Posredu, kami
                 berkomitmen untuk menjaga kesehatan seluruh anggota keluarga Anda, dari yang termuda hingga yang tertua.
             </p>
-            <div class="md:grid grid-cols-4 gap-5 mt-8 md:space-y-0 space-y-10">
+            <div class="grid md:grid-cols-4 grid-cols-2 md:gap-5 gap-y-10 items-center mt-8">
                 <div class="text-center space-y-1">
                     <span id="total-anak" data-count="{{ $dataPemeriksaan['anak'] }}"
-                        class="count-up text-4xl text-gray-700 font-bold">{{ $dataPemeriksaan['anak'] }}</span>
-                    <p class="text-lg text-gray-700">Total Anak</p>
+                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['anak'] }}</span>
+                    <p class="text-xl text-gray-700">Total Anak</p>
                 </div>
-                <div class="text-center space-y-1">
+                <div class="text-center space-y-1 top-0">
                     <span id="total-ibu" data-count="{{ $dataPemeriksaan['ibu'] }}"
-                        class="count-up text-4xl text-gray-700 font-bold">{{ $dataPemeriksaan['ibu'] }}</span>
-                    <p class="text-lg text-gray-700">Total Ibu Hamil</p>
+                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['ibu'] }}</span>
+                    <p class="text-xl text-gray-700">Total Ibu Hamil</p>
                 </div>
                 <div class="text-center space-y-1">
                     <span id="total-remaja" data-count="{{ $dataPemeriksaan['remaja'] }}"
-                        class="count-up text-4xl text-gray-700 font-bold">{{ $dataPemeriksaan['remaja'] }}</span>
-                    <p class="text-lg text-gray-700">Total Remaja</p>
+                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['remaja'] }}</span>
+                    <p class="text-xl text-gray-700">Total Remaja</p>
                 </div>
                 <div class="text-center space-y-1">
                     <span id="total-lansia" data-count="{{ $dataPemeriksaan['lansia'] }}"
-                        class="count-up text-4xl text-gray-700 font-bold">{{ $dataPemeriksaan['lansia'] }}</span>
-                    <p class="text-lg text-gray-700">Total Lansia</p>
+                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['lansia'] }}</span>
+                    <p class="text-xl text-gray-700">Total Lansia</p>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:px-0 group">
                 @forelse ($posts as $post)
                     <div data-aos="fade-up"
-                        class="bg-gray-100 hover:bg-purple-100 rounded-lg shadow-lg group-hover:[&:not(:hover)]:blur-sm transition duration-300 overflow-hidden">
+                        class="bg-gray-100  rounded-lg shadow-lg group-hover:[&:not(:hover)]:blur-sm transition duration-300 overflow-hidden">
                         <div class="h-[200px] overflow-hidden relative">
                             <span
                                 class="bg-black/50 z-10 rounded-bl-lg rounded-tr-lg right-0 absolute px-3 p-1 text-gray-100">{{ $post->category->title }}</span>
@@ -184,10 +184,10 @@
                             @endif
                         </div>
                         <div class="px-5 py-3">
+                            <h2 class="text-gray-500 mb-2 text-sm">{{ date_format($post->created_at, 'd F, Y') }}</h2>
                             <a href="{{ route('blog.show', ['post' => $post->slug]) }}"
-                                class="text-gray-800 font-medium text-xl hover:text-blue-400 duration-150">{{ Str::limit($post->title, 87) }}</a>
-                            <h2 class="text-gray-500 mt-3 text-sm">{{ date_format($post->created_at, 'd F, Y') }}</h2>
-                            <div id="body-artikel" class="my-3 text-gray-800 text-md">
+                                class="text-gray-800 font-medium text-lg hover:text-blue-400 duration-150">{{ Str::limit($post->title, 87) }}</a>
+                            <div id="body-artikel" class="my-2 text-gray-800 text-md">
                                 {!! Str::limit($post->body) !!}
                             </div>
                         </div>
@@ -203,7 +203,7 @@
     @if ($galleries->isNotEmpty())
         <div id="galeri" class="w-full md:mt-28 pb-20 pt-10 overflow-hidden">
             <h1 class="text-center md:text-4xl text-2xl mb-10 font-black font-nunito">DOKUMENTASI KEGIATAN</h1>
-            <div class="max-w-screen-xl mx-auto">
+            <div class="max-w-screen-xl mx-auto overflow-hidden">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         @foreach ($galleries as $gallery)
@@ -228,7 +228,8 @@
         <div class="max-w-7xl mx-auto overflow-hidden">
             <h1 class="text-center md:text-4xl text-2xl md:mb-10 mb-3 font-black font-nunito">VISI DAN MISI</h1>
             <div data-aos="fade-up" class="p-5 md:p-0">
-                <h2 class="text-center md:text-4xl text-2xl font-atma italic text-blue-500">Layanan, Inovasi, Edukasi!</h2>
+                <h2 class="text-center md:text-4xl text-2xl font-atma italic text-blue-500">Layanan, Inovasi, Edukasi!
+                </h2>
                 <p class="max-w-screen-lg mx-auto text-center md:text-2xl my-3 italic">{{ $app['visi'] }}</p>
             </div>
             <div class="max-w-screen-lg mx-auto md:mt-5 mt-0 md:p-0 p-5 md:grid grid-cols-3 gap-5">
@@ -241,14 +242,14 @@
                 </div>
                 <div data-aos="fade-up" data-aos-offset="400" class="border border-gray-200 p-5 rounded-3xl">
                     <div class="">
-                        <img src="{{ asset('images/layanan.png') }}" class="w-40 h-40 mx-auto" alt="">
+                        <img src="{{ asset('images/inovasi.png') }}" class="w-40 h-40 mx-auto" alt="">
                         <h1 class="text-center text-4xl font-atma italic text-blue-500">Inovasi</h1>
                     </div>
                     <p class="text-center text-lg mt-3">{{ $app['misi2'] }}</p>
                 </div>
                 <div data-aos="fade-left" data-aos-offset="400" class="border border-gray-200 p-5 rounded-3xl">
                     <div class="">
-                        <img src="{{ asset('images/layanan.png') }}" class="w-40 h-40 mx-auto" alt="">
+                        <img src="{{ asset('images/edukasi.png') }}" class="w-40 h-40 mx-auto" alt="">
                         <h1 class="text-center text-4xl font-atma italic text-blue-500">Edukasi</h1>
                     </div>
                     <p class="text-center text-lg mt-3">{{ $app['misi3'] }}</p>
@@ -370,105 +371,6 @@
     </footer>
 
     <x-slot:script>
-        <script>
-            window.onscroll = function() {
-                const header = document.querySelector("nav");
-                const navbar = document.getElementById("navbar");
-                const fixedNv = header.offsetTop;
-    
-                if (window.pageYOffset > fixedNv) {
-                    header.classList.add("navbar-fixed");
-                    header.classList.add("bg-white");
-                    header.classList.remove("bg-tosca");
-                    navbar.classList.remove("md:bg-tosca");
-                } else {
-                    navbar.classList.add("md:bg-tosca");
-                    header.classList.add("bg-tosca");
-                    header.classList.remove("bg-white");
-                    header.classList.remove("navbar-fixed");
-                }
-            };
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var countUpElements = document.querySelectorAll('.count-up');
-
-                var observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            var $countUp = entry.target;
-                            var countTo = parseInt($countUp.getAttribute('data-count'), 10);
-                            var currentNumber = 0;
-                            var increment = countTo / 200; // Adjust for smoother animation
-
-                            var interval = setInterval(function() {
-                                currentNumber += increment;
-                                if (currentNumber >= countTo) {
-                                    currentNumber = countTo;
-                                    clearInterval(interval);
-                                }
-                                $countUp.textContent = Math.floor(currentNumber);
-                            }, 10);
-
-                            observer.unobserve($countUp); // Stop observing after animation
-                        }
-                    });
-                }, {
-                    threshold: 0.1 // Adjust the threshold as needed
-                });
-
-                countUpElements.forEach(function(element) {
-                    observer.observe(element);
-                });
-            });
-        </script>
-        <script>
-            const swiper = new Swiper('.swiper-container', {
-                // Swiper Options
-                slidesPerView: 3,
-                spaceBetween: 30,
-                centeredSlides: true,
-                loop: true,
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                    dynamicBullets: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                effect: 'coverflow',
-                coverflowEffect: {
-                    rotate: 0,
-                    stretch: 100,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true,
-                },
-            });
-        </script>
-        <script>
-            const text = "POSREDU";
-            let index = 0;
-            const speed = 300; // Waktu antara karakter (dalam milidetik)
-
-            function typeEffect() {
-                if (index < text.length) {
-                    document.getElementById('posredu').innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(typeEffect, speed);
-                }
-            }
-
-            // Mulai efek mengetik ketika halaman dimuat
-            window.onload = function() {
-                typeEffect();
-            };
-        </script>
+        <script src="{{ asset('js/home.js') }}"></script>
     </x-slot:script>
 </x-guest-layout>

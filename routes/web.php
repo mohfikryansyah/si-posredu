@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/ibu/export', [IbuController::class, 'export'])->name('ibu.export');
     Route::get('/ibu', [IbuController::class, 'index'])->name('ibu');
     Route::post('/ibu', [IbuController::class, 'store']);
     Route::put('/ibu', [IbuController::class, 'update']);

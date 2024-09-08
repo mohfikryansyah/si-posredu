@@ -20,46 +20,6 @@
                                 <p class="text-red-500 text-xs">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="mb-5 col-span-full">
-                            <label for="visi"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Visi</label>
-                            <textarea rows="4"
-                                class="{{ $errors->edit_app->has('visi') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                name="visi" id="visi" placeholder="visi singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
-                            @error('visi', 'edit_app')
-                                <p class="text-red-500 text-xs">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-5 col-span-full">
-                            <label for="misi1"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Misi1</label>
-                            <textarea rows="4"
-                                class="{{ $errors->edit_app->has('misi1') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                name="misi1" id="misi1" placeholder="misi1 singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
-                            @error('misi1', 'edit_app')
-                                <p class="text-red-500 text-xs">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-5 col-span-full">
-                            <label for="misi2"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Misi2</label>
-                            <textarea rows="4"
-                                class="{{ $errors->edit_app->has('misi2') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                name="misi2" id="misi2" placeholder="misi2 singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
-                            @error('misi2', 'edit_app')
-                                <p class="text-red-500 text-xs">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-5 col-span-full">
-                            <label for="misi3"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Misi3</label>
-                            <textarea rows="4"
-                                class="{{ $errors->edit_app->has('misi3') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                name="misi3" id="misi3" placeholder="misi3 singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
-                            @error('misi3', 'edit_app')
-                                <p class="text-red-500 text-xs">{{ $message }}</p>
-                            @enderror
-                        </div>
                         <div class="mb-5 col-span-1">
                             <label for="lokasi"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
@@ -88,6 +48,46 @@
                                 class="{{ $errors->edit_app->has('no_tlp', $app['no_tlp']) ? 'border-red-500' : 'border-gray-300' }}"
                                 value="{{ $app['no_tlp'] }}"></x-number-input>
                             @error('no_tlp', 'edit_app')
+                                <p class="text-red-500 text-xs">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-5 col-span-full">
+                            <label for="visi"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Visi</label>
+                            <textarea rows="4"
+                                class="{{ $errors->edit_app->has('visi') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                name="visi" id="visi" placeholder="visi singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
+                            @error('visi', 'edit_app')
+                                <p class="text-red-500 text-xs">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-5 col-span-1">
+                            <label for="misi1"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Misi 1</label>
+                            <textarea rows="8"
+                                class="{{ $errors->edit_app->has('misi1') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                name="misi1" id="misi1" placeholder="misi1 singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
+                            @error('misi1', 'edit_app')
+                                <p class="text-red-500 text-xs">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-5 col-span-1">
+                            <label for="misi2"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Misi 2</label>
+                            <textarea rows="8"
+                                class="{{ $errors->edit_app->has('misi2') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                name="misi2" id="misi2" placeholder="misi2 singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
+                            @error('misi2', 'edit_app')
+                                <p class="text-red-500 text-xs">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-5 col-span-1">
+                            <label for="misi3"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Misi 3</label>
+                            <textarea rows="8"
+                                class="{{ $errors->edit_app->has('misi3') ? 'border-red-500' : 'border-gray-300' }} bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                name="misi3" id="misi3" placeholder="misi3 singkat tentang layanan">{{ old('visi', $app['visi']) }}</textarea>
+                            @error('misi3', 'edit_app')
                                 <p class="text-red-500 text-xs">{{ $message }}</p>
                             @enderror
                         </div>

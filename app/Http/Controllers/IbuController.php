@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\IbuExport;
 use App\Models\Ibu;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IbuController extends Controller
 {
@@ -103,5 +105,14 @@ class IbuController extends Controller
     {
         Ibu::findOrFail($request->id)->delete();
         return back()->with('success',"Data berhasil dihapus!");
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('ibu_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new IbuExport($id, $startDate, $endDate), 'laporan_ibu.xlsx');
     }
 }
