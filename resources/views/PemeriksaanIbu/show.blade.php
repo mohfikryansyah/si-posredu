@@ -4,9 +4,11 @@
     <div class="grid lg:grid-cols-12 gap-5">
         <div class="relative lg:col-span-3 col-span-12 rounded-lg p-5 bg-gray-50 shadow-md">
             <div class="flex text-[180px] justify-center pb-3">
-                @if ($mom->ibu->user->fotoProfile)
-                    <img src="{{ asset('storage/' . $mom->ibu->user->fotoProfile) }}"
-                        class="w-48 h-48 rounded-full object-cover" alt="user foto">
+                @if ($mom->ibu->user)
+                    @if ($mom->ibu->user->fotoProfile)
+                        <img src="{{ asset('storage/' . $mom->ibu->user->fotoProfile) }}"
+                            class="w-48 h-48 rounded-full object-cover" alt="user foto">
+                    @endif
                 @else
                     <i class="fa-solid fa-circle-user"></i>
                 @endif
