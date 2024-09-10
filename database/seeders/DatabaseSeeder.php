@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
         // Contact::factory(1)->create();
 
         $user = User::create([
-            'name' => 'adminposredu',
+            'name' => 'Admin',
             'email' => 'adminposredu@gmail.com',
             'password' => Hash::make('adminposredu')
         ]);
