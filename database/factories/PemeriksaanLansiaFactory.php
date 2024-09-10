@@ -23,7 +23,7 @@ class PemeriksaanLansiaFactory extends Factory
             'employee_id' => Employee::factory(),
             'tanggal_pemeriksaan' => fake()->dateTimeBetween('-9 month', '2 month'),
             'tekanan_darah' => fake()->randomNumber(3),
-            'suhu_tubuh' => fake()->randomNumber(2),
+            // 'suhu_tubuh' => fake()->randomNumber(2),
             'kolestrol' => fake()->randomNumber(2),
             'asam_urat' => fake()->randomNumber(2),
             'gula_darah' => fake()->randomNumber(2),
