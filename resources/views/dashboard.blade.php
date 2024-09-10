@@ -115,7 +115,7 @@
         </div>
     </div>
 
-    <div class="md:grid grid-cols-3">
+    <div class="md:grid grid-cols-3 md:mt-0 mt-5">
         <div id="statistik_pemeriksaan" class="bg-white p-5">
             <h1 class="text-gray-600 text-lg font-bold mb-5">Statistik Pemeriksaan Bulan Ini</h1>
             <div class="space-y-5">
