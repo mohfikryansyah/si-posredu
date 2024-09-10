@@ -40,9 +40,9 @@
                         <option disabled selected>Pilih</option>
                         @foreach ($employees as $employee)
                             @if (old('employee_id') === $employee->id)
-                                <option value="{{ $employee->id }}" selected>{{ $employee->name }}</option>
+                                <option value="{{ $employee->id }}" selected>{{ $employee->nama }}</option>
                             @else
-                                <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                <option value="{{ $employee->id }}">{{ $employee->nama }}</option>
                             @endif
                         @endforeach
                     </select>

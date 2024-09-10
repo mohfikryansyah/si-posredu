@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('no_tlp', 13);
             $table->string('pekerjaan');
+            $table->date('tanggal_pendaftaran');
             $table->timestamps();
         });
     }

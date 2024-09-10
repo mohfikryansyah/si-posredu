@@ -21,7 +21,7 @@ class PemeriksaanLansiaFactory extends Factory
         return [
             'lansia_id' => Lansia::factory(),
             'employee_id' => Employee::factory(),
-            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-5 month', '+5 year'),
+            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-9 month', '2 month'),
             'tekanan_darah' => fake()->randomNumber(3),
             'suhu_tubuh' => fake()->randomNumber(2),
             'kolestrol' => fake()->randomNumber(2),

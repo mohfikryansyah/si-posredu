@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,12 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::orderBy('join', 'desc')->paginate(5)->withQueryString();
+        $employees = Employee::with('user')->latest()->get();
+        $users = User::with('employee')->get();
 
         return view('Employee.index', compact([
-            'employees'
+            'employees',
+            'users'
         ]));
     }
 
@@ -32,7 +35,17 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validateWithBag('add_employee', [
+            'nama' => 'required|string|max:255',
+            'tempat_tanggal_lahir' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'join' => 'required|date'
+        ]);
+
+
+        Employee::create($validatedData);
+
+        return redirect()->route('employee.index')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -48,7 +61,10 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('Employee.edit', [
+            'employees' => employee::latest()->get(),
+            'e' => $employee,
+        ]);
     }
 
     /**
@@ -56,14 +72,24 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $validatedData = $request->validateWithBag('edit_employee', [
+            'nama' => 'required|string|max:255',
+            'tempat_tanggal_lahir' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'join' => 'required|date'
+        ]);
+
+        Employee::where('id', $employee->id)->update($validatedData);
+
+        return redirect()->route('employee.index')->with('success', 'Data berhasil diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Employee $employee)
+    public function destroy(Request $request)
     {
-        //
+        Employee::findOrFail($request->id)->delete();
+        return redirect()->route('employee.index')->with('success', 'Data berhasil dihapus!');
     }
 }

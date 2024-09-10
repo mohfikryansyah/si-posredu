@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use Carbon\Carbon;
 use App\Models\Ibu;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanIbu;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PemeriksaanIbuExport;
 
 class PemeriksaanIbuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    // public function __construct()
+    // {
+    //     if (auth()->user()->hasAnyRole(['ADMIN', 'MASYARAKAT'])) {
+    //         abort(403, 'Unauthorized');
+            
+    //     } else {
+    //     }
+    // }
+
     public function index()
     {
         $suntik_tetanus_toksoid = ['Ya', 'Tidak'];
@@ -120,5 +131,14 @@ class PemeriksaanIbuController extends Controller
     {
         PemeriksaanIbu::findOrFail($request->id)->delete();
         return back()->with('success',"Data berhasil dihapus!");
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('ibu_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new PemeriksaanIbuExport($id, $startDate, $endDate), 'laporan_pemeriksaan_ibu.xlsx');
     }
 }

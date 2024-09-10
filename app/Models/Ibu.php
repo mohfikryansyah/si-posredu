@@ -21,4 +21,8 @@ class Ibu extends Model
         return $this->hasMany(PemeriksaanIbu::class, 'ibu_id', 'id');
     }
     
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

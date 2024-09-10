@@ -13,11 +13,7 @@ class PemeriksaanLansia extends Model
 
     protected $guarded = ['id'];
     protected $primaryKey = 'id';
-    // public $incrementing = false;
     protected $keyType = 'string';
-    protected $casts = [
-        'tanggal_pemeriksaan' => 'date:d-m-Y',
-    ];
 
     public function lansia()
     {

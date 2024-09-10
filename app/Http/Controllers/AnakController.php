@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anak;
+use App\Exports\AnakExport;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AnakController extends Controller
 {
@@ -97,5 +99,14 @@ class AnakController extends Controller
     {
         Anak::findOrFail($request->id)->delete();
         return back()->with('success',"Data berhasil dihapus!");
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('anak_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new AnakExport($id, $startDate, $endDate), 'laporan_anak.xlsx');
     }
 }

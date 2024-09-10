@@ -3,12 +3,34 @@
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
+            @role('MASYARAKAT')
+            <li>
+                <x-sidebar-link :href="route('dashboard.masyarakat')" :active="request()->routeIs(['pemeriksaan*', 'dashboard.masyarakat'])">
+                    <i class="fa-solid fa-house w-5"></i>
+                    <span class="ms-3">{{ __('Dashboard') }}</span>
+                </x-sidebar-link>
+            </li>
+            @endrole
+
+            @role('KADER')
+            <li>
+                <x-sidebar-link :href="route('dashboard.kader')" :active="request()->routeIs('dashboard.kader')">
+                    <i class="fa-solid fa-house w-5"></i>
+                    <span class="ms-3">{{ __('Dashboard') }}</span>
+                </x-sidebar-link>
+            </li>
+            @endrole
+
+            @role('ADMIN')
             <li>
                 <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     <i class="fa-solid fa-house w-5"></i>
                     <span class="ms-3">{{ __('Dashboard') }}</span>
                 </x-sidebar-link>
             </li>
+            @endrole
+
+            @role(['ADMIN', 'KADER'])
             <li>
                 <x-dropdown aria-controls="posyandu" data-collapse-toggle="posyandu">
                     <p class="text-gray-500 w-5">
@@ -106,6 +128,16 @@
                 </ul>
             </li>
         </ul>
+        @endrole
+        @role('ADMIN')
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+            <li>
+                <x-sidebar-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
+                    <i class="fa-solid fa-hospital-user w-5"></i>
+                    <span class="ms-3">{{ __('Petugas') }}</span>
+                </x-sidebar-link>
+            </li>
+        </ul>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
                 <x-sidebar-link :href="route('jadwal-pelayanan.index')" :active="request()->routeIs('jadwal-pelayanan.index')">
@@ -129,7 +161,7 @@
             </li>
             <li>
                 <x-sidebar-link :href="route('gallery.index')" :active="request()->routeIs('gallery*')">
-                    <i class="fa-solid fa-camera"></i>
+                    <i class="fa-solid fa-camera w-5"></i>
                     <span class="ms-3">{{ __('Dokumentasi Kegiatan') }}</span>
                 </x-sidebar-link>
             </li>
@@ -144,11 +176,12 @@
         </ul>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-                <x-sidebar-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                <x-sidebar-link :href="route('register')" :active="request()->routeIs('register')">
                     <i class="fa-solid fa-address-card"></i>
-                    <span class="ms-3">{{ __('Profile') }}</span>
+                    <span class="ms-3">{{ __('Registrasi Akun') }}</span>
                 </x-sidebar-link>
             </li>
         </ul>
+        @endrole
     </div>
 </aside>

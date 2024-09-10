@@ -3,9 +3,13 @@
     {{-- <div class="h-screen"> --}}
     <div class="grid lg:grid-cols-12 gap-5">
         <div class="relative lg:col-span-3 col-span-12 rounded-lg p-5 bg-gray-50 shadow-md">
-            <div class="flex justify-center pb-3">
-                <img class="w-48 h-48 rounded-full hover:scale-105 duration-300"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
+            <div class="flex text-[180px] justify-center pb-3">
+                @if ($mom->ibu->user->fotoProfile)
+                    <img src="{{ asset('storage/' . $mom->ibu->user->fotoProfile) }}"
+                        class="w-48 h-48 rounded-full object-cover" alt="user foto">
+                @else
+                    <i class="fa-solid fa-circle-user"></i>
+                @endif
             </div>
             <div class="mt-3 space-y-3">
                 <div class="inline-flex items-center justify-center w-full">
@@ -56,7 +60,7 @@
 
                     <p class="text-gray-500 text-sm">Petugas Pemeriksa</p>
                     <p class="text-gray-800 font-medium text-sm">
-                        {{ $mom->employee->name }}
+                        {{ $mom->employee->nama }}
                     </p>
 
                     <p class="text-gray-500 text-sm">Usia Kehamilan</p>

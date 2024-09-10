@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('nama_orang_tua');
             $table->string('pekerjaan_orang_tua');
             $table->string('golongan_darah');
-            $table->string('tanggal_pendaftaran');
+            $table->date('tanggal_pendaftaran');
             $table->timestamps();
         });
     }

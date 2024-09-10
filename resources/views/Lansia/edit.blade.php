@@ -1,7 +1,7 @@
 <!-- Modal Component -->
 <x-modal name="edit_lansia" id="edit_lansia" :show="$errors->edit_lansia->any()" maxWidth="2xl" focusable>
     <div class="p-6">
-        <h2 class="text-lg font-medium text-gray-900">Buat Data Lansia</h2>
+        <h2 class="text-lg font-medium text-gray-900">Ubah Data Lansia</h2>
         <p class="mt-4 text-sm text-gray-600">
             Periksa semua data sebelum menyimpan.
         </p>
@@ -22,7 +22,7 @@
                 <div class="col-span-2 sm:col-span-1">
                     <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
                             class="text-red-500">*</span></label>
-                    <x-number-input name="nik" id="nik"
+                    <x-number-input name="nik" id="edit_nik"
                         class="{{ $errors->edit_lansia->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
                         value="{{ old('nik') }}"></x-number-input>
                     @error('nik', 'edit_lansia')
@@ -38,6 +38,17 @@
                         placeholder="Contoh: Gorontalo, 11 April 2001" required
                         value="{{ old('tempat_tanggal_lahir') }}"></x-text-input>
                     @error('tempat_tanggal_lahir', 'edit_lansia')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="tanggal_pendaftaran"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pendaftaran<span
+                            class="text-red-500">*</span></label>
+                    <x-date-input name="tanggal_pendaftaran" id="edit_tanggal_pendaftaran"
+                        class="{{ $errors->edit_lansia->has('tanggal_pendaftaran') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('tanggal_pendaftaran') }}"></x-date-input>
+                    @error('tanggal_pendaftaran', 'edit_lansia')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

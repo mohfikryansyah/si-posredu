@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $persentasePerubahan = $this->getPercentageChange(PemeriksaanIbu::class);
 
         return view('dashboard', [
-            'user' => User::all(),
+            'users' => User::all(),
             'dataPemeriksaan' => $this->getTotalDataPemeriksaan(),
             'dataRegistrasi' => $this->getTotalDataRegistrasi(),
             'persentasePerubahan' => $persentasePerubahan,

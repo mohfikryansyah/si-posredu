@@ -21,7 +21,7 @@ class PemeriksaanRemajaFactory extends Factory
         return [
             'remaja_id' => Remaja::factory(),
             'employee_id' => Employee::factory(),
-            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-5 month', '+5 year'),
+            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-9 month', '2 month'),
             'berat_badan' => fake()->randomFloat(1, 40, 60),
             'tinggi_badan' => fake()->randomFloat(1, 150, 170),
             'tekanan_darah' => fake()->randomNumber(3),

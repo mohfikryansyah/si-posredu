@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('no_tlp');
             $table->string('pekerjaan');
-            $table->string('tanggal_pendaftaran');
+            $table->date('tanggal_pendaftaran');
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('kolestrol', 5, 1);
             $table->decimal('asam_urat', 5, 1);
             $table->decimal('gula_darah', 5, 1);
-            $table->decimal('suhu_tubuh', 5, 1);
+            // $table->decimal('suhu_tubuh', 5, 1);
             $table->string('catatan');
             $table->timestamps();
 

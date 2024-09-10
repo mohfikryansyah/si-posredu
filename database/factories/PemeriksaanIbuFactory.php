@@ -31,7 +31,7 @@ class PemeriksaanIbuFactory extends Factory
         return [
             'ibu_id' => Ibu::factory(),
             'employee_id' => Employee::factory(),
-            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-5 month', '+5 year'),
+            'tanggal_pemeriksaan' => fake()->dateTimeBetween('-9 month', '2 month'),
             'usia_kehamilan' => fake()->randomNumber(2),
             'tekanan_darah' => fake()->randomNumber(3),
             'berat_badan' => fake()->randomFloat(1, 40, 120),

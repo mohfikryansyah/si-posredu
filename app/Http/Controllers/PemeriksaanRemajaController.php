@@ -6,6 +6,8 @@ use App\Models\Remaja;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanRemaja;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PemeriksaanRemajaExport;
 
 class PemeriksaanRemajaController extends Controller
 {
@@ -109,5 +111,14 @@ class PemeriksaanRemajaController extends Controller
     {
         PemeriksaanRemaja::findOrFail($request->id)->delete();
         return back()->with('success',"Data berhasil dihapus!");
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('remaja_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new PemeriksaanRemajaExport($id, $startDate, $endDate), 'Laporan Pemeriksaan Remaja.xlsx');
     }
 }

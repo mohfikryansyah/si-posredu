@@ -2,12 +2,13 @@
 
 namespace App\Exports;
 
+use Carbon\Carbon;
 use App\Models\Ibu;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
 class IbuExport implements FromQuery, WithHeadings, WithMapping
 {
@@ -44,6 +45,8 @@ class IbuExport implements FromQuery, WithHeadings, WithMapping
             $query->whereDate('tanggal_pendaftaran', '<=', $this->endDate);
         }
 
+        $query->orderBy('tanggal_pendaftaran', 'desc');
+
         return $query;
     }
 
@@ -54,9 +57,6 @@ class IbuExport implements FromQuery, WithHeadings, WithMapping
 
     public function map($row): array
     {
-        $row->nik = "'" . $row->nik;
-        $row->no_tlp = "'" . $row->no_tlp;
-
         return [
             $row->nama,
             $row->nik,
@@ -67,7 +67,7 @@ class IbuExport implements FromQuery, WithHeadings, WithMapping
             $row->alamat,
             $row->no_tlp,
             $row->pekerjaan,
-            $row->tanggal_pendaftaran,
+            Carbon::parse($row->tanggal_pendaftaran)->translatedFormat('d F, Y'),
         ];
     }
 }

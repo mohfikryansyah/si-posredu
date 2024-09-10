@@ -41,9 +41,9 @@
                         <option disabled selected>Pilih</option>
                         @foreach ($employees as $employee)
                             @if (old('employee_id') === $employee->id)
-                                <option value="{{ $employee->id }}" selected>{{ $employee->name }}</option>
+                                <option value="{{ $employee->id }}" selected>{{ $employee->nama }}</option>
                             @else
-                                <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                <option value="{{ $employee->id }}">{{ $employee->nama }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -69,7 +69,7 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="md:col-span-1 col-span-3">
+                {{-- <div class="md:col-span-1 col-span-3">
                     <label for="edit_suhu_tubuh"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Suhu Tubuh<span
                             class="text-red-500">*</span><span class="text-gray-400"> (derajat)</span></label>
@@ -77,7 +77,7 @@
                     @error('suhu_tubuh', 'edit_pemeriksaan_lansia')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="md:col-span-1 col-span-3">
                     <label for="edit_kolestrol"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kolestrol<span

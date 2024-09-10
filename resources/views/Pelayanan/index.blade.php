@@ -13,7 +13,7 @@
                 <table id="table_pelayanan">
                     <thead>
                         <tr>
-                            <th scope="col">Judul</th>
+                            <th scope="col">Nama</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Mulai</th>
                             <th scope="col">Akhir</th>

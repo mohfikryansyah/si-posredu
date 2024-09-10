@@ -37,7 +37,7 @@
                 <div class="col-span-2 sm:col-span-1">
                     <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
                             class="text-red-500">*</span></label>
-                    <x-number-input name="nik" id="nik"
+                    <x-number-input name="nik" id="show_nik"
                         class="{{ $errors->show_ibu->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
                         value="{{ old('nik') }}"></x-number-input>
                 </div>

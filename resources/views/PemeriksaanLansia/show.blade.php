@@ -3,8 +3,7 @@
     <div class="rounded-md bg-white shadow-lg">
         <div class="p-5">
             <p class="text-gray-500 text-sm font-medium">
-                {{ date_format(date_create($lansias->tanggal_pemeriksaan), 'd M, Y') }}
-                ({{ \Carbon\Carbon::parse($lansias['tanggal_pemeriksaan'])->diffForHumans() }})
+                {{ date_format(date_create($lansias->tanggal_pemeriksaan), 'd F, Y') }}
             </p>
             <p class="text-orange-400 mt-1 text-lg font-medium">
                 {{ $lansias->lansia->nama }}
@@ -31,7 +30,7 @@
                 <div class="flex gap-5 text-gray-500 text-sm font-medium tracking-wide">
                     <div class="space-y-2 lg:mt-0 mt-2">
                         <p class="text-right">Petugas Pemeriksa</p>
-                        <p class="text-gray-800 lg:text-right">{{ $lansias->employee->name }}</p>
+                        <p class="text-gray-800 lg:text-right">{{ $lansias->employee->nama }}</p>
                     </div>
                 </div>
             </div>
@@ -111,7 +110,7 @@
                         <span class="text-gray-500">mg/dL</span>
                     </p>
 
-                    <p class="text-gray-500">Suhu Tubuh</p>
+                    {{-- <p class="text-gray-500">Suhu Tubuh</p>
                     @php
                         $isEqual = $pemeriksaanSebelumnya && $lansias->suhu_tubuh == $pemeriksaanSebelumnya->suhu_tubuh;
                         $isHigher = $pemeriksaanSebelumnya && $lansias->suhu_tubuh > $pemeriksaanSebelumnya->suhu_tubuh;
@@ -125,8 +124,8 @@
                             ~
                         @endif
                         <span class="text-gray-800">{{ $lansias->suhu_tubuh }}</span>
-                        <span class="text-gray-500">mg/dL</span>
-                    </p>
+                        <span class="text-gray-500">°C</span>
+                    </p> --}}
 
                     <p class="text-gray-500">Catatan</p>
                     <p class="text-gray-800 font-medium">{{ $lansias->catatan }}</p>
@@ -158,7 +157,7 @@
                         <p class="text-gray-800 font-medium">{{ $pemeriksaanSebelumnya->gula_darah }} <span
                                 class="text-gray-500">mg/dL</span></p>
                         <p class="text-gray-500">Suhu Tubuh</p>
-                        <p class="text-gray-800 font-medium">{{ $pemeriksaanSebelumnya->suhu_tubuh . '°C' }}</p>
+                        {{-- <p class="text-gray-800 font-medium">{{ $pemeriksaanSebelumnya->suhu_tubuh . '°C' }}</p> --}}
                         <p class="text-gray-500">Catatan</p>
                         <p class="text-gray-800 font-medium">{{ $pemeriksaanSebelumnya->catatan }}</p>
                     </div>

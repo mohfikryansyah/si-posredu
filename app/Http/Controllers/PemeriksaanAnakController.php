@@ -6,6 +6,9 @@ use App\Models\Anak;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanAnak;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PemeriksaanAnakExport;
+use App\Exports\PemeriksaanLansiaExport;
 
 class PemeriksaanAnakController extends Controller
 {
@@ -111,5 +114,14 @@ class PemeriksaanAnakController extends Controller
     {
         PemeriksaanAnak::findOrFail($request->id)->delete();
         return redirect()->route('pemeriksaanAnak')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('anak_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new PemeriksaanAnakExport($id, $startDate, $endDate), 'laporan_pemeriksaan_anak.xlsx');
     }
 }

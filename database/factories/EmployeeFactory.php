@@ -16,11 +16,15 @@ class EmployeeFactory extends Factory
      */
     public function definition(): array
     {
+        $kota = fake()->randomElement(['Gorontalo,', 'Makassar,', 'Manado,']);
+        $date = fake()->dateTimeBetween('-4 years');
+        $formatDate = $date->format('j F Y');
+        
         return [
-            'name' => fake()->name(),
-            'birthday' => fake()->dateTimeBetween('-30 years', '-25 years'),
+            'nama' => fake()->name(),
+            'tempat_tanggal_lahir' => $kota . $formatDate,
             'join' => fake()->dateTimeBetween('-4 years'),
-            'address' => fake()->address(),
+            'alamat' => fake()->address(),
         ];
     }
 }

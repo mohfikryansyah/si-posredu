@@ -39,7 +39,7 @@
                 <div class="flex gap-5 text-gray-500 text-sm font-medium tracking-wide">
                     <div class="space-y-2 lg:mt-0 mt-2">
                         <p class="text-right">Petugas Pemeriksa</p>
-                        <p class="text-gray-800 lg:text-right">{{ $children->employee->name }}</p>
+                        <p class="text-gray-800 lg:text-right">{{ $children->employee->nama }}</p>
                     </div>
                 </div>
             </div>

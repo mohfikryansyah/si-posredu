@@ -25,4 +25,9 @@ class PemeriksaanIbu extends Model
     {
         return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

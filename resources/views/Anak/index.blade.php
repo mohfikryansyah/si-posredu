@@ -5,20 +5,32 @@
         </h2>
     </x-slot>
 
-    <div class="w-full h-auto rounded-lg py-5">
-        <div
-            class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 bg-transparent dark:bg-gray-900 rounded-t-lg">
-            <!-- Button to open modal -->
-            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'add_anak')"
-                class="openbtn bg-orange-400 text-white inline-flex items-center px-4 py-1.5 rounded-lg font-medium">
-                <svg class="me-1 -ms-1 w-5 h-5 font-bold" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                Tambah Data
-            </button>
+    <div class="flex space-x-2">
+        <div class="h-auto rounded-lg py-5">
+            <div
+                class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 bg-transparent dark:bg-gray-900 rounded-t-lg">
+                <!-- Button to open modal -->
+                <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'add_anak')"
+                    class="openbtn bg-orange-400 text-white inline-flex items-center px-4 py-1.5 rounded-lg font-medium">
+                    <svg class="me-1 -ms-1 w-5 h-5 font-bold" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    Tambah Data
+                </button>
+            </div>
+        </div>
+        <div class="h-auto rounded-lg py-5">
+            <div
+                class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 bg-transparent dark:bg-gray-900 rounded-t-lg">
+                <!-- Button to open modal -->
+                <button x-data x-on:click.prevent="$dispatch('open-modal', 'export_anak')"
+                    class="openbtn bg-green-400 text-white inline-flex items-center px-4 py-1.5 rounded-lg font-medium">
+                    Export Excel
+                </button>
+            </div>
         </div>
     </div>
 
@@ -41,15 +53,13 @@
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th class="whitespace-nowrap">
                             <a href="javascript:void(0);" x-data data-id="{{ $child->id }}"
-                                data-nik="{{ $child->nik }}"
-                                data-nama="{{ $child->nama }}" data-nama-ibu="{{ $child->nama_ibu }}"
-                                data-nama-ayah="{{ $child->nama_ayah }}"
+                                data-nik="{{ $child->nik }}" data-nama="{{ $child->nama }}"
+                                data-nama-ibu="{{ $child->nama_ibu }}" data-nama-ayah="{{ $child->nama_ayah }}"
                                 data-jenis-kelamin="{{ $child->jenis_kelamin }}"
                                 data-tempat-tanggal-lahir="{{ $child->tempat_tanggal_lahir }}"
                                 data-alamat="{{ $child->alamat }}" data-no-tlp="{{ $child->no_tlp }}"
                                 data-tanggal-pendaftaran="{{ $child->tanggal_pendaftaran }}"
-                                x-on:click="$dispatch('open-modal', 'show_anak')"
-                                class="showbtn hover:text-orange-400">
+                                x-on:click="$dispatch('open-modal', 'show_anak')" class="showbtn hover:text-orange-400">
                                 {{ $child->nama }}
                             </a>
                         </th>
@@ -71,9 +81,8 @@
                         <td>
                             <div class="flex items-center">
                                 <a href="javascript:void(0);" x-data data-id="{{ $child->id }}"
-                                    data-nik="{{ $child->nik }}"
-                                    data-nama="{{ $child->nama }}" data-nama-ibu="{{ $child->nama_ibu }}"
-                                    data-nama-ayah="{{ $child->nama_ayah }}"
+                                    data-nik="{{ $child->nik }}" data-nama="{{ $child->nama }}"
+                                    data-nama-ibu="{{ $child->nama_ibu }}" data-nama-ayah="{{ $child->nama_ayah }}"
                                     data-jenis-kelamin="{{ $child->jenis_kelamin }}"
                                     data-tempat-tanggal-lahir="{{ $child->tempat_tanggal_lahir }}"
                                     data-alamat="{{ $child->alamat }}" data-no-tlp="{{ $child->no_tlp }}"
@@ -100,6 +109,7 @@
     @include('Anak.edit')
     @include('Anak.delete')
     @include('Anak.show')
+    @include('Anak.export')
 
     <x-slot:script>
         <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
@@ -111,6 +121,11 @@
         </script>
         <script>
             $(document).ready(function() {
+
+                $(".select2nama").select2({
+                    width: 'resolve' // need to override the changed default
+                });
+                
                 $('table').on('click', '.editbtn', function() {
                     var data = $(this).data();
 

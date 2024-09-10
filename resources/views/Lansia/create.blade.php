@@ -40,6 +40,17 @@
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
+                    <label for="tanggal_pendaftaran"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pendaftaran<span
+                            class="text-red-500">*</span></label>
+                    <x-date-input name="tanggal_pendaftaran" id="tanggal_pendaftaran"
+                        class="{{ $errors->add_lansia->has('tanggal_pendaftaran') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('tanggal_pendaftaran') }}"></x-date-input>
+                    @error('tanggal_pendaftaran', 'add_lansia')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
                     <label for="golongan_darah"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gol. Darah<span
                             class="text-red-500">*</span></label>

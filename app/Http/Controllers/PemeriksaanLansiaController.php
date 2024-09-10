@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Exports\PemeriksaanLansiaExport;
 use App\Models\Lansia;
-use App\Models\PemeriksaanLansia;
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\PemeriksaanLansia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PemeriksaanLansiaController extends Controller
 {
@@ -48,7 +50,7 @@ class PemeriksaanLansiaController extends Controller
             'kolestrol' => 'required|numeric',
             'asam_urat' => 'required|numeric',
             'gula_darah' => 'required|numeric',
-            'suhu_tubuh' => 'required|numeric',
+            // 'suhu_tubuh' => 'required|numeric',
             'catatan' => 'required|max:72',
         ]);
 
@@ -96,7 +98,7 @@ class PemeriksaanLansiaController extends Controller
             'kolestrol' => 'required|numeric',
             'asam_urat' => 'required|numeric',
             'gula_darah' => 'required|numeric',
-            'suhu_tubuh' => 'required|numeric',
+            // 'suhu_tubuh' => 'required|numeric',
             'catatan' => 'required|max:72',
         ]);
 
@@ -112,5 +114,14 @@ class PemeriksaanLansiaController extends Controller
     {
         PemeriksaanLansia::findOrFail($request->id)->delete();
         return back()->with('success',"Data berhasil dihapus!");
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('lansia_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new PemeriksaanLansiaExport($id, $startDate, $endDate), 'laporan_pemeriksaan_lansia.xlsx');
     }
 }

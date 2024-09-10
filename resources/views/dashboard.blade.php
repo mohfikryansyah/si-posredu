@@ -2,7 +2,19 @@
     <x-slot name="header">
         <div class="flex justify-between items-center ">
             <h2 class="font-medium md:text-lg text-md text-gray-700 leading-tight">
-                Welcome, {{ auth()->user()->name }}!
+                @if (auth()->user()->tipe_entitas == 'anak')
+                    Welcome, {{ auth()->user()->anak->nama }}!
+                @elseif (auth()->user()->tipe_entitas == 'remaja')
+                    Welcome, {{ auth()->user()->remaja->nama }}!
+                @elseif (auth()->user()->tipe_entitas == 'ibu')
+                    Welcome, {{ auth()->user()->ibu->nama }}!
+                @elseif (auth()->user()->tipe_entitas == 'lansia')
+                    Welcome, {{ auth()->user()->lansia->nama }}!
+                @elseif (auth()->user()->tipe_entitas == 'petugas')
+                    Welcome, {{ auth()->user()->employee->nama }}!
+                @else
+                    Welcome, {{ auth()->user()->name }}!
+                @endif
             </h2>
 
             <span id="tanggalwaktu" class="text-gray-400 md:text-lg text-md"></span>
@@ -109,7 +121,8 @@
             <div class="space-y-5">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
-                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-blue-200 rounded-full dark:bg-blue-900 dark:ring-gray-900 shrink-0">
+                        <div
+                            class="z-10 flex items-center justify-center w-5 h-5 bg-blue-200 rounded-full dark:bg-blue-900 dark:ring-gray-900 shrink-0">
                             <span class="flex w-3 h-3 bg-blue-400 rounded-full"></span>
                         </div>
                         <p class="ms-2 font-medium">Pemeriksaan Ibu</p>
@@ -118,7 +131,8 @@
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
-                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-green-200 rounded-full dark:bg-green-900 dark:ring-gray-900 shrink-0">
+                        <div
+                            class="z-10 flex items-center justify-center w-5 h-5 bg-green-200 rounded-full dark:bg-green-900 dark:ring-gray-900 shrink-0">
                             <span class="flex w-3 h-3 bg-green-400 rounded-full"></span>
                         </div>
                         <p class="ms-2 font-medium">Pemeriksaan Anak</p>
@@ -127,7 +141,8 @@
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
-                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-yellow-200 rounded-full dark:bg-yellow-900 dark:ring-gray-900 shrink-0">
+                        <div
+                            class="z-10 flex items-center justify-center w-5 h-5 bg-yellow-200 rounded-full dark:bg-yellow-900 dark:ring-gray-900 shrink-0">
                             <span class="flex w-3 h-3 bg-yellow-400 rounded-full"></span>
                         </div>
                         <p class="ms-2 font-medium">Pemeriksaan Remaja</p>
@@ -136,7 +151,8 @@
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
-                        <div class="z-10 flex items-center justify-center w-5 h-5 bg-red-200 rounded-full dark:bg-red-900 dark:ring-gray-900 shrink-0">
+                        <div
+                            class="z-10 flex items-center justify-center w-5 h-5 bg-red-200 rounded-full dark:bg-red-900 dark:ring-gray-900 shrink-0">
                             <span class="flex w-3 h-3 bg-red-400 rounded-full"></span>
                         </div>
                         <p class="ms-2 font-medium">Pemeriksaan Lansia</p>

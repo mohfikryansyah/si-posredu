@@ -31,6 +31,7 @@ class LansiaFactory extends Factory
             'alamat' => fake()->address(),
             'no_tlp' => $no_tlp . fake()->randomNumber(5, true),
             'pekerjaan' => fake()->jobTitle(),
+            'tanggal_pendaftaran' => fake()->date()
         ];
     }
 }

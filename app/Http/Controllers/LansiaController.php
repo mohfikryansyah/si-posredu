@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LansiaExport;
 use App\Models\Lansia;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LansiaController extends Controller
 {
@@ -41,6 +43,7 @@ class LansiaController extends Controller
             'golongan_darah' => 'required|string|max:3',
             'alamat' => 'required|string|max:255',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
+            'tanggal_pendaftaran' => 'required',
             'pekerjaan' => 'required|string|max:255',
         ]);
 
@@ -82,6 +85,7 @@ class LansiaController extends Controller
             'golongan_darah' => 'required|string|max:3',
             'alamat' => 'required|string|max:255',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
+            'tanggal_pendaftaran' => 'required',
             'pekerjaan' => 'required|string|max:255',
         ]);
 
@@ -98,5 +102,14 @@ class LansiaController extends Controller
     {
         Lansia::findOrFail($request->id)->delete();
         return back()->with('success',"Data berhasil dihapus!");
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('remaja_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new LansiaExport($id, $startDate, $endDate), 'laporan_lansia.xlsx');
     }
 }

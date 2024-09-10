@@ -1,7 +1,7 @@
 <!-- Modal Component -->
 <x-modal name="export_ibu" id="export_ibu" :show="false" maxWidth="2xl" focusable>
     <div class="p-6">
-        <h2 class="text-lg font-medium text-gray-900">Buat Data Excel Ibu</h2>
+        <h2 class="text-lg font-medium text-gray-900">Export Data Ibu</h2>
 
         <form action="{{ route('ibu.export') }}" method="GET" class="mt-4">
             @csrf

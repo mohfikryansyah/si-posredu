@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RemajaExport;
 use App\Models\Remaja;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RemajaController extends Controller
 {
@@ -105,5 +107,14 @@ class RemajaController extends Controller
     {
         Remaja::findOrFail($request->id)->delete();
         return back()->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('remaja_id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+
+        return Excel::download(new RemajaExport($id, $startDate, $endDate), 'laporan_remaja.xlsx');
     }
 }

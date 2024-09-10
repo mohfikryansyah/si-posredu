@@ -6,10 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
+    
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +19,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'tipe_entitas',
+        'anak_id',
+        'remaja_id',
+        'lansia_id',
+        'ibu_id',
+        'employee_id',
+        'fotoProfile',
         'email',
         'password',
     ];
@@ -44,4 +52,30 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function anak()
+    {
+        return $this->belongsTo(Anak::class, 'anak_id');
+    }
+
+    public function remaja()
+    {
+        return $this->belongsTo(Remaja::class, 'remaja_id');
+    }
+
+    public function lansia()
+    {
+        return $this->belongsTo(Lansia::class, 'lansia_id');
+    }
+
+    public function ibu()
+    {
+        return $this->belongsTo(Ibu::class, 'ibu_id');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
+    
 }
