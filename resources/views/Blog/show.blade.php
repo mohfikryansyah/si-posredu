@@ -41,7 +41,7 @@
                                     title="{{ $postTerkait->title }}">
                                     {{ Str::limit($postTerkait->title, 80) }}
                                 </a>
-                                <div id="body-artikel" class="text-gray-500 text-sm">{!! Str::limit($postTerkait->body, 100) !!}</div>
+                                {{-- <div id="body-artikel" class="text-gray-500 text-sm">{!! Str::limit($postTerkait->body, 100) !!}</div> --}}
                                 <div class="text-red-400 text-sm mt-2 mb-1">
                                     {{ $postTerkait->category->title }}
                                     <span class="text-gray-300 text-sm"> &#9679; </span>
@@ -85,15 +85,15 @@
                             src="{{ asset('images/no-thumbnail.jpg') }}" alt="">
                     @endif
                     <p class="text-gray-400 text-sm mt-2 mb-1">{{ date_format($post->created_at, 'd F, Y') }}</p>
-                    <div class="h-[75px]">
+                    <div>
                         <a href="{{ route('blog.show', ['post' => $post->slug]) }}"
                             class="text-gray-600 hover:text-blue-400 duration-150 font-bold text-md"
                             title="{{ $post->title }}">
                             {{ Str::limit($post->title, 60) }}</a>
                     </div>
-                    <div id="body-artikel" class="h-[75px] text-gray-500 text-sm">
+                    {{-- <div id="body-artikel" class="h-[75px] text-gray-500 text-sm">
                         {!! Str::limit($post->body, 100) !!}
-                    </div>
+                    </div> --}}
                     <p class="text-red-400 text-sm mt-2 mb-1">{{ $post->category->title }}<span
                             class="text-gray-300 text-sm"> &#9679; </span><span class="text-gray-400">telah dibaca
                             {{ $post->views . ' kali' }}</span>

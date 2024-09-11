@@ -34,7 +34,7 @@
                     {{-- <p class="text-md text-gray-600 mb-1">Dibuat pada {{ date_format($populer['created_at'], 'd F, Y') }}</p> --}}
                     <a href="{{ route('blog.show', ['post' => $populer->slug]) }}"
                         class="block text-gray-600 hover:text-blue-400 duration-300 font-bold text-2xl mt-2">{{ $populer['title'] }}</a>
-                    <div id="body-artikel" class="text-gray-600 text-lg my-5">{!! Str::limit($populer->body, 420) !!}</div>
+                    {{-- <div id="body-artikel" class="text-gray-600 text-lg my-5">{!! Str::limit($populer->body, 420) !!}</div> --}}
                     <p class="text-red-600 text-lg">{{ $populer->category['title'] }} <span
                             class="text-gray-400 text-sm">&#9679; </span><span class="text-gray-400">telah dibaca
                             {{ $populer['views'] }} kali</span></p>
@@ -66,9 +66,9 @@
                             title="{{ $post->title }}">
                             {{ Str::limit($post->title, 60) }}</a>
                     </div>
-                    <div id="body-artikel" class="h-[75px] text-gray-500 text-sm">
+                    {{-- <div id="body-artikel" class="h-[75px] text-gray-500 text-sm">
                         {!! Str::limit($post->body, 100) !!}
-                    </div>
+                    </div> --}}
                     <p class="text-red-400 text-sm mt-2 mb-1">{{ $post->category->title }}<span
                             class="text-gray-300 text-sm"> &#9679; </span><span class="text-gray-400">telah dibaca
                             {{ $post->views . ' kali' }}</span>
@@ -78,7 +78,7 @@
                 <x-empty>Saat ini belum ada artikel yang tersedia untuk ditampilkan.</x-empty>
             @endforelse
         </div>
-        @if ($posts->isNotEmpty())
+        @if (count($posts) > 1)
             <div class="text-center mt-8">
                 <div class="inline-flex items-center justify-center w-full">
                     <hr class="w-full h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
