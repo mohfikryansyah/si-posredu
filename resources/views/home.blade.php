@@ -201,7 +201,7 @@
                             <a href="{{ route('blog.show', ['post' => $post->slug]) }}"
                                 class="text-gray-800 font-medium text-lg hover:text-blue-400 duration-150">{{ Str::limit($post->title, 87) }}</a>
                             <div id="body-artikel" class="my-2 text-gray-800 text-md">
-                                {!! Str::limit($post->body) !!}
+                                {!! Str::limit($post->body, 100) !!}
                             </div>
                         </div>
                     </div>
@@ -237,7 +237,7 @@
     @endif
 
 
-    <div id="galeri" class="w-full md:mt-14 pt-20">
+    <div id="visi_misi" class="w-full md:mt-14 pt-20">
         <div class="max-w-7xl mx-auto overflow-hidden">
             <h1 class="text-center md:text-4xl text-2xl md:mb-10 mb-3 font-black font-nunito">VISI DAN MISI</h1>
             <div data-aos="fade-up" class="p-5 md:p-0">
