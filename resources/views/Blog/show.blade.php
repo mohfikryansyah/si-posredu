@@ -37,7 +37,8 @@
                                     {{ date_format($postTerkait->created_at, 'd F, Y') }}
                                 </p>
                                 <a href="{{ route('blog.show', ['post' => $postTerkait->slug]) }}"
-                                    class="text-gray-600 hover:text-blue-400 duration-150 font-bold text-md" title="{{ $postTerkait->title }}">
+                                    class="text-gray-600 hover:text-blue-400 duration-150 font-bold text-md"
+                                    title="{{ $postTerkait->title }}">
                                     {{ Str::limit($postTerkait->title, 80) }}
                                 </a>
                                 <div id="body-artikel" class="text-gray-500 text-sm">{!! Str::limit($postTerkait->body, 100) !!}</div>
@@ -86,7 +87,8 @@
                     <p class="text-gray-400 text-sm mt-2 mb-1">{{ date_format($post->created_at, 'd F, Y') }}</p>
                     <div class="h-[75px]">
                         <a href="{{ route('blog.show', ['post' => $post->slug]) }}"
-                            class="text-gray-600 hover:text-blue-400 duration-150 font-bold text-md" title="{{ $post->title }}">
+                            class="text-gray-600 hover:text-blue-400 duration-150 font-bold text-md"
+                            title="{{ $post->title }}">
                             {{ Str::limit($post->title, 60) }}</a>
                     </div>
                     <div id="body-artikel" class="h-[75px] text-gray-500 text-sm">
@@ -98,29 +100,20 @@
                     </p>
                 </div>
             @empty
-                <div id="artikel-0"
-                    class="max-w-screen-xl mx-auto h-[200px] flex items-center justify-center bg-gray-100 mb-10 rounded-lg">
-                    <div class="max-w-3xl">
-                        <div
-                            class="mx-auto w-10 h-10 mb-4 text-gray-500 bg-gray-200 rounded-full relative flex justify-center items-center text-sm">
-                            <i class="fa-solid fa-x"></i>
-                        </div>
-                        <h1 class="text-gray-800 font-light text-lg uppercase">
-                            Saat ini belum ada artikel yang tersedia untuk ditampilkan.
-                        </h1>
-                    </div>
-                </div>
+                <x-empty>Saat ini belum ada artikel terbaru lainnya.</x-empty>
             @endforelse
         </div>
-        <div class="text-center mt-8">
-            <div class="inline-flex items-center justify-center w-full">
-                <hr class="w-full h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-                <button id="load-more"
-                    class="absolute px-3 font-medium text-xl text-gray-600 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-600">
-                    Load More
-                </button>
+        @if (count($posts) > 1)
+            <div class="text-center mt-8">
+                <div class="inline-flex items-center justify-center w-full">
+                    <hr class="w-full h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+                    <button id="load-more"
+                        class="absolute px-3 font-medium text-xl text-gray-600 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-600">
+                        Load More
+                    </button>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 
     <x-slot:script>
