@@ -6,11 +6,11 @@ window.onscroll = function() {
     if (window.pageYOffset > fixedNv) {
         header.classList.add("navbar-fixed");
         header.classList.add("bg-white");
-        header.classList.remove("bg-tosca");
-        navbar.classList.remove("md:bg-tosca");
+        header.classList.remove("bg-purple-400");
+        navbar.classList.remove("md:bg-purple-400");
     } else {
-        navbar.classList.add("md:bg-tosca");
-        header.classList.add("bg-tosca");
+        navbar.classList.add("md:bg-purple-400");
+        header.classList.add("bg-purple-400");
         header.classList.remove("bg-white");
         header.classList.remove("navbar-fixed");
     }

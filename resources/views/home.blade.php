@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <nav class=" bg-tosca">
+    <nav class=" bg-purple-400">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="{{ env('APP_URL') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="{{ asset('images/logo.png') }}" class="h-8" alt="Flowbite Logo" />
@@ -18,7 +18,7 @@
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul id="navbar"
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-tosca dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-purple-400 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
                         <a href="#"
                             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-100 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
@@ -49,7 +49,7 @@
         </div>
     </nav>
 
-    <div class="w-full bg-tosca md:p-0 px-5">
+    <div class="w-full bg-purple-400 md:p-0 px-5">
         <div class="max-w-7xl mx-auto md:pt-20 pt-10">
             <div class="md:flex w-full">
                 <div class="py-2 pr-12 max-w-screen-md mx-auto lg:py-16">
@@ -77,7 +77,7 @@
                         @endauth
                         @guest
                         <a href="{{ route('login') }}"
-                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
+                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
                             SIGN IN
                             <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -102,7 +102,7 @@
 
     <div class="w-full absolute">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#3eac91" fill-opacity="1"
+            <path fill="#ac94fa" fill-opacity="1"
                 d="M0,128L60,117.3C120,107,240,85,360,80C480,75,600,85,720,106.7C840,128,960,160,1080,160C1200,160,1320,128,1380,112L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
             </path>
         </svg>
@@ -125,22 +125,22 @@
             <div class="grid md:grid-cols-4 grid-cols-2 md:gap-5 gap-y-10 items-center mt-8">
                 <div class="text-center space-y-1">
                     <span id="total-anak" data-count="{{ $dataPemeriksaan['anak'] }}"
-                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['anak'] }}</span>
+                        class="count-up text-6xl text-purple-700 font-atma font-bold">{{ $dataPemeriksaan['anak'] }}</span>
                     <p class="text-xl text-gray-700">Total Anak</p>
                 </div>
                 <div class="text-center space-y-1 top-0">
                     <span id="total-ibu" data-count="{{ $dataPemeriksaan['ibu'] }}"
-                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['ibu'] }}</span>
+                        class="count-up text-6xl text-purple-700 font-atma font-bold">{{ $dataPemeriksaan['ibu'] }}</span>
                     <p class="text-xl text-gray-700">Total Ibu Hamil</p>
                 </div>
                 <div class="text-center space-y-1">
                     <span id="total-remaja" data-count="{{ $dataPemeriksaan['remaja'] }}"
-                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['remaja'] }}</span>
+                        class="count-up text-6xl text-purple-700 font-atma font-bold">{{ $dataPemeriksaan['remaja'] }}</span>
                     <p class="text-xl text-gray-700">Total Remaja</p>
                 </div>
                 <div class="text-center space-y-1">
                     <span id="total-lansia" data-count="{{ $dataPemeriksaan['lansia'] }}"
-                        class="count-up text-6xl text-blue-700 font-atma font-bold">{{ $dataPemeriksaan['lansia'] }}</span>
+                        class="count-up text-6xl text-purple-700 font-atma font-bold">{{ $dataPemeriksaan['lansia'] }}</span>
                     <p class="text-xl text-gray-700">Total Lansia</p>
                 </div>
             </div>
@@ -299,7 +299,7 @@
                     <div class="flex space-x-3">
                         <div>
                             <div
-                                class="w-14 h-14 rounded-full text-xl text-white bg-tosca flex items-center justify-center">
+                                class="w-14 h-14 rounded-full text-xl text-white bg-purple-400 flex items-center justify-center">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
                         </div>
@@ -313,7 +313,7 @@
                     <div class="flex space-x-3">
                         <div>
                             <div
-                                class="w-14 h-14 rounded-full text-xl text-white bg-tosca flex items-center justify-center">
+                                class="w-14 h-14 rounded-full text-xl text-white bg-purple-400 flex items-center justify-center">
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
                         </div>
@@ -327,7 +327,7 @@
                     <div class="flex space-x-3">
                         <div>
                             <div
-                                class="w-14 h-14 rounded-full text-2xl text-white bg-tosca flex items-center justify-center">
+                                class="w-14 h-14 rounded-full text-2xl text-white bg-purple-400 flex items-center justify-center">
                                 <i class="fa-brands fa-whatsapp"></i>
                             </div>
                         </div>
