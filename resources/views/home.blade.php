@@ -65,26 +65,46 @@
                         hidup dan kesejahteraan masyarakat.</p>
                     <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0">
                         @auth
-                        <a href="{{ route('login') }}"
-                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
-                            DASHBOARD
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
+                            @php
+                                // Dapatkan tipe entitas dari pengguna yang sudah diautentikasi
+                                $user = Auth::user();
+                                $redirectUrl = route('home.index'); // Default route jika tipe entitas tidak dikenali
+
+                                // Tentukan URL berdasarkan tipe entitas
+                                switch ($user->roles->first()->name) {
+                                    case 'MASYARAKAT':
+                                        $redirectUrl = route('dashboard.masyarakat');
+                                        break;
+                                    case 'KADER':
+                                        $redirectUrl = route('dashboard.kader');
+                                        break;
+                                    case 'ADMIN':
+                                        $redirectUrl = route('dashboard');
+                                        break;
+                                }
+                            @endphp
+
+                            <a href="{{ $redirectUrl }}"
+                                class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900">
+                                DASHBOARD
+                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </a>
                         @endauth
+
                         @guest
-                        <a href="{{ route('login') }}"
-                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
-                            SIGN IN
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
+                            <a href="{{ route('login') }}"
+                                class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900">
+                                SIGN IN
+                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </a>
                         @endguest
                         {{-- <a href=""
                             class="py-3 px-5 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-70">
@@ -111,13 +131,15 @@
     <div id="profil" class="w-full md:mt-36 pt-20 mt-28 px-5">
         <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-anchor-placement="top-center">
             <h1 class="text-center md:text-4xl text-2xl mb-6 font-black font-nunito">PROFIL POSREDU</h1>
-            <p class="text-lg mb-3 text-gray-700 text-center">Posredu adalah sebuah inisiatif kesehatan terpadu yang menggabungkan
+            <p class="text-lg mb-3 text-gray-700 text-center">Posredu adalah sebuah inisiatif kesehatan terpadu yang
+                menggabungkan
                 tiga layanan
                 utama dalam satu platform: Posyandu, Posremaja, dan Posbindu. Program ini bertujuan untuk menyediakan
                 layanan kesehatan yang menyeluruh bagi semua kelompok usia, mulai dari balita hingga lansia, dengan
                 pendekatan yang holistik dan terintegrasi.
             </p>
-            <p class="text-lg text-gray-700 text-center">Posredu hadir untuk menjawab kebutuhan masyarakat akan pelayanan kesehatan
+            <p class="text-lg text-gray-700 text-center">Posredu hadir untuk menjawab kebutuhan masyarakat akan
+                pelayanan kesehatan
                 yang
                 terintegrasi dan mudah diakses, dengan fokus pada pencegahan dan edukasi. Melalui Posredu, kami
                 berkomitmen untuk menjaga kesehatan seluruh anggota keluarga Anda, dari yang termuda hingga yang tertua.
@@ -244,7 +266,8 @@
                 </h2>
                 <p class="max-w-screen-lg mx-auto text-center md:text-2xl my-3 italic">{{ $app['visi'] }}</p>
             </div>
-            <div class="max-w-screen-lg mx-auto md:mt-5 mt-0 md:p-0 p-5 md:grid grid-cols-3 gap-5 md:space-y-0 space-y-3">
+            <div
+                class="max-w-screen-lg mx-auto md:mt-5 mt-0 md:p-0 p-5 md:grid grid-cols-3 gap-5 md:space-y-0 space-y-3">
                 <div data-aos="fade-right" data-aos-offset="400" class="border border-gray-200 p-5 rounded-3xl">
                     <div class="">
                         <img src="{{ asset('images/layanan.png') }}" class="w-40 h-40 mx-auto" alt="">
