@@ -1,7 +1,7 @@
 <x-guest-layout>
     <nav class=" bg-purple-400">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="{{ env('APP_URL') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="{{ route('home.index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="{{ asset('images/logo.png') }}" class="h-8" alt="Flowbite Logo" />
                 <span
                     class="self-center text-2xl font-semibold font-abyssinica text-gray-800 whitespace-nowrap dark:text-white">{{ $app['app_name'] }}</span>
@@ -368,7 +368,7 @@
 
     <footer class="p-4 bg-gray-100 md:p-8 lg:p-10 dark:bg-gray-800">
         <div class="mx-auto max-w-screen-xl text-center">
-            <a href="{{ env('APP_URL') }}"
+            <a href="{{ route('home.index') }}"
                 class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class="h-14" src="{{ asset('images/logo.png') }}" alt="logo-posyandu">
             </a>
@@ -400,7 +400,7 @@
                 </li>
             </ul>
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
-                    href="{{ env('APP_URL') }}" class="hover:underline">Sistem Informasi Posredu</a>. All Rights
+                    href="{{ route('home.index') }}" class="hover:underline">Sistem Informasi Posredu</a>. All Rights
                 Reserved.</span>
         </div>
     </footer>
