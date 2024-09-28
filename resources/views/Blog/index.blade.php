@@ -18,12 +18,12 @@
     @if ($populer)
         <div id="berita_populer" class="max-w-screen-xl mx-auto mb-10 rounded-lg">
             <div class="md:grid md:p-0 p-5 md:space-y-0 space-y-2 grid-cols-2 gap-5 items-center">
-                <div class="col-span-1 h-[380px] rounded-lg overflow-hidden">
+                <div class="col-span-1 h-[340px] w-full rounded-lg overflow-hidden">
                     @if ($populer->thumbnail)
-                        <img class="h-auto max-w-full rounded-lg hover:scale-105 duration-300"
+                        <img class="h-full max-w-full w-full object-center rounded-lg hover:scale-105 duration-300"
                             src="{{ asset('storage/' . $populer->thumbnail) }}" alt="">
                     @else
-                        <img class="w-full bg-cover h-auto max-w-full rounded-lg hover:scale-105 duration-300"
+                        <img class="h-full max-w-full w-full object-center rounded-lg hover:scale-105 duration-300"
                             src="{{ asset('images/no-thumbnail.jpg') }}" alt="">
                     @endif
                 </div>

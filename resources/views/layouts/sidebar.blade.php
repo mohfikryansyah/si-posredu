@@ -44,7 +44,7 @@
                     </svg>
                 </x-dropdown>
                 <ul id="posyandu"
-                    class="{{ Route::is(['ibu', 'pemeriksaanIbu*', 'anak', 'pemeriksaanAnak']) ? '' : 'hidden' }} py-2 space-y-2">
+                    class="{{ Route::is(['ibu', 'pemeriksaanIbu*', 'anak', 'pemeriksaanAnak', 'tanpaPemeriksaanIbu', 'tanpaPemeriksaanAnak']) ? '' : 'hidden' }} py-2 space-y-2">
                     <li>
                         <x-dropdown-link href="{{ route('ibu') }}" :active="request()->routeIs('ibu')">
                             <i class="fa-regular fa-circle w-5"></i>
@@ -58,6 +58,13 @@
                         </x-dropdown-link>
                     </li>
                     <li>
+                        <x-dropdown-link href="{{ route('tanpaPemeriksaanIbu') }}" :active="request()->routeIs('tanpaPemeriksaanIbu*')">
+                            <i class="fa-regular fa-circle w-5"></i>
+                            <span class="ms-3">{{ __('Ibu Hamil Tanpa Pemeriksaan') }}</span>
+                            <span class="inline-flex items-center justify-center w-4 h-4 p-4 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ count(App\Models\MissedPelayanans::where('entitas_type', 'Ibu')->get()) }}</span>
+                        </x-dropdown-link>
+                    </li>
+                    <li class="border-t">
                         <x-dropdown-link href="{{ route('anak') }}" :active="request()->routeIs('anak')">
                             <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Anak') }}</span>
@@ -67,6 +74,13 @@
                         <x-dropdown-link href="{{ route('pemeriksaanAnak') }}" :active="request()->routeIs('pemeriksaanAnak')">
                             <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Pemeriksaan Anak') }}</span>
+                        </x-dropdown-link>
+                    </li>
+                    <li>
+                        <x-dropdown-link href="{{ route('tanpaPemeriksaanAnak') }}" :active="request()->routeIs('tanpaPemeriksaanAnak*')">
+                            <i class="fa-regular fa-circle w-5"></i>
+                            <span class="ms-3">{{ __('Anak Tanpa Pemeriksaan') }}</span>
+                            <span class="inline-flex items-center justify-center w-4 h-4 p-4 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ count(App\Models\MissedPelayanans::where('entitas_type', 'Anak')->get()) }}</span>
                         </x-dropdown-link>
                     </li>
                 </ul>
@@ -84,7 +98,7 @@
                     </svg>
                 </x-dropdown>
                 <ul id="posremaja"
-                    class="{{ Route::is(['remaja', 'pemeriksaanRemaja*']) ? '' : 'hidden' }} py-2 space-y-2">
+                    class="{{ Route::is(['remaja', 'pemeriksaanRemaja*', 'tanpaPemeriksaanRemaja']) ? '' : 'hidden' }} py-2 space-y-2">
                     <li>
                         <x-dropdown-link href="{{ route('remaja') }}" :active="request()->routeIs('remaja')">
                             <i class="fa-regular fa-circle w-5"></i>
@@ -95,6 +109,13 @@
                         <x-dropdown-link href="{{ route('pemeriksaanRemaja') }}" :active="request()->routeIs('pemeriksaanRemaja*')">
                             <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Pemeriksaan Remaja') }}</span>
+                        </x-dropdown-link>
+                    </li>
+                    <li>
+                        <x-dropdown-link href="{{ route('tanpaPemeriksaanRemaja') }}" :active="request()->routeIs('tanpaPemeriksaanRemaja*')">
+                            <i class="fa-regular fa-circle w-5"></i>
+                            <span class="ms-3">{{ __('Remaja Tanpa Pemeriksaan') }}</span>
+                            <span class="inline-flex items-center justify-center w-4 h-4 p-4 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ count(App\Models\MissedPelayanans::where('entitas_type', 'Remaja')->get()) }}</span>
                         </x-dropdown-link>
                     </li>
                 </ul>
@@ -112,7 +133,7 @@
                     </svg>
                 </x-dropdown>
                 <ul id="posbindu"
-                    class="{{ Route::is(['lansia', 'pemeriksaanLansia*']) ? '' : 'hidden' }} py-2 space-y-2">
+                    class="{{ Route::is(['lansia', 'pemeriksaanLansia*', 'tanpaPemeriksaanLansia']) ? '' : 'hidden' }} py-2 space-y-2">
                     <li>
                         <x-dropdown-link href="{{ route('lansia') }}" :active="request()->routeIs('lansia')">
                             <i class="fa-regular fa-circle w-5"></i>
@@ -123,6 +144,13 @@
                         <x-dropdown-link href="{{ route('pemeriksaanLansia') }}" :active="request()->routeIs('pemeriksaanLansia*')">
                             <i class="fa-regular fa-circle w-5"></i>
                             <span class="ms-3">{{ __('Pemeriksaan Lansia') }}</span>
+                        </x-dropdown-link>
+                    </li>
+                    <li>
+                        <x-dropdown-link href="{{ route('tanpaPemeriksaanLansia') }}" :active="request()->routeIs('tanpaPemeriksaanLansia*')">
+                            <i class="fa-regular fa-circle w-5"></i>
+                            <span class="ms-3">{{ __('Lansia Tanpa Pemeriksaan') }}</span>
+                            <span class="inline-flex items-center justify-center w-4 h-4 p-4 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ count(App\Models\MissedPelayanans::where('entitas_type', 'Lansia')->get()) }}</span>
                         </x-dropdown-link>
                     </li>
                 </ul>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\PemeriksaanLansiaExport;
 use App\Models\Lansia;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\MissedPelayanans;
 use App\Models\PemeriksaanLansia;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PemeriksaanLansiaExport;
 
 class PemeriksaanLansiaController extends Controller
 {
@@ -123,5 +124,11 @@ class PemeriksaanLansiaController extends Controller
         $endDate = $request->input('end');
 
         return Excel::download(new PemeriksaanLansiaExport($id, $startDate, $endDate), 'laporan_pemeriksaan_lansia.xlsx');
+    }
+
+    public function tanpaPemeriksaanLansia()
+    {
+        $tanpaPemeriksaanLansia = MissedPelayanans::where('entitas_type', 'Lansia')->latest()->get();
+        return view('TanpaPemeriksaan.lansia', compact('tanpaPemeriksaanLansia'));
     }
 }

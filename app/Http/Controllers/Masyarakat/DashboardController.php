@@ -7,34 +7,39 @@ use App\Models\Anak;
 use App\Models\User;
 use App\Models\Lansia;
 use App\Models\Remaja;
+use App\Models\Pelayanan;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanIbu;
 use App\Models\PemeriksaanAnak;
 use App\Models\PemeriksaanLansia;
 use App\Models\PemeriksaanRemaja;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $ada = $this->getAllPemeriksaan();
-        // dd($ada);
+    {   
+        // $jadwal = $this->getJadwalPelayanan();
+        // dd($this->get);
+
         return view('Masyarakat.dashboard', [
             'pemeriksaans' => $this->getAllPemeriksaan(),
+            'jadwal' => $this->getJadwalPelayanan(),
+            
         ]);
     }
 
-    private function getTotalDataPemeriksaan()
+    private function getJadwalPelayanan()
     {
-        return [
-            'ibu' => PemeriksaanIbu::where('employee_id', Auth::user()->employee_id)->count(),
-            'anak' => PemeriksaanAnak::where('employee_id', Auth::user()->employee_id)->count(),
-            'remaja' => PemeriksaanRemaja::where('employee_id', Auth::user()->employee_id)->count(),
-            'lansia' => PemeriksaanLansia::where('employee_id', Auth::user()->employee_id)->count(),
-        ];
+        $bulanIni = Carbon::now()->month;
+        $tahunIni = Carbon::now()->year;
+        $result = Pelayanan::whereMonth('tanggal_pelayanan', $bulanIni)->whereYear('tanggal_pelayanan', $tahunIni)->latest()->first();
+        return $result;
     }
+
+    
 
     private function getAllPemeriksaan()
     {

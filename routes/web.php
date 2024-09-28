@@ -41,6 +41,7 @@ Route::prefix('admin')
     ->middleware('auth', CheckRole::class . ':ADMIN')
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/export-entitas-tanpa-pemeriksaan', [DashboardController::class, 'export'])->name('dashboard.export');
     });
 
 Route::prefix('petugas')
@@ -75,6 +76,7 @@ Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function (
 
 Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function () {
     Route::get('/pemeriksaan-ibu', [PemeriksaanIbuController::class, 'index'])->name('pemeriksaanIbu');
+    Route::get('/ibu-hamil-tanpa-pemeriksaan', [PemeriksaanIbuController::class, 'tanpaPemeriksaanIbu'])->name('tanpaPemeriksaanIbu');
     Route::post('/pemeriksaan-ibu', [PemeriksaanIbuController::class, 'store']);
     Route::put('/pemeriksaan-ibu', [PemeriksaanIbuController::class, 'update']);
     Route::delete('/pemeriksaan-ibu', [PemeriksaanIbuController::class, 'destroy'])->name('pemeriksaanIbu.destroy');
@@ -89,6 +91,7 @@ Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function (
 
 Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function () {
     Route::get('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'index'])->name('pemeriksaanAnak');
+    Route::get('/anak-tanpa-pemeriksaan', [PemeriksaanAnakController::class, 'tanpaPemeriksaanAnak'])->name('tanpaPemeriksaanAnak');
     Route::post('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'store']);
     Route::put('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'update']);
     Route::delete('/pemeriksaan-anak', [PemeriksaanAnakController::class, 'destroy'])->name('pemeriksaanAnak.destroy');
@@ -103,6 +106,7 @@ Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function (
 
 Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function () {
     Route::get('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'index'])->name('pemeriksaanLansia');
+    Route::get('/lansia-tanpa-pemeriksaan', [PemeriksaanLansiaController::class, 'tanpaPemeriksaanLansia'])->name('tanpaPemeriksaanLansia');
     Route::post('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'store']);
     Route::put('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'update']);
     Route::delete('/pemeriksaan-lansia', [PemeriksaanLansiaController::class, 'destroy'])->name('pemeriksaanLansia.destroy');
@@ -117,6 +121,7 @@ Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function (
 
 Route::middleware(['auth', CheckRole::class . ':ADMIN,KADER'])->group(function () {
     Route::get('/pemeriksaan-remaja', [PemeriksaanRemajaController::class, 'index'])->name('pemeriksaanRemaja');
+    Route::get('/remaja-tanpa-pemeriksaan', [PemeriksaanRemajaController::class, 'tanpaPemeriksaanRemaja'])->name('tanpaPemeriksaanRemaja');
     Route::post('/pemeriksaan-remaja', [PemeriksaanRemajaController::class, 'store']);
     Route::put('/pemeriksaan-remaja', [PemeriksaanRemajaController::class, 'update']);
     Route::delete('/pemeriksaan-remaja', [PemeriksaanRemajaController::class, 'destroy'])->name('pemeriksaanRemaja.destroy');

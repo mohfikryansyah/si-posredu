@@ -29,6 +29,10 @@
                             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-100 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profil</a>
                     </li>
                     <li>
+                        <a href="#grafik"
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-100 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Grafik</a>
+                    </li>
+                    <li>
                         <a href="#jadwal_pelayanan"
                             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-100 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Layanan</a>
                     </li>
@@ -106,10 +110,6 @@
                                 </svg>
                             </a>
                         @endguest
-                        {{-- <a href=""
-                            class="py-3 px-5 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-70">
-                            Learn more
-                        </a> --}}
                     </div>
                 </div>
                 <div class="py-8 w-full items-center justify-center flex">
@@ -128,7 +128,7 @@
         </svg>
     </div>
 
-    <div id="profil" class="w-full md:mt-36 pt-20 mt-28 px-5">
+    <div id="profil" class="w-full md:mt-52 pt-20 mt-5 px-5">
         <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-anchor-placement="top-center">
             <h1 class="text-center md:text-4xl text-2xl mb-6 font-black font-nunito">PROFIL POSREDU</h1>
             <p class="text-lg mb-3 text-gray-700 text-center">Posredu adalah sebuah inisiatif kesehatan terpadu yang
@@ -169,6 +169,22 @@
         </div>
     </div>
 
+    {{-- CHART --}}
+    <div id="grafik" class="w-full md:mt-14 pt-20 px-5 overflow-hidden">
+        <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-anchor-placement="top-center">
+            <h1 class="text-center md:text-4xl text-2xl md:mb-16 mb-6 font-black font-nunito">GRAFIK PEMERIKSAAN</h1>
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-5">
+                <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5 relative">
+                    <div id="doughnut-chart" class="w-auto h-[400px]"></div>
+                </div>
+                <div class="bg-white shadow-sm rounded-lg md:mb-5 p-5 relative">
+                    <h2 class="text-lg font-bold text-center text-gray-600">Pemeriksaan Perbulan</h2>
+                    <div id="share-dataset" class="w-auto h-[400px]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div id="jadwal_pelayanan" class="w-full md:mt-14 pt-20 px-5">
         <div class="max-w-7xl mx-auto">
@@ -178,21 +194,22 @@
                     <img src="{{ asset('images/pelayanan.png') }}" data-aos="fade-right" data-aos-offset="300"
                         class="w-96 h-96" alt="" srcset="{{ asset('images/pelayanan.png') }}">
                 @endif
-                @forelse ($pelayanans as $pelayanan)
-                    <div data-aos="fade-left" data-aos-offset="300" class="mb-3">
-                        <h1 class="text-purple-500 text-2xl font-medium">
-                            {{ $pelayanan->nama . ' - ' . date_format(date_create($pelayanan->tanggal_pelayanan), 'd F, Y') }}
-                        </h1>
-                        <h4 class="text-gray-500 text-md font-medium">
-                            {{ 'Mulai pukul ' . $pelayanan->start . ' - ' . $pelayanan->end . ' WITA' }}</h4>
-                        <p class="text-gray-800 text-lg mt-2">{{ $pelayanan->deskripsi }}</p>
-                    </div>
-                @empty
-                    <x-empty>Saat ini belum ada jadwal layanan yang tersedia untuk ditampilkan.</x-empty>
+                <div class="flex-col">
+                    @forelse ($pelayanans as $pelayanan)
+                        <div data-aos="fade-left" data-aos-offset="300" class="mb-3">
+                            <h1 class="text-purple-500 text-2xl font-medium">
+                                {{ $pelayanan->nama . ' - ' . date_format(date_create($pelayanan->tanggal_pelayanan), 'd F, Y') }}
+                            </h1>
+                            <h4 class="text-gray-500 text-md font-medium">
+                                {{ 'Mulai pukul ' . $pelayanan->start . ' - ' . $pelayanan->end . ' WITA' }}</h4>
+                            <p class="text-gray-800 text-lg mt-2">{{ $pelayanan->deskripsi }}</p>
+                        </div>
+                    @empty
+                </div>
+                <x-empty>Saat ini belum ada jadwal layanan yang tersedia untuk ditampilkan.</x-empty>
                 @endforelse
             </div>
         </div>
-    </div>
     </div>
 
     <div id="artikel" class="w-full md:mt-14 pt-20 px-5">
@@ -407,5 +424,194 @@
 
     <x-slot:script>
         <script src="{{ asset('js/home.js') }}"></script>
+        <script>
+            var chartDom = document.getElementById('share-dataset');
+            var myCharts = echarts.init(chartDom);
+            var option;
+
+            var months = @json($months);
+            var dataIbu = @json($dataIbu);
+            var dataAnak = @json($dataAnak);
+            var dataRemaja = @json($dataRemaja);
+            var dataLansia = @json($dataLansia);
+
+            setTimeout(function() {
+                option = {
+                    legend: {
+                        bottom: 'bottom',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        showContent: false
+                    },
+                    dataset: {
+                        source: [
+                            ['tahun', ...months],
+                            ['Ibu', ...dataIbu],
+                            ['Anak', ...dataAnak],
+                            ['Remaja', ...dataRemaja],
+                            ['Lansia', ...dataLansia]
+                        ]
+                    },
+                    xAxis: {
+                        type: 'category'
+                    },
+                    yAxis: {
+                        gridIndex: 0
+                    },
+                    grid: {
+                        top: '50%'
+                    },
+                    series: [{
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            emphasis: {
+                                focus: 'series'
+                            }
+                        },
+                        {
+                            type: 'pie',
+                            id: 'pie',
+                            radius: '30%',
+                            center: ['50%', '25%'],
+                            emphasis: {
+                                focus: 'self'
+                            },
+                            label: {
+                                formatter: '{b}: {@January} ({d}%)' // default value is January, will update later
+                            },
+                            encode: {
+                                itemName: 'tahun',
+                                value: months[0], // default value is January, will update later
+                                tooltip: months[0]
+                            }
+                        }
+                    ]
+                };
+
+                myCharts.on('updateAxisPointer', function(event) {
+                    const xAxisInfo = event.axesInfo[0];
+                    if (xAxisInfo) {
+                        const dimension = xAxisInfo.value;
+                        myCharts.setOption({
+                            series: {
+                                id: 'pie',
+                                data: [{
+                                        value: dataIbu[dimension],
+                                        name: 'Ibu'
+                                    },
+                                    {
+                                        value: dataAnak[dimension],
+                                        name: 'Anak'
+                                    },
+                                    {
+                                        value: dataRemaja[dimension],
+                                        name: 'Remaja'
+                                    },
+                                    {
+                                        value: dataLansia[dimension],
+                                        name: 'Lansia'
+                                    }
+                                ]
+                            }
+                        });
+                    }
+                });
+
+                myCharts.setOption(option);
+            });
+
+            option && myCharts.setOption(option);
+        </script>
+        <script>
+            var data = @json($dataPemeriksaan);
+            var chartDom = document.getElementById('doughnut-chart');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            var option = {
+                title: {
+                    text: 'Total Pemeriksaan',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    bottom: 'bottom',
+                },
+                series: [{
+                    name: 'Jumlah Pemeriksaan',
+                    type: 'pie',
+                    radius: ['40%', '70%'], // Membuat chart menjadi doughnut
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10, // Membuat sudut menjadi rounded
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '35',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [{
+                            value: data.ibu,
+                            name: 'Ibu'
+                        },
+                        {
+                            value: data.anak,
+                            name: 'Anak'
+                        },
+                        {
+                            value: data.remaja,
+                            name: 'Remaja'
+                        },
+                        {
+                            value: data.lansia,
+                            name: 'Lansia'
+                        }
+                    ]
+                }]
+            };
+
+            // Set opsi dan render chart
+            myChart.setOption(option);
+        </script>
     </x-slot:script>
 </x-guest-layout>

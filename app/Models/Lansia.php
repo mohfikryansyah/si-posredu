@@ -15,7 +15,7 @@ class Lansia extends Model
     // public $incrementing = false;
     protected $keyType = 'string';
 
-    public function PemeriksaanLansia()
+    public function pemeriksaanLansia()
     {
         return $this->hasMany(PemeriksaanLansia::class, 'lansia_id', 'id');
     }

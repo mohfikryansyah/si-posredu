@@ -31,7 +31,66 @@
             </div>
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
-                    <div>
+                    @role('MASYARAKAT')
+                        <button type="button"
+                            class="relative inline-flex items-center text-sm font-medium p-1 text-center bg-rose-500 text-white rounded-lg hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            aria-expanded="false" data-dropdown-toggle="notification">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 20 16">
+                                <path
+                                    d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                                <path
+                                    d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                            </svg>
+                            <span class="sr-only">Notifications</span>
+                            @if (!$ibuBelumPemeriksaan)
+                                @if (Carbon\Carbon::now()->gt($jadwal->tanggal_pelayanan))
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-3 h-3 text-[0.6rem] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-1 -end-1 dark:border-gray-900">
+                                    </div>
+                                @endif
+                            @endif
+                        </button>
+                        {{-- @dd(Carbon\Carbon::now()->gt($jadwal->tanggal_pelayanan)) --}}
+                        <div class="z-50 hidden max-w-sm my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                            id="notification">
+                            @if ($jadwal)
+                                @if (Carbon\Carbon::now()->lt($jadwal->tanggal_pelayanan))
+                                    <div class="px-4 py-3" role="menuNotification">
+                                        <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                            Tidak ada pemberitahuan
+                                        </p>
+                                    </div>
+                                @elseif (!$ibuBelumPemeriksaan)
+                                    <div class="px-4 py-3" role="menuNotification">
+                                        <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                            Pemberitahuan
+                                        </p>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-gray-300" role="none">
+                                            Halo, {{ $entities[auth()->user()->tipe_entitas] ?? auth()->user()->name }}
+                                        </p>
+                                        <p class="text-sm text-gray-700">
+                                            Anda tidak melakukan pemeriksaan pada bulan ini yang dijadwalkan pada
+                                            {{ date_format(date_create($jadwal->tanggal_pelayanan), 'd F, Y') }}
+                                        </p>
+                                    </div>
+                                @else
+                                    <div class="px-4 py-3" role="menuNotification">
+                                        <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                            Tidak ada pemberitahuan
+                                        </p>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="px-4 py-3" role="menuNotification">
+                                    <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                        Tidak ada pemberitahuan
+                                    </p>
+                                </div>
+                            @endif
+                        </div>
+                    @endrole
+                    <div class="ml-3">
                         <button type="button"
                             class="flex text-3xl bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">

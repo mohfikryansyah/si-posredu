@@ -9,20 +9,13 @@ use Illuminate\Http\Request;
 use App\Models\PemeriksaanIbu;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PemeriksaanIbuExport;
+use App\Models\MissedPelayanans;
 
 class PemeriksaanIbuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    // public function __construct()
-    // {
-    //     if (auth()->user()->hasAnyRole(['ADMIN', 'MASYARAKAT'])) {
-    //         abort(403, 'Unauthorized');
-            
-    //     } else {
-    //     }
-    // }
 
     public function index()
     {
@@ -140,5 +133,11 @@ class PemeriksaanIbuController extends Controller
         $endDate = $request->input('end');
 
         return Excel::download(new PemeriksaanIbuExport($id, $startDate, $endDate), 'laporan_pemeriksaan_ibu.xlsx');
+    }
+
+    public function tanpaPemeriksaanIbu()
+    {
+        $tanpaPemeriksaanIbu = MissedPelayanans::where('entitas_type', 'Ibu')->latest()->get();
+        return view('TanpaPemeriksaan.ibu', compact('tanpaPemeriksaanIbu'));
     }
 }

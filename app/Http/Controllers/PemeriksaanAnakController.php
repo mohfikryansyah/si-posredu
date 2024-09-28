@@ -6,6 +6,7 @@ use App\Models\Anak;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanAnak;
+use App\Models\MissedPelayanans;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PemeriksaanAnakExport;
 use App\Exports\PemeriksaanLansiaExport;
@@ -118,10 +119,16 @@ class PemeriksaanAnakController extends Controller
 
     public function export(Request $request)
     {
-        $id = $request->input('anak_id');
+        $id = $request->input(' anak_id');
         $startDate = $request->input('start');
         $endDate = $request->input('end');
 
         return Excel::download(new PemeriksaanAnakExport($id, $startDate, $endDate), 'laporan_pemeriksaan_anak.xlsx');
+    }
+
+    public function tanpaPemeriksaanAnak()
+    {
+        $tanpaPemeriksaanAnak = MissedPelayanans::where('entitas_type', 'Anak')->latest()->get();
+        return view('TanpaPemeriksaan.anak', compact('tanpaPemeriksaanAnak'));
     }
 }

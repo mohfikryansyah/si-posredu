@@ -52,7 +52,7 @@
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <h1 class="bg-orange-400 px-5 py-2.5 text-gray-100 font-medium">Buat Kategori</h1>
                 <div class="p-5">
-                    <form action="{{ route('categories.store') }}" method="POST" class="max-w-sm mx-auto">
+                    <form action="{{ route('categories.store') }}" method="POST" class="w-full mx-auto">
                         @csrf
                         <div class="mb-5">
                             <label for="title"
@@ -75,8 +75,7 @@
     @include('Category.delete')
 
     <x-slot:script>
-        <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
-        <script src="{{ asset('plugins/jquery/dataTables.tailwindcss.js') }}"></script>
+        
         <script>
             new DataTable('#table_category', {
                 order: []

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TanpaPemeriksaanExport;
 use Carbon\Carbon;
 use App\Models\Ibu;
 use App\Models\Anak;
@@ -11,9 +12,11 @@ use App\Models\Remaja;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanIbu;
 use App\Models\PemeriksaanAnak;
+use App\Models\MissedPelayanans;
 use App\Models\PemeriksaanLansia;
 use App\Models\PemeriksaanRemaja;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardController extends Controller
 {
@@ -34,7 +37,6 @@ class DashboardController extends Controller
             'lansia' => $this->getCurrentMonthData(PemeriksaanLansia::class),
         ];
 
-        // Menghitung persentase perubahan pemeriksaan ibu
         $persentasePerubahan = $this->getPercentageChange(PemeriksaanIbu::class);
 
         return view('dashboard', [
@@ -48,6 +50,7 @@ class DashboardController extends Controller
             'dataAnak' => $dataAnak,
             'dataRemaja' => $dataRemaja,
             'dataLansia' => $dataLansia,
+            'tanpaPemeriksaan' => MissedPelayanans::latest()->get(),
         ]);
     }
 
@@ -106,5 +109,17 @@ class DashboardController extends Controller
         }
 
         return (($currentMonthData - $lastMonthData) / $lastMonthData) * 100;
+    }
+
+    public function export(Request $request)
+    {
+        $id = $request->input('id');
+        $startDate = $request->input('start');
+        $endDate = $request->input('end');
+        $entitas = $request->input('entitas');
+
+        // dd($entitas);
+
+        return Excel::download(new TanpaPemeriksaanExport($id, $entitas, $startDate, $endDate), 'laporan entitas tanpa pemeriksaan.xlsx');
     }
 }

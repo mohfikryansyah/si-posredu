@@ -50,13 +50,13 @@
                             </div>
                         @empty
                             <div id="artikel-0"
-                                class="w-full mx-auto flex items-center justify-center bg-gray-100 mb-10 rounded-lg p-5">
+                                class="w-full mx-auto flex items-center justify-center border-dotted border-2 mb-10 rounded-lg p-5">
                                 <div class="max-w-3xl text-center">
                                     <div
-                                        class="mx-auto w-10 h-10 mb-4 text-gray-500 bg-gray-200 rounded-full flex justify-center items-center text-sm">
+                                        class="mx-auto w-10 h-10 mb-4 text-gray-400 bg-gray-50 rounded-full flex justify-center items-center text-sm">
                                         <i class="fa-solid fa-x"></i>
                                     </div>
-                                    <h1 class="text-gray-800 font-light text-lg uppercase">
+                                    <h1 class="text-gray-800 font-light text-lg">
                                         Tidak ada artikel terkait.
                                     </h1>
                                 </div>

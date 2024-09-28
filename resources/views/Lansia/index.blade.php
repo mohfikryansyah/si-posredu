@@ -120,8 +120,7 @@
     @include('Lansia.export')
 
     <x-slot:script>
-        <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
-        <script src="{{ asset('plugins/jquery/dataTables.tailwindcss.js') }}"></script>
+        
         <script>
             new DataTable('#table_lansia', {
                 order: []

@@ -26,7 +26,9 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         return view('auth.register', [
-            'users' => User::with('roles')->get(),
+            'users' => User::whereDoesntHave('roles', function($query) {
+                $query->where('name', 'ADMIN');
+            })->get(),
             'anaks' => $this->getAllData(Anak::class),
             'ibus' => $this->getAllData(Ibu::class),
             'remajas' => $this->getAllData(Remaja::class),

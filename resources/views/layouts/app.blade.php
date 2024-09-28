@@ -8,15 +8,14 @@
     <title>{{ config('app.name', 'Posyandu') }}</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link
-        href="{{ asset('plugins/fonts/fonts.bunny.css') }}"
-        rel="stylesheet" />
+    <link href="{{ asset('plugins/fonts/fonts.bunny.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/app-BzOUB8-N.css') }}" data-navigate-track="reload"/>
-    <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script> 
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BEveI7B8.css') }}" data-navigate-track="reload" />
+    <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script>
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="{{ asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}">
@@ -33,6 +32,8 @@
 
     <script src="{{ asset('plugins/quilltexteditor/quill.js') }}"></script>
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery/dataTables.js') }}"></script>
+    <script src="{{ asset('plugins/jquery/dataTables.tailwindcss.js') }}"></script>
     <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
     <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
     @if (session('success'))

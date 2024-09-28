@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,13 +30,13 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // $user = auth()->user();
-        $user = Auth::user();
-        // dd($user);
-        if ($user->roles->first()->name == 'ADMIN') {
+        $user = User::find(Auth::user()->id);
+        // dd($user->hasRole('MASYARAKAT'));
+        if ($user->hasRole('ADMIN')) {
             return redirect()->intended(route('dashboard', absolute: false));
-        } elseif ($user->roles->first()->name == 'KADER') {
+        } elseif ($user->hasRole('KADER')) {
             return redirect()->intended(route('dashboard.kader', absolute: false));
-        } elseif ($user->roles->first()->name == 'MASYARAKAT') {
+        } elseif ($user->hasRole('MASYARAKAT')) {
             return redirect()->intended(route('dashboard.masyarakat', absolute: false));
         }
     }

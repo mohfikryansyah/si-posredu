@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Remaja;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\MissedPelayanans;
 use App\Models\PemeriksaanRemaja;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PemeriksaanRemajaExport;
@@ -120,5 +121,11 @@ class PemeriksaanRemajaController extends Controller
         $endDate = $request->input('end');
 
         return Excel::download(new PemeriksaanRemajaExport($id, $startDate, $endDate), 'Laporan Pemeriksaan Remaja.xlsx');
+    }
+
+    public function tanpaPemeriksaanRemaja()
+    {
+        $tanpaPemeriksaanRemaja = MissedPelayanans::where('entitas_type', 'Remaja')->latest()->get();
+        return view('TanpaPemeriksaan.remaja', compact('tanpaPemeriksaanRemaja'));
     }
 }

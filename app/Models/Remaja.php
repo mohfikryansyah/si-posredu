@@ -14,4 +14,9 @@ class Remaja extends Model
     protected $primaryKey = 'id';
     // public $incrementing = false;
     protected $keyType = 'string';
+
+    public function pemeriksaanRemaja()
+    {
+        return $this->hasMany(PemeriksaanRemaja::class, 'remaja_id', 'id');
+    }
 }
