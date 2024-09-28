@@ -29,4 +29,4 @@ Artisan::command('inspire', function () {
 //     }
 // });
 
-Schedule::command('pelayanan:check-missed')->everySecond();
+Schedule::command('pelayanan:check-missed')->dailyAt("23:59");
