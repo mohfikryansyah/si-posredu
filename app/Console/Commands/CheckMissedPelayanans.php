@@ -10,6 +10,7 @@ use App\Models\Remaja;
 use App\Models\Pelayanan;
 use Illuminate\Console\Command;
 use App\Models\MissedPelayanans;
+use Illuminate\Support\Facades\Log;
 
 class CheckMissedPelayanans extends Command
 {
@@ -32,6 +33,7 @@ class CheckMissedPelayanans extends Command
      */
     public function handle()
     {
+        Log::info('Command pelayanan:check-missed executed.');
         $currentDate = Carbon::now();
 
         $pelayanans = Pelayanan::where('tanggal_pelayanan', '<', $currentDate)->get();
