@@ -23,7 +23,7 @@ Artisan::command('schedule:run', function (Schedule $schedule) {
 
         // Jika hari ini adalah tanggal pelayanan, jadwalkan command
         if (Carbon::now()->isSameDay($tanggalPelayanan)) {
-            $schedule->command('pelayanan:check-missed')->dailyAt('18:00'); // atau waktu yang kamu inginkan
+            $schedule->command('pelayanan:check-missed')->dailyAt('13:14'); // atau waktu yang kamu inginkan
         }
     }
 });
