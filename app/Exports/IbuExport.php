@@ -73,8 +73,8 @@ class IbuExport implements FromQuery, WithHeadings, WithMapping, WithCustomStart
         $drawing = new Drawing();
         $drawing->setName('Logo');
         $drawing->setDescription('This is my logo');
-        $drawing->setPath(public_path('images/logo.png'));
-        $drawing->setHeight(90);
+        $drawing->setPath(public_path('images/logo-pohuwato.png'));
+        $drawing->setHeight(100);
         $drawing->setCoordinates('A1');
 
         return $drawing;
@@ -85,9 +85,10 @@ class IbuExport implements FromQuery, WithHeadings, WithMapping, WithCustomStart
         return [
             AfterSheet::class => function (AfterSheet $event) {
 
-                $event->sheet->setCellValue('F2', 'Pustu Desa Bunto');
-                $event->sheet->setCellValue('F3', 'Bunto, Kec. Popayato Timur, Kab. Pohuwato');
-                $event->sheet->setCellValue('F4', 'Telp: (+62) 0822 1166 3322, Email: pustubunto@gmail.com');
+                $event->sheet->setCellValue('F2', 'PEMERINTAH KABUPATEN POHUWATO');
+                $event->sheet->setCellValue('F3', 'KECAMATAN POPAYATO TIMUR');
+                $event->sheet->setCellValue('F4', 'DESA BUNTO');
+                $event->sheet->setCellValue('F5', 'Jln. Hi. DR Djibu Ishak');
 
                 $event->sheet->getStyle('A7:K7')->applyFromArray([
                    'font' => [
@@ -100,11 +101,22 @@ class IbuExport implements FromQuery, WithHeadings, WithMapping, WithCustomStart
                         'bold' => true,
                         'size' => 12,
                         'center' => true,
+                        'name' => 'Times New Roman',
                     ],
                     'alignment' => [
                         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                     ],
+                ]);
+
+                $event->sheet->getStyle('F5')->applyFromArray([
+                    'font' => [
+                        'name' => 'Blackadder ITC',
+                    ],
+                    'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    ]
                 ]);
 
                 $event->sheet->getStyle('A5:K5')->applyFromArray([

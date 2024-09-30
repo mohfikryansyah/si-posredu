@@ -162,6 +162,7 @@
             </div>
         </div>
         <div id="statistik_pemeriksaan" class="bg-white p-5 col-span-2 rounded-lg">
+            <h1 class="text-gray-600 text-lg font-bold mb-5">Entitas Tanpa Pemeriksaan</h1>
             <div class="h-auto rounded-lg">
                 <div
                     class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 bg-transparent dark:bg-gray-900 rounded-t-lg">
@@ -214,51 +215,29 @@
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="entitas"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Pilih Entitas<span class="text-red-500">*</span>
-                            </label>
-                            <select id="entitas" name="entitas"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                style="width: 100%;">
-                                <option value="" {{ old('entitas') == '' ? 'selected' : '' }}>Semua
-                                </option>
-                                <option value="Anak" {{ old('entitas') == 'Anak' ? 'selected' : '' }}>Anak
-                                </option>
-                                <option value="Remaja" {{ old('entitas') == 'Remaja' ? 'selected' : '' }}>Remaja
-                                </option>
-                                <option value="Ibu" {{ old('entitas') == 'Ibu' ? 'selected' : '' }}>Ibu
-                                </option>
-                                <option value="Lansia" {{ old('entitas') == 'Lansia' ? 'selected' : '' }}>Lansia
-                                </option>
-                            </select>
+                        <label for="entitas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Pilih Entitas<span class="text-red-500">*</span>
+                        </label>
+                        <select id="entitas" name="entitas"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            style="width: 100%;">
+                            <option value="" {{ old('entitas') == '' ? 'selected' : '' }}>Semua
+                            </option>
+                            <option value="Anak" {{ old('entitas') == 'Anak' ? 'selected' : '' }}>Anak
+                            </option>
+                            <option value="Remaja" {{ old('entitas') == 'Remaja' ? 'selected' : '' }}>Remaja
+                            </option>
+                            <option value="Ibu" {{ old('entitas') == 'Ibu' ? 'selected' : '' }}>Ibu
+                            </option>
+                            <option value="Lansia" {{ old('entitas') == 'Lansia' ? 'selected' : '' }}>Lansia
+                            </option>
+                        </select>
                     </div>
 
                     <div id="entity_details" class="col-span-2">
                         <!-- Fields for different entities will be added here dynamically -->
                     </div>
 
-                    {{-- <div class="col-span-2">
-                        <label for="nama"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span
-                                class="text-red-500">*</span></label>
-                        <select id="export_nama" name="nama"
-                            class="select2nama bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            style="width: 100%;">
-                            <option value="" selected>Semua</option>
-                            @foreach ($tanpaPemeriksaan as $tp)
-                                @if (old('nama') === $tp->id)
-                                    <option value="{{ $tp->id }}" selected>{{ $tp->nama }}
-                                    </option>
-                                @else
-                                    <option value="{{ $tp->id }}">{{ $tp->nama }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('nama', 'export_pemeriksaan_remaja')
-                            <p class="text-red-500 text-xs">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
                     <div class="md:col-span-1 col-span-2">
                         <label for="start"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mulai tanggal<span
@@ -380,7 +359,7 @@
                                 </select>
                             </div>
                         `;
-                    } 
+                    }
                     // Reinitialize select2 after fields are added dynamically
                     $('.select2nama').select2();
                 }

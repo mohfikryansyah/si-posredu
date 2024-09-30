@@ -172,7 +172,7 @@
     @include('auth.delete')
 
     <x-slot:script>
-        
+
         <script>
             new DataTable('#table_user', {
                 order: []
