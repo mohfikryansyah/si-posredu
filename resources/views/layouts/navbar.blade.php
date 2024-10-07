@@ -44,10 +44,12 @@
                             </svg>
                             <span class="sr-only">Notifications</span>
                             @if (!$ibuBelumPemeriksaan)
-                                @if (Carbon\Carbon::now()->gt($jadwal->tanggal_pelayanan))
-                                    <div
-                                        class="absolute inline-flex items-center justify-center w-3 h-3 text-[0.6rem] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-1 -end-1 dark:border-gray-900">
-                                    </div>
+                                @if (isset($jadwal))
+                                    @if (Carbon\Carbon::now()->gt($jadwal->tanggal_pelayanan))
+                                        <div
+                                            class="absolute inline-flex items-center justify-center w-3 h-3 text-[0.6rem] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-1 -end-1 dark:border-gray-900">
+                                        </div>
+                                    @endif
                                 @endif
                             @endif
                         </button>
