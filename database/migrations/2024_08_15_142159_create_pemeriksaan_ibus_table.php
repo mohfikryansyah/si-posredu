@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('keluhan');
             $table->string('pemberian_vitamin');
             $table->string('catatan');
+            $table->integer('pemeriksaan_ke');
             $table->timestamps();
 
             $table->foreign('ibu_id')->references('id')->on('ibus')->onDelete('cascade');

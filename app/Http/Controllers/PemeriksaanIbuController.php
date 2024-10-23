@@ -66,6 +66,16 @@ class PemeriksaanIbuController extends Controller
             'catatan' => 'required|max:72',
         ]);
 
+        $nomorPemeriksaan = PemeriksaanIbu::with(['ibu', 'employee'])->where('ibu_id', $request->ibu_id)->orderBy('tanggal_pemeriksaan', 'desc')->first();
+
+        if ($nomorPemeriksaan) {
+            $validatedData['pemeriksaan_ke'] = $nomorPemeriksaan['pemeriksaan_ke'] + 1;
+        } else {
+            $validatedData['pemeriksaan_ke'] = 1;
+        }
+
+        // dd($validatedData['pemeriksaan_ke']);
+
         PemeriksaanIbu::create($validatedData);
 
         return redirect()->route('pemeriksaanIbu')->with('success', 'Data berhasil disimpan!');
@@ -76,9 +86,16 @@ class PemeriksaanIbuController extends Controller
      */
     public function show($pemeriksaanIbu)
     {
-        $showPemeriksaan = PemeriksaanIbu::with('ibu')->where('id', $pemeriksaanIbu)->firstOrFail();
+        $showPemeriksaan = PemeriksaanIbu::with(['ibu', 'employee'])->where('id', $pemeriksaanIbu)->firstOrFail();
+        $pemeriksaanSebelumnya = PemeriksaanIbu::with(['ibu', 'employee'])
+            ->where('ibu_id', $showPemeriksaan->ibu_id)
+            ->where('tanggal_pemeriksaan', '<', $showPemeriksaan->tanggal_pemeriksaan)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->first();
+
         return view('PemeriksaanIbu.show', [
             'mom' => $showPemeriksaan,
+            'pemeriksaanSebelumnya' => $pemeriksaanSebelumnya,
         ]);
     }
 
@@ -112,7 +129,7 @@ class PemeriksaanIbuController extends Controller
             'pemberian_vitamin' => 'required|max:100',
             'catatan' => 'required|max:72',
         ]);
-        
+
         PemeriksaanIbu::where('id', $request->id)->update($validatedData);
         return redirect()->route('pemeriksaanIbu')->with('success', 'Data berhasil diubah!');
     }
@@ -120,10 +137,10 @@ class PemeriksaanIbuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)   
+    public function destroy(Request $request)
     {
         PemeriksaanIbu::findOrFail($request->id)->delete();
-        return back()->with('success',"Data berhasil dihapus!");
+        return back()->with('success', "Data berhasil dihapus!");
     }
 
     public function export(Request $request)

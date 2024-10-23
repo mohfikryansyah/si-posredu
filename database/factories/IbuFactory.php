@@ -32,7 +32,7 @@ class IbuFactory extends Factory
             'alamat' => fake()->address(),
             'no_tlp' => fake()->randomNumber(5, true),
             'pekerjaan' => fake()->jobTitle(),
-            'tanggal_pendaftaran' => fake()->date()
+            'tanggal_pendaftaran' => fake()->date(),
         ];
     }
 }

@@ -44,6 +44,7 @@ class PemeriksaanIbuFactory extends Factory
             'keluhan' => fake()->randomElement(['Ada Keluhan', 'Tidak ada Keluhan']),
             'pemberian_vitamin' => fake()->randomElement(['Ya', 'Tidak']),
             'catatan' => fake()->randomElement(['Keadaan membaik', 'Keadaan tidak membaik']),
+            'pemeriksaan_ke' => fake()->randomNumber(1, true),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];
