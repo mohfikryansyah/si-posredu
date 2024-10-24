@@ -63,12 +63,9 @@ class PemeriksaanRemajaController extends Controller
     public function show($pemeriksaanRemaja)
     {
         $remajas = PemeriksaanRemaja::with(['remaja', 'employee'])->where('id', $pemeriksaanRemaja)->firstOrFail();
-        // dd($remajas->remaja_id);
         $pemeriksaanSebelumnya = Pemeriksaanremaja::with(['remaja', 'employee'])->where('remaja_id', $remajas->remaja_id)->orderBy('tanggal_pemeriksaan', 'desc')->skip(1)->first();
         $count = PemeriksaanRemaja::with(['remaja', 'employee'])->where('remaja_id', $remajas->remaja_id)->count();
-        // dd($pemeriksaanSebelumnya);
-        // dd($count);
-        return view('Pemeriksaanremaja.show', [
+        return view('PemeriksaanRemaja.show', [
             'remajas' => $remajas,
             'pemeriksaanSebelumnya' => $pemeriksaanSebelumnya,
             'count' => $count,
@@ -111,7 +108,7 @@ class PemeriksaanRemajaController extends Controller
     public function destroy(Request $request)
     {
         PemeriksaanRemaja::findOrFail($request->id)->delete();
-        return back()->with('success',"Data berhasil dihapus!");
+        return back()->with('success', "Data berhasil dihapus!");
     }
 
     public function export(Request $request)
