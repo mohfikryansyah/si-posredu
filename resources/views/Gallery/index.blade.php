@@ -90,6 +90,8 @@
             $(document).ready(function() {
                 $('table').on('click', '.deletebtn', function() {
                     var id = $(this).data('id');
+                    console.log(id);
+                    
 
                     $('#delete_id').val(id);
                 });
