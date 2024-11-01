@@ -1,427 +1,181 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold md:text-xl text-lg text-gray-800 leading-tight">
+            {{ __('Detail Pemeriksaan Ibu Hamil') }}
+        </h2>
+    </x-slot>
 
-    {{-- <div class="h-screen"> --}}
-    <div class="grid lg:grid-cols-12 gap-5">
-        <div class="relative lg:col-span-3 col-span-12 rounded-lg p-5 bg-white shadow-md">
-            <div class="flex text-[180px] justify-center pb-3">
-                @if ($mom->ibu->user)
-                    @if ($mom->ibu->user->fotoProfile)
-                        <img src="{{ asset('storage/' . $mom->ibu->user->fotoProfile) }}"
-                            class="w-48 h-48 rounded-full object-cover" alt="user foto">
-                    @endif
-                @else
-                    <i class="fa-solid fa-circle-user"></i>
-                @endif
-            </div>
-            <div class="mt-3 space-y-3">
-                <div class="inline-flex items-center justify-center w-full">
-                    <hr class="w-full h-px bg-gray-200 border-0 dark:bg-gray-700">
-                    <span
-                        class="absolute px-3 font-medium text-gray-800 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Data
-                        Diri</span>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-gray-500 text-sm">Nama</p>
-                    <p class="text-gray-800 font-medium text-sm">
-                        {{ $mom->ibu->nama }}
-                    </p>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-gray-500 text-sm">Lahir</p>
-                    <p class="text-gray-800 font-medium text-sm">
-                        {{ $mom->ibu->tempat_tanggal_lahir }}
-                    </p>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-gray-500 text-sm">Alamat</p>
-                    <p class="text-gray-800 font-medium text-sm">
-                        {{ $mom->ibu->alamat }}
-                    </p>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-gray-500 text-sm">Pekerjaan</p>
-                    <p class="text-gray-800 font-medium text-sm">
-                        {{ $mom->ibu->pekerjaan }}
-                    </p>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="lg:col-span-6 col-span-12 bg-white rounded-lg shadow-md">
-            <div class="p-5">
-                <p class="text-orange-600 font-bold text-xl">Detail Pemeriksaan ({{ $mom->pemeriksaan_ke }})</p>
-            </div>
-            <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700">
-            <div class="px-5 py-3">
-                <div class="md:grid-cols-3 grid-cols-2 mt-2 gap-y-3 hidden md:grid">
-                    <p class="col-start-2 text-orange-400 font-bold">Saat Ini</p>
-                    <p class="text-orange-400 font-bold">Sebelumnya</p>
-                </div>
-                <div class="grid md:grid-cols-3 grid-cols-2 mt-3 gap-y-3">
-                    <div class="space-y-3">
-                        <p class="text-gray-500 text-sm truncate">Tanggal Pemeriksaan</p>
-                        <p class="text-gray-500 text-sm truncate">Petugas Pemeriksa</p>
-                        <p class="text-gray-500 text-sm truncate">Usia Kehamilan</p>
-                        <p class="text-gray-500 text-sm truncate">Tekanan Darah</p>
-                        <p class="text-gray-500 text-sm truncate">Berat Badan</p>
-                        <p class="text-gray-500 text-sm truncate">Tinggi Badan</p>
-                        <p class="text-gray-500 text-sm truncate">Lingkar Lengan Atas</p>
-
-                        <p class="text-gray-500 text-sm truncate">Pemeriksaan Lab</p>
-                        <p class="text-gray-500 text-sm truncate">Suntik Tetanus Toksoid</p>
-                        <p class="text-gray-500 text-sm truncate">Tinggi Fundus</p>
-                        <p class="text-gray-500 text-sm truncate">Denyut Jantung Janin</p>
-                        <p class="text-gray-500 text-sm truncate">Keluhan</p>
-                        <p class="text-gray-500 text-sm truncate">Pemberian Vitamin</p>
-                    </div>
-                    <div class="space-y-3">
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ date_format(date_create($mom->tanggal_pemeriksaan), 'd F, Y') }}
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->employee->nama }}
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->usia_kehamilan }}
-                            <span class="text-gray-500">Minggu</span>
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->tekanan_darah }}
-                            <span class="text-gray-500">mmHg</span>
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->berat_badan }}
-                            <span class="text-gray-500">kg</span>
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->tinggi_badan }}
-                            <span class="text-gray-500">cm</span>
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->lingkar_lengan_atas }}
-                            <span class="text-gray-500">cm</span>
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->pemeriksaan_lab }}
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->suntik_tetanus_toksoid }}
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->tinggi_fundus }}
-                            <span class="text-gray-500">cm</span>
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->denyut_jantung_janin }}
-                            <span class="text-gray-500">bpm</span>
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->keluhan }}
-                        </p>
-                        <p class="text-gray-800 font-medium text-sm truncate">
-                            {{ $mom->pemberian_vitamin }}
-                        </p>
-                    </div>
-
-                    @if ($pemeriksaanSebelumnya)
-                        <div class="space-y-3 hidden md:block">
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ date_format(date_create($pemeriksaanSebelumnya->tanggal_pemeriksaan), 'd F, Y') }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->employee->nama }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->usia_kehamilan }}
-                                <span class="text-gray-500">Minggu</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->tekanan_darah }}
-                                <span class="text-gray-500">mmHg</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->berat_badan }}
-                                <span class="text-gray-500">kg</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->tinggi_badan }}
-                                <span class="text-gray-500">cm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->lingkar_lengan_atas }}
-                                <span class="text-gray-500">cm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->pemeriksaan_lab }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->suntik_tetanus_toksoid }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->tinggi_fundus }}
-                                <span class="text-gray-500">cm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->denyut_jantung_janin }}
-                                <span class="text-gray-500">bpm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->keluhan }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm">
-                                {{ $pemeriksaanSebelumnya->pemberian_vitamin }}
-                            </p>
-                        </div>
-                    @else
-                        <div
-                            class="col-span-1 hidden md:flex col-start-3 row-span-full items-center justify-center text-gray-400">
-                            <p>Tidak ada data sebelumnya</p>
-                        </div>
-                    @endif
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="lg:col-span-3 col-span-12 rounded-lg bg-white shadow-md">
-            <div class="border-b p-3 lg:text-2xl font-medium text-center text-orange-400 text-lg">
-                <p class="text-orange-600 font-bold text-xl">Darah</p>
-            </div>
-            <div class="flex justify-center border-b pb-2">
-                <img class="w-40 h-40 duration-300 animate-heartbeat" src="{{ asset('images/heartbeat.png') }}"
-                    alt="">
-            </div>
-            <div class="px-3 py-2 text-orange-400 relative">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <tbody>
-                        <tr>
-                            <td class="py-1 text-orange-500">
-                                Saat Ini
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="py-1 text-gray-500">
-                                Tekanan Darah Ibu
-                            </td>
-                            <th scope="row" class="text-right text-gray-800 font-medium dark:text-white">
-                                {{ $mom->tekanan_darah . ' mmHg' }}
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="py-1 text-gray-500">
-                                Denyut Jantung Janin
-                            </td>
-                            <th scope="row" class="text-right text-gray-800 font-medium dark:text-white">
-                                {{ $mom->denyut_jantung_janin . ' bpm' }}
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="py-1 text-gray-500">
-                                Gol. Darah
-                            </td>
-                            <th scope="row" class="text-right text-gray-800 font-medium dark:text-white">
-                                {{ $mom->ibu->golongan_darah }}
-                            </th>
-                        </tr>
-                        @if ($pemeriksaanSebelumnya)
-                            <tr>
-                                <td class="py-1 text-orange-500">
-                                    Sebelumnya
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-1 text-gray-500">
-                                    Tekanan Darah Ibu
-                                </td>
-                                <th scope="row" class="text-right text-gray-800 font-medium dark:text-white">
-                                    {{ $pemeriksaanSebelumnya->tekanan_darah . ' mmHg' }}
-                                </th>
-                            </tr>
-                            <tr>
-                                <td class="py-1 text-gray-500">
-                                    Denyut Jantung Janin
-                                </td>
-                                <th scope="row" class="text-right text-gray-800 font-medium dark:text-white">
-                                    {{ $pemeriksaanSebelumnya->denyut_jantung_janin . ' bpm' }}
-                                </th>
-                            </tr>
-                            <tr>
-                                <td class="py-1 text-gray-500">
-                                    Gol. Darah
-                                </td>
-                                <th scope="row" class="text-right text-gray-800 font-medium dark:text-white">
-                                    {{ $pemeriksaanSebelumnya->ibu->golongan_darah }}
-                                </th>
-                            </tr>
-                        @endif
-                        <tr>
-                            <td colspan="2">
-                                <div class="inline-flex items-center justify-center w-full">
-                                    <hr class="w-full h-px bg-gray-200 border-0 dark:bg-gray-700">
-                                    <span
-                                        class="absolute px-3 font-medium -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Catatan Saat Ini</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="pt-2" colspan="2">
-                                {{ Str::limit($mom->catatan, 69, '...') }}
-                            </td>
-                        </tr>
-                        @if ($pemeriksaanSebelumnya)
-                        <tr>
-                            <td colspan="2">
-                                <div class="inline-flex items-center justify-center w-full">
-                                    <hr class="w-full h-px bg-gray-200 border-0 dark:bg-gray-700">
-                                    <span
-                                        class="absolute px-3 font-medium -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Catatan Sebelumnya</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="pt-2" colspan="2">
-                                {{ Str::limit($mom->catatan, 69, '...') }}
-                            </td>
-                        </tr>
-                        @endif
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        @if ($pemeriksaanSebelumnya)
-            <div class="lg:col-span-6 col-span-12 bg-white rounded-lg shadow-md block md:hidden">
-                <div class="p-5">
-                    <p class="text-orange-600 font-bold text-xl">Detail Pemeriksaan Sebelumnya</p>
-                </div>
-                <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700">
-                <div class="px-5 py-3">
-                    <div class="grid grid-cols-2 mt-2 gap-y-3">
-                        <div class="space-y-3">
-                            <p class="text-gray-500 text-sm truncate">Tanggal Pemeriksaan</p>
-                            <p class="text-gray-500 text-sm truncate">Petugas Pemeriksa</p>
-                            <p class="text-gray-500 text-sm truncate">Usia Kehamilan</p>
-                            <p class="text-gray-500 text-sm truncate">Tekanan Darah</p>
-                            <p class="text-gray-500 text-sm truncate">Berat Badan</p>
-                            <p class="text-gray-500 text-sm truncate">Tinggi Badan</p>
-                            <p class="text-gray-500 text-sm truncate">Lingkar Lengan Atas</p>
-
-                            <p class="text-gray-500 text-sm truncate">Pemeriksaan Lab</p>
-                            <p class="text-gray-500 text-sm truncate">Suntik Tetanus Toksoid</p>
-                            <p class="text-gray-500 text-sm truncate">Tinggi Fundus</p>
-                            <p class="text-gray-500 text-sm truncate">Denyut Jantung Janin</p>
-                            <p class="text-gray-500 text-sm truncate">Keluhan</p>
-                            <p class="text-gray-500 text-sm truncate">Pemberian Vitamin</p>
-                        </div>
-
-                        <div class="space-y-3 block md:hidden">
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ date_format(date_create($pemeriksaanSebelumnya->tanggal_pemeriksaan), 'd F, Y') }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->employee->nama }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->usia_kehamilan }}
-                                <span class="text-gray-500">Minggu</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->tekanan_darah }}
-                                <span class="text-gray-500">mmHg</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->berat_badan }}
-                                <span class="text-gray-500">kg</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->tinggi_badan }}
-                                <span class="text-gray-500">cm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->lingkar_lengan_atas }}
-                                <span class="text-gray-500">cm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->pemeriksaan_lab }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->suntik_tetanus_toksoid }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->tinggi_fundus }}
-                                <span class="text-gray-500">cm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->denyut_jantung_janin }}
-                                <span class="text-gray-500">bpm</span>
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->keluhan }}
-                            </p>
-                            <p class="text-gray-800 font-medium text-sm truncate">
-                                {{ $pemeriksaanSebelumnya->pemberian_vitamin }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="lg:col-span-3 col-span-12 rounded-lg bg-white shadow-md block md:hidden">
-                <div class="border-b p-3 lg:text-2xl font-medium text-center text-orange-400 text-lg">
-                    <p class="text-orange-600 font-bold text-xl">Darah</p>
-                </div>
-                <div class="flex justify-center border-b pb-2">
-                    <img class="w-40 h-40 duration-300 animate-heartbeat" src="{{ asset('images/heartbeat.png') }}"
-                        alt="">
-                </div>
-                <div class="px-3 py-2 text-orange-400 relative">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <tbody>
-                            <tr>
-                                <td class="py-1 text-orange-400">
-                                    Tekanan Darah Ibu
-                                </td>
-                                <th scope="row" class="text-right font-medium dark:text-white">
-                                    {{ $pemeriksaanSebelumnya->tekanan_darah . ' mmHg' }}
-                                </th>
-                            </tr>
-                            <tr>
-                                <td class="py-1 text-orange-400">
-                                    Denyut Jantung Janin
-                                </td>
-                                <th scope="row" class="text-right font-medium dark:text-white">
-                                    {{ $pemeriksaanSebelumnya->denyut_jantung_janin . ' bpm' }}
-                                </th>
-                            </tr>
-                            <tr>
-                                <td class="py-1 text-orange-400">
-                                    Gol. Darah
-                                </td>
-                                <th scope="row" class="text-right font-medium dark:text-white">
-                                    {{ $pemeriksaanSebelumnya->ibu->golongan_darah }}
-                                </th>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="inline-flex items-center justify-center w-full">
-                                        <hr class="w-full h-px bg-gray-200 border-0 dark:bg-gray-700">
-                                        <span
-                                            class="absolute px-3 font-medium -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">Catatan</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pt-2" colspan="2">
-                                    {{ Str::limit($pemeriksaanSebelumnya->catatan, 69, '...') }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        @endif
+    <div class="w-full p-5 bg-white mt-4 rounded-md shadow-sm">
+        <h2 class="font-semibold md:text-xl text-lg text-gray-800 leading-tight text-center">
+            {{ $mom->ibu->nama }}
+        </h2>
+        <h2 class="font-semibold md:text-lg text-md text-gray-600 leading-tight text-center">
+            {{ $mom->ibu->tempat_tanggal_lahir }}
+        </h2>
     </div>
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white mt-4">
+        <table id="table_pemeriksaan_ibu">
+            <thead>
+                <tr>
+                    <th scope="col" class="whitespace-normal">Petugas</th>
+                    <th scope="col" class="whitespace-normal">Tgl. Pemeriksaan</th>
+                    <th scope="col" class="whitespace-normal">Usia Kehamilan</th>
+                    <th scope="col" class="whitespace-normal">Berat Badan</th>
+                    <th scope="col" class="whitespace-normal">Tinggi Badan</th>
+                    <th scope="col" class="whitespace-normal">Tinggi Fundus</th>
+                    <th scope="col" class="whitespace-normal">Denyut Jantung Janin</th>
+                    <th scope="col" class="whitespace-normal">Lingkar Lengan Atas</th>
+                    <th scope="col" class="whitespace-normal">Pemeriksaan Lab</th>
+                    <th scope="col" class="whitespace-normal">Suntik Tetanus Toksoid</th>
+                    <th scope="col" class="whitespace-normal">Keluhan</th>
+                    <th scope="col" class="whitespace-normal">Pemberian Vitamin</th>
+                    <th scope="col" class="whitespace-normal">Tekanan Darah</th>
+                    <th scope="col" class="whitespace-normal">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($allPemeriksaanIbuSaatIni as $item)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th class="whitespace-nowrap">
+                            {{ $item->employee->nama }}
+                        </th>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ date_format(date_create($item->tanggal_pemeriksaan), 'd/m/Y') }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->usia_kehamilan . ' Minggu' }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->berat_badan . ' kg' }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->tinggi_badan . ' cm' }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->tinggi_fundus . ' cm' }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->denyut_jantung_janin . ' bpm' }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->lingkar_lengan_atas . ' cm' }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->pemeriksaan_lab }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->suntik_tetanus_toksoid }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->keluhan }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->pemberian_vitamin }}
+                        </td>
+                        <td class="whitespace-nowrap md:whitespace-normal">
+                            {{ $item->tekanan_darah . ' mmHg' }}
+                        </td>
+                        <td>
+                            <div class="flex items-center">
+                                <a href="javascript:void(0);" x-data data-id="{{ $item->id }}"
+                                    data-ibu-id="{{ $item->ibu->id }}" data-employee-id="{{ $item->employee_id }}"
+                                    data-tanggal-pemeriksaan="{{ $item->tanggal_pemeriksaan }}"
+                                    data-berat-badan="{{ $item->berat_badan }}"
+                                    data-tinggi-badan="{{ $item->tinggi_badan }}"
+                                    data-usia-kehamilan="{{ $item->usia_kehamilan }}"
+                                    data-tekanan-darah="{{ $item->tekanan_darah }}"
+                                    data-tinggi-fundus="{{ $item->tinggi_fundus }}"
+                                    data-denyut-jantung-janin="{{ $item->denyut_jantung_janin }}"
+                                    data-lingkar-lengan-atas="{{ $item->lingkar_lengan_atas }}"
+                                    data-pemeriksaan-lab="{{ $item->pemeriksaan_lab }}"
+                                    data-suntik-tetanus-toksoid="{{ $item->suntik_tetanus_toksoid }}"
+                                    data-keluhan="{{ $item->keluhan }}"
+                                    data-pemberian-vitamin="{{ $item->pemberian_vitamin }}"
+                                    data-catatan="{{ $item->catatan }}"
+                                    x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_ibu')"
+                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+                                <a data-id={{ $item->id }} data-nama="{{ $item->ibu->nama }}"
+                                    href="javascript:void(0);" x-data=""
+                                    x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_ibu')"
+                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    <i class="fa-solid fa-trash-arrow-up"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- MODAL --->
+    @include('PemeriksaanIbu.edit')
+    @include('PemeriksaanIbu.delete')
+
+    <x-slot:script>
+
+        <script>
+            new DataTable('#table_pemeriksaan_ibu', {
+                order: []
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $(".select2nama").select2({
+                    width: 'resolve' // need to override the changed default
+                });
+                $(".select2employee").select2({
+                    width: 'resolve' // need to override the changed default
+                });
+
+                $('table').on('click', '.editbtn', function() {
+                    var id = $(this).data('id');
+                    var ibu_id = $(this).data('ibu-id');
+                    var employee_id = $(this).data('employee-id');
+                    var tanggal_pemeriksaan = $(this).data('tanggal-pemeriksaan');
+                    var berat_badan = $(this).data('berat-badan');
+                    var tinggi_badan = $(this).data('tinggi-badan');
+                    var usia_kehamilan = $(this).data('usia-kehamilan');
+                    var tekanan_darah = $(this).data('tekanan-darah');
+                    var tinggi_fundus = $(this).data('tinggi-fundus');
+                    var denyut_jantung_janin = $(this).data('denyut-jantung-janin');
+                    var lingkar_lengan_atas = $(this).data('lingkar-lengan-atas');
+                    var pemeriksaan_lab = $(this).data('pemeriksaan-lab');
+                    var suntik_tetanus_toksoid = $(this).data('suntik-tetanus-toksoid');
+                    var keluhan = $(this).data('keluhan');
+                    var pemberian_vitamin = $(this).data('pemberian-vitamin');
+                    var catatan = $(this).data('catatan');
+
+                    $('#edit_id').val(id);
+                    $('#edit_ibu_id').val(ibu_id).trigger('change');
+                    $('#edit_employee_id').val(employee_id).trigger('change');
+                    $('#edit_tanggal_pemeriksaan').val(tanggal_pemeriksaan);
+                    $('#edit_berat_badan').val(berat_badan);
+                    $('#edit_tinggi_badan').val(tinggi_badan);
+                    $('#edit_usia_kehamilan').val(usia_kehamilan);
+                    $('#edit_tekanan_darah').val(tekanan_darah);
+                    $('#edit_tinggi_fundus').val(tinggi_fundus);
+                    $('#edit_denyut_jantung_janin').val(denyut_jantung_janin);
+                    $('#edit_lingkar_lengan_atas').val(lingkar_lengan_atas);
+                    $('#edit_pemeriksaan_lab').val(pemeriksaan_lab);
+                    $('#edit_suntik_tetanus_toksoid').val(suntik_tetanus_toksoid).trigger('change');
+                    $('#edit_keluhan').val(keluhan);
+                    $('#edit_pemberian_vitamin').val(pemberian_vitamin);
+                    $('#edit_catatan').val(catatan);
+                });
+
+                $('table').on('click', '.deletebtn', function() {
+                    var id = $(this).data('id');
+
+                    $('#delete_id').val(id);
+                });
+            });
+        </script>
+    </x-slot:script>
+
 </x-app-layout>

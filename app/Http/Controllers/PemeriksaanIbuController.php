@@ -22,7 +22,14 @@ class PemeriksaanIbuController extends Controller
         $suntik_tetanus_toksoid = ['Ya', 'Tidak'];
         $golonganDarah = ['A', 'B', 'AB', 'O'];
         $moms = Ibu::with('pemeriksaanIbu')->latest()->get();
-        $pemeriksaanIbu = PemeriksaanIbu::with(['ibu', 'employee'])->latest()->get();
+        $pemeriksaanIbu = $pemeriksaanIbu = PemeriksaanIbu::select('*')
+            ->whereIn('id', function ($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('pemeriksaan_ibus')
+                    ->groupBy('ibu_id');
+            })
+            ->latest()
+            ->get();
         // dd($pemeriksaanIbu);
         $employees = Employee::all();
         return view('PemeriksaanIbu.index', [
@@ -92,10 +99,20 @@ class PemeriksaanIbuController extends Controller
             ->where('tanggal_pemeriksaan', '<', $showPemeriksaan->tanggal_pemeriksaan)
             ->orderBy('tanggal_pemeriksaan', 'desc')
             ->first();
+        $allPemeriksaanIbuSaatIni = PemeriksaanIbu::with(['ibu', 'employee'])
+            ->where('ibu_id', $showPemeriksaan->ibu_id)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->get();
+        $suntik_tetanus_toksoid = ['Ya', 'Tidak'];
+        // dd($suntik_tetanus_toksoid);
 
         return view('PemeriksaanIbu.show', [
             'mom' => $showPemeriksaan,
             'pemeriksaanSebelumnya' => $pemeriksaanSebelumnya,
+            'allPemeriksaanIbuSaatIni' => $allPemeriksaanIbuSaatIni,
+            'moms' => Ibu::with('pemeriksaanIbu')->latest()->get(),
+            'employees' => Employee::latest()->get(),
+            'suntik_tetanus_toksoid' => $suntik_tetanus_toksoid,
         ]);
     }
 
