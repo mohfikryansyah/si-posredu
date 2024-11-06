@@ -17,6 +17,7 @@
     <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script>
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
     <link href="{{ asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}">
     <script src="{{ asset('plugins/echarts/echarts.min.js') }}"></script>
