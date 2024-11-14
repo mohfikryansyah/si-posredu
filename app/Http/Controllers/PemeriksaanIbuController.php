@@ -22,7 +22,7 @@ class PemeriksaanIbuController extends Controller
         $suntik_tetanus_toksoid = ['Ya', 'Tidak'];
         $golonganDarah = ['A', 'B', 'AB', 'O'];
         $moms = Ibu::with('pemeriksaanIbu')->latest()->get();
-        $pemeriksaanIbu = $pemeriksaanIbu = PemeriksaanIbu::select('*')
+        $pemeriksaanIbu = PemeriksaanIbu::select('*')
             ->whereIn('id', function ($query) {
                 $query->selectRaw('MAX(id)')
                     ->from('pemeriksaan_ibus')
@@ -30,7 +30,7 @@ class PemeriksaanIbuController extends Controller
             })
             ->latest()
             ->get();
-        // dd($pemeriksaanIbu);
+
         $employees = Employee::all();
         return view('PemeriksaanIbu.index', [
             'moms' => $moms,

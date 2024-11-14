@@ -17,12 +17,22 @@ class PemeriksaanAnakController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         $children = Anak::latest()->get();
         $employees = Employee::latest()->get();
         $pemeriksaans = PemeriksaanAnak::with('anak')->latest()->get();
+        $pemeriksaanAnak = PemeriksaanAnak::select('*')
+            ->whereIn('id', function ($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('pemeriksaan_anaks')
+                    ->groupBy('anak_id');
+            })
+            ->latest()
+            ->get();
+
         return view('PemeriksaanAnak.index', [
             'pemeriksaans' => $pemeriksaans,
+            'pemeriksaanAnaks' => $pemeriksaanAnak,
             'children' => $children,
             'employees' => $employees,
         ]);
@@ -64,16 +74,29 @@ class PemeriksaanAnakController extends Controller
      */
     public function show($pemeriksaanAnak)
     {
-        $children = PemeriksaanAnak::with(['anak', 'employee'])->where('id', $pemeriksaanAnak)->firstOrFail();
-        // dd($children->anak_id);
-        $pemeriksaanSebelumnya = PemeriksaanAnak::with(['anak', 'employee'])->where('anak_id', $children->anak_id)->orderBy('tanggal_pemeriksaan', 'desc')->skip(1)->first();
-        $count = PemeriksaanAnak::with(['anak', 'employee'])->where('anak_id', $children->anak_id)->count();
-        // dd($pemeriksaanSebelumnya);
-        // dd($count);
+        $child = PemeriksaanAnak::with(['anak', 'employee'])->where('id', $pemeriksaanAnak)->firstOrFail();
+        $count = PemeriksaanAnak::with(['anak', 'employee'])->where('anak_id', $child->anak_id)->count();
+
+        $pemeriksaanSebelumnya = PemeriksaanAnak::with(['anak', 'employee'])
+            ->where('anak_id', $child->anak_id)
+            ->where('tanggal_pemeriksaan', '<', $child->tanggal_pemeriksaan)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->first();
+        $allPemeriksaanAnakSaatIni = PemeriksaanAnak::with(['anak', 'employee'])
+            ->where('anak_id', $child->anak_id)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->get();
+
+            // dd(Anak::with('pemeriksaanAnak')->latest()->get());
+
+
         return view('PemeriksaanAnak.show', [
-            'children' => $children,
+            'child' => $child,
+            'children' => Anak::with('pemeriksaanAnak')->latest()->get(),
             'pemeriksaanSebelumnya' => $pemeriksaanSebelumnya,
+            'allPemeriksaanAnakSaatIni' => $allPemeriksaanAnakSaatIni,
             'count' => $count,
+            'employees' => Employee::latest()->get(),
         ]);
     }
 

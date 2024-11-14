@@ -20,8 +20,17 @@ class PemeriksaanRemajaController extends Controller
         $pemeriksaanRemaja = PemeriksaanRemaja::with(['remaja', 'employee'])->latest()->get();
         $remaja = Remaja::latest()->get();
         $employees = Employee::latest()->get();
+        $pemeriksaanRemajas = PemeriksaanRemaja::select('*')
+            ->whereIn('id', function ($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('pemeriksaan_remajas')
+                    ->groupBy('remaja_id');
+            })
+            ->latest()
+            ->get();
         return view('PemeriksaanRemaja.index', [
             'pemeriksaans' => $pemeriksaanRemaja,
+            'pemeriksaanRemajas' => $pemeriksaanRemajas,
             'remajas' => $remaja,
             'employees' => $employees,
         ]);
@@ -62,13 +71,26 @@ class PemeriksaanRemajaController extends Controller
      */
     public function show($pemeriksaanRemaja)
     {
-        $remajas = PemeriksaanRemaja::with(['remaja', 'employee'])->where('id', $pemeriksaanRemaja)->firstOrFail();
-        $pemeriksaanSebelumnya = Pemeriksaanremaja::with(['remaja', 'employee'])->where('remaja_id', $remajas->remaja_id)->orderBy('tanggal_pemeriksaan', 'desc')->skip(1)->first();
-        $count = PemeriksaanRemaja::with(['remaja', 'employee'])->where('remaja_id', $remajas->remaja_id)->count();
+        $remaja = PemeriksaanRemaja::with(['remaja', 'employee'])->where('id', $pemeriksaanRemaja)->firstOrFail();
+        $count = PemeriksaanRemaja::with(['remaja', 'employee'])->where('remaja_id', $remaja->remaja_id)->count();
+
+        $pemeriksaanSebelumnya = PemeriksaanRemaja::with(['remaja', 'employee'])
+            ->where('remaja_id', $remaja->remaja_id)
+            ->where('tanggal_pemeriksaan', '<', $remaja->tanggal_pemeriksaan)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->first();
+        $allPemeriksaanRemajaSaatIni = PemeriksaanRemaja::with(['remaja', 'employee'])
+            ->where('remaja_id', $remaja->remaja_id)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->get();
+
         return view('PemeriksaanRemaja.show', [
-            'remajas' => $remajas,
+            'remaja' => $remaja,
+            'remajas' => Remaja::with('pemeriksaanRemaja')->latest()->get(),
             'pemeriksaanSebelumnya' => $pemeriksaanSebelumnya,
+            'allPemeriksaanRemajaSaatIni' => $allPemeriksaanRemajaSaatIni,
             'count' => $count,
+            'employees' => Employee::latest()->get(),
         ]);
     }
 

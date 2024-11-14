@@ -88,12 +88,12 @@
                                     data-alamat="{{ $child->alamat }}" data-no-tlp="{{ $child->no_tlp }}"
                                     data-tanggal-pendaftaran="{{ $child->tanggal_pendaftaran }}"
                                     x-on:click="$dispatch('open-modal', 'edit_anak')"
-                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-green-500 bg-white hover:text-green-700 focus:outline-none transition">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
                                 <a data-id={{ $child->id }} data-nama="{{ $child->nama }}"
                                     href="javascript:void(0);" x-on:click="$dispatch('open-modal', 'delete_anak')"
-                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-red-500 bg-white hover:text-red-700 focus:outline-none transition">
                                     <i class="fa-solid fa-trash-arrow-up"></i>
                                 </a>
                             </div>

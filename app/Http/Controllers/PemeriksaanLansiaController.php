@@ -21,8 +21,17 @@ class PemeriksaanLansiaController extends Controller
         $pemeriksaanLansia = PemeriksaanLansia::with('lansia')->latest()->get();
         $lansias = Lansia::latest()->get();
         $employees = Employee::latest()->get();
+        $pemeriksaanLansias = PemeriksaanLansia::select('*')
+            ->whereIn('id', function ($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('pemeriksaan_lansias')
+                    ->groupBy('lansia_id');
+            })
+            ->latest()
+            ->get();
         return view('PemeriksaanLansia.index', [
             'pemeriksaans' => $pemeriksaanLansia,
+            'pemeriksaanLansias' => $pemeriksaanLansias,
             'lansias' => $lansias,
             'employees' => $employees,
             'golongan_darah' => $golonganDarah,
@@ -65,16 +74,26 @@ class PemeriksaanLansiaController extends Controller
      */
     public function show($pemeriksaanLansia)
     {
-        $lansias = PemeriksaanLansia::with(['lansia', 'employee'])->where('id', $pemeriksaanLansia)->firstOrFail();
-        // dd($lansias->lansia_id);
-        $pemeriksaanSebelumnya = PemeriksaanLansia::with(['lansia', 'employee'])->where('lansia_id', $lansias->lansia_id)->orderBy('tanggal_pemeriksaan', 'desc')->skip(1)->first();
-        $count = PemeriksaanLansia::with(['lansia', 'employee'])->where('lansia_id', $lansias->lansia_id)->count();
-        // dd($pemeriksaanSebelumnya);
-        // dd($count);
+        $lansia = PemeriksaanLansia::with(['lansia', 'employee'])->where('id', $pemeriksaanLansia)->firstOrFail();
+        $count = PemeriksaanLansia::with(['lansia', 'employee'])->where('lansia_id', $lansia->lansia_id)->count();
+
+        $pemeriksaanSebelumnya = PemeriksaanLansia::with(['lansia', 'employee'])
+            ->where('lansia_id', $lansia->lansia_id)
+            ->where('tanggal_pemeriksaan', '<', $lansia->tanggal_pemeriksaan)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->first();
+        $allPemeriksaanLansiaSaatIni = PemeriksaanLansia::with(['lansia', 'employee'])
+            ->where('lansia_id', $lansia->lansia_id)
+            ->orderBy('tanggal_pemeriksaan', 'desc')
+            ->get();
+
         return view('PemeriksaanLansia.show', [
-            'lansias' => $lansias,
+            'lansia' => $lansia,
+            'lansias' => PemeriksaanLansia::with(['lansia', 'employee'])->latest()->get(),
             'pemeriksaanSebelumnya' => $pemeriksaanSebelumnya,
+            'allPemeriksaanLansiaSaatIni' => $allPemeriksaanLansiaSaatIni,
             'count' => $count,
+            'employees' => Employee::latest()->get(),
         ]);
     }
 
@@ -114,7 +133,7 @@ class PemeriksaanLansiaController extends Controller
     public function destroy(Request $request)
     {
         PemeriksaanLansia::findOrFail($request->id)->delete();
-        return back()->with('success',"Data berhasil dihapus!");
+        return back()->with('success', "Data berhasil dihapus!");
     }
 
     public function export(Request $request)

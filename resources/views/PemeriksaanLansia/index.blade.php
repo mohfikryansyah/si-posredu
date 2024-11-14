@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pemeriksaans as $pemeriksaan)
+                @foreach ($pemeriksaanLansias as $pemeriksaan)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th class="whitespace-nowrap">
@@ -77,13 +77,13 @@
                                     data-catatan="{{ $pemeriksaan->catatan }}"
                                     data-employee-id="{{ $pemeriksaan->employee->id }}"
                                     x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_lansia')"
-                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-green-500 bg-white hover:text-green-700 focus:outline-none transition">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
                                 <a data-id={{ $pemeriksaan->id }} data-nama="{{ $pemeriksaan->nama }}"
                                     href="javascript:void(0);" x-data=""
                                     x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_lansia')"
-                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-blue-700 focus:outline-none transition">
+                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-red-500 bg-white hover:text-red-700 focus:outline-none transition">
                                     <i class="fa-solid fa-trash-arrow-up"></i>
                                 </a>
                             </div>
