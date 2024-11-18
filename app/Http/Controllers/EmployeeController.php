@@ -13,7 +13,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with('user')->latest()->get();
+        $employees = Employee::with('user')->where('jabatan', '=', 'Kader')->latest()->get();
         $users = User::with('employee')->get();
 
         return view('Employee.index', compact([
@@ -35,13 +35,20 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validatedData = $request->validateWithBag('add_employee', [
             'nama' => 'required|string|max:255',
             'tempat_tanggal_lahir' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'join' => 'required|date'
+            'join' => 'required|date',
         ]);
 
+        $validatedData['jabatan'] = 'Kader';
+
+        // if ($request->hasFile('avatar')) {
+        //     $imagePath = $request->file('avatar')->store('avatar', 'public');
+        //     $validatedData['avatar'] = $imagePath;
+        // }
 
         Employee::create($validatedData);
 
@@ -62,7 +69,7 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         return view('Employee.edit', [
-            'employees' => employee::latest()->get(),
+            'employees' => Employee::with('users')->latest()->get(),
             'e' => $employee,
         ]);
     }

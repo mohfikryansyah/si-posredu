@@ -160,15 +160,21 @@
         @role('ADMIN')
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-                <x-sidebar-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
+                <x-sidebar-link :href="route('employee.index')" :active="request()->routeIs('employee*')">
                     <i class="fa-solid fa-hospital-user w-5"></i>
-                    <span class="ms-3">{{ __('Petugas') }}</span>
+                    <span class="ms-3">{{ __('Kader') }}</span>
+                </x-sidebar-link>
+            </li>
+            <li>
+                <x-sidebar-link :href="route('petugas-kesehatan.index')" :active="request()->routeIs('petugas-kesehatan*')">
+                    <i class="fa-solid fa-hospital-user w-5"></i>
+                    <span class="ms-3">{{ __('Petugas Kesehatan') }}</span>
                 </x-sidebar-link>
             </li>
         </ul>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-                <x-sidebar-link :href="route('jadwal-pelayanan.index')" :active="request()->routeIs('jadwal-pelayanan.index')">
+                <x-sidebar-link :href="route('jadwal-pelayanan.index')" :active="request()->routeIs('jadwal-pelayanan*')">
                     <i class="fa-regular fa-clock w-5"></i>
                     <span class="ms-3">{{ __('Jadwal Pelayanan') }}</span>
                 </x-sidebar-link>
@@ -176,7 +182,7 @@
         </ul>
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-                <x-sidebar-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                <x-sidebar-link :href="route('categories.index')" :active="request()->routeIs('categories*')">
                     <i class="fa-solid fa-list w-5"></i>
                     <span class="ms-3">{{ __('Kategori') }}</span>
                 </x-sidebar-link>

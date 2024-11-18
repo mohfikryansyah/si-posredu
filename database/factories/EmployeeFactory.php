@@ -22,7 +22,11 @@ class EmployeeFactory extends Factory
         
         return [
             'nama' => fake()->name(),
+            'nip' => '1990081720200410',
+            'unit_kerja' => fake()->city,
+            'no_tlp' => '081234567890',
             'tempat_tanggal_lahir' => $kota . $formatDate,
+            'jabatan' => fake()->randomElement(['Kader', 'Dokter', 'Perawat', 'Bidan']),
             'join' => fake()->dateTimeBetween('-4 years'),
             'alamat' => fake()->address(),
         ];

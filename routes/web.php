@@ -23,6 +23,7 @@ use App\Http\Controllers\PemeriksaanIbuController;
 use App\Http\Controllers\PemeriksaanAnakController;
 use App\Http\Controllers\PemeriksaanLansiaController;
 use App\Http\Controllers\PemeriksaanRemajaController;
+use App\Http\Controllers\PetugasKesehatanController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
@@ -59,6 +60,11 @@ Route::prefix('masyarakat')
 Route::middleware('auth', CheckRole::class . ':ADMIN')->group(function () {
     Route::resource('/employee', EmployeeController::class)->except('destroy');
     Route::delete('/employee', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+});
+
+Route::middleware('auth', CheckRole::class . ':ADMIN')->group(function () {
+    Route::resource('/petugas-kesehatan', PetugasKesehatanController::class)->except('destroy');
+    Route::delete('/petugas-kesehatan', [PetugasKesehatanController::class, 'destroy'])->name('petugaskesehatan.destroy');
 });
 
 Route::middleware('auth')->group(function () {

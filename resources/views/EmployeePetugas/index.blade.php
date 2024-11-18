@@ -10,25 +10,27 @@
             </header>
 
             <div class="w-full relative overflow-x-auto rounded-lg shadow-md sm:rounded-lg bg-white my-5">
-                <table id="table_employee">
+                <table id="table_petugasKesehatan">
                     <thead>
                         <tr>
                             <th scope="col">Nama</th>
-                            <th scope="col">Lahir</th>
-                            <th scope="col">Bergabung sejak</th>
+                            <th scope="col">NIP</th>
+                            <th scope="col">Jabatan</th>
+                            <th scope="col">Unit Kerja</th>
+                            <th scope="col">No Tlp</th>
                             <th scope="col">Alamat</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($employees as $employee)
+                        @foreach ($petugasKesehatan as $petugasKesehatan)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row"
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                    @if ($employee->user)
-                                        @if ($employee->user->fotoProfile)
-                                            <img src="{{ asset('storage/' . $employee->user->fotoProfile) }}"
+                                    @if ($petugasKesehatan->user)
+                                        @if ($petugasKesehatan->user->fotoProfile)
+                                            <img src="{{ asset('storage/' . $petugasKesehatan->user->fotoProfile) }}"
                                                 class="w-10 h-10 rounded-full img-preview object-cover" alt="user foto">
                                         @else
                                             <div class="text-4xl">
@@ -41,30 +43,37 @@
                                         </div>
                                     @endif
                                     <div class="ps-3">
-                                        <div class="text-base font-semibold">{{ $employee->nama }}</div>
-                                        @if ($employee->user !== null)
-                                            <div class="font-normal text-gray-500">{{ $employee->user->email }}</div>
+                                        <div class="text-base font-semibold">{{ $petugasKesehatan->nama }}</div>
+                                        @if ($petugasKesehatan->user !== null)
+                                            <div class="font-normal text-gray-500">{{ $petugasKesehatan->user->email }}
+                                            </div>
                                         @endif
                                     </div>
                                 </th>
                                 <td class="whitespace-nowrap">
-                                    {{ $employee->tempat_tanggal_lahir }}
+                                    {{ $petugasKesehatan->nip }}
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    {{ $employee->join }}
+                                    {{ $petugasKesehatan->jabatan }}
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    {{ $employee->alamat }}
+                                    {{ $petugasKesehatan->unit_kerja }}
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    {{ $petugasKesehatan->no_tlp }}
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    {{ $petugasKesehatan->alamat }}
                                 </td>
                                 <td>
                                     <div class="flex items-center">
-                                        <a href="{{ route('employee.edit', ['employee' => $employee->id]) }}"
+                                        <a href="{{ route('petugas-kesehatan.edit', ['petugas_kesehatan' => $petugasKesehatan->id]) }}"
                                             class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-green-500 bg-white hover:text-green-700 focus:outline-none transition">
                                             <i class="fa-regular fa-pen-to-square"></i>
                                         </a>
-                                        <a x-data data-id={{ $employee->id }} data-nama="{{ $employee->nama }}"
-                                            href="javascript:void(0);"
-                                            x-on:click="$dispatch('open-modal', 'delete_employee')"
+                                        <a x-data data-id={{ $petugasKesehatan->id }}
+                                            data-nama="{{ $petugasKesehatan->nama }}" href="javascript:void(0);"
+                                            x-on:click="$dispatch('open-modal', 'delete_petugasKesehatan')"
                                             class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-red-500 bg-white hover:text-red-700 focus:outline-none transition">
                                             <i class="fa-solid fa-trash-arrow-up"></i>
                                         </a>
@@ -80,37 +89,66 @@
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <h1 class="bg-orange-400 px-5 py-2.5 text-gray-100 font-medium">Tambah Petugas</h1>
                 <div class="p-5">
-                    <form action="{{ route('employee.store') }}" method="POST" class="max-w-sm mx-auto">
+                    <form action="{{ route('petugas-kesehatan.store') }}" method="POST" class="max-w-sm mx-auto">
                         @csrf
                         <div class="mb-5">
                             <label for="nama"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span
                                     class="text-red-500">*</span></label>
                             <x-text-input name="nama" id="nama"
-                                class="{{ $errors->add_employee->has('nama') ? 'border-red-500' : 'border-gray-300' }}"></x-text-input>
-                            @error('nama', 'add_employee')
+                                class="{{ $errors->add_petugasKesehatan->has('nama') ? 'border-red-500' : 'border-gray-300' }}"></x-text-input>
+                            @error('nama', 'add_petugasKesehatan')
                                 <p class="text-red-500 text-xs">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-5">
-                            <label for="tempat_tanggal_lahir"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat, Tanggal
-                                Lahir<span class="text-red-500">*</span></label>
-                            <x-text-input name="tempat_tanggal_lahir" id="tempat_tanggal_lahir"
-                                class="{{ $errors->add_employee->has('tempat_tanggal_lahir') ? 'border-red-500' : 'border-gray-300' }}"
+                            <label for="nip"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIP<span
+                                    class="text-red-500">*</span></label>
+                            <x-number-input name="nip" id="nip"
+                                class="{{ $errors->add_petugasKesehatan->has('nip') ? 'border-red-500' : 'border-gray-300' }}"
+                                autocomplete="off"></x-number-input>
+                            @error('nip', 'add_petugasKesehatan')
+                                <p class="text-red-500 text-xs">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-5">
+                            <label for="jabatan"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jabatan<span
+                                    class="text-red-500">*</span></label>
+                            <select id="jabatan" name="jabatan"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected disabled>Pilih jabatan</option>
+                                <option value="Dokter" {{ old('jabatan') == 'Dokter' ? 'selected' : '' }}>Dokter
+                                </option>
+                                <option value="Perawat" {{ old('jabatan') == 'Perawat' ? 'selected' : '' }}>Perawat
+                                </option>
+                                <option value="Bidan" {{ old('jabatan') == 'Bidan' ? 'selected' : '' }}>Bidan</option>
+                            </select>
+                            @error('jabatan', 'add_petugasKesehatan')
+                                <p class="text-red-500 text-xs">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="unit_kerja"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit Kerja<span
+                                    class="text-red-500">*</span></label>
+                            <x-text-input name="unit_kerja" id="unit_kerja"
+                                class="{{ $errors->add_petugasKesehatan->has('unit_kerja') ? 'border-red-500' : 'border-gray-300' }}"
                                 autocomplete="off"></x-text-input>
-                            @error('tempat_tanggal_lahir', 'add_employee')
+                            @error('unit_kerja', 'add_petugasKesehatan')
                                 <p class="text-red-500 text-xs">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-5">
-                            <label for="join"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
-                                Bergabung<span class="text-red-500">*</span></label>
-                            <x-date-input name="join" id="join"
-                                class="{{ $errors->add_employee->has('join') ? 'border-red-500' : 'border-gray-300' }}"
-                                autocomplete="off"></x-date-input>
-                            @error('join', 'add_employee')
+                            <label for="no_tlp"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Tlp<span
+                                    class="text-red-500">*</span></label>
+                            <x-number-input name="no_tlp" id="no_tlp"
+                                class="{{ $errors->add_petugasKesehatan->has('no_tlp') ? 'border-red-500' : 'border-gray-300' }}"
+                                autocomplete="off"></x-number-input>
+                            @error('no_tlp', 'add_petugasKesehatan')
                                 <p class="text-red-500 text-xs">{{ $message }}</p>
                             @enderror
                         </div>
@@ -119,9 +157,9 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat<span
                                     class="text-red-500">*</span></label>
                             <x-text-input name="alamat" id="alamat"
-                                class="{{ $errors->add_employee->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
+                                class="{{ $errors->add_petugasKesehatan->has('alamat') ? 'border-red-500' : 'border-gray-300' }}"
                                 autocomplete="off"></x-text-input>
-                            @error('alamat', 'add_employee')
+                            @error('alamat', 'add_petugasKesehatan')
                                 <p class="text-red-500 text-xs">{{ $message }}</p>
                             @enderror
                         </div>
@@ -134,12 +172,12 @@
 
 
     <!-- MODAL --->
-    @include('Employee.delete')
+    @include('EmployeePetugas.delete')
 
     <x-slot:script>
 
         <script>
-            new DataTable('#table_employee', {
+            new DataTable('#table_petugasKesehatan', {
                 order: []
             });
         </script>

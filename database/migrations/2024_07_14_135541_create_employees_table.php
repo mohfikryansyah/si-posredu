@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('nip')->nullable();
+            $table->enum('jabatan', ['Dokter', 'Perawat', 'Bidan', 'Kader']);
             $table->string('nama');
-            $table->string('tempat_tanggal_lahir');
-            $table->date('join');
+            $table->string('unit_kerja')->nullable();
+            $table->string('no_tlp')->nullable();
+            $table->string('tempat_tanggal_lahir')->nullable();
+            $table->date('join')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('alamat');
             $table->timestamps();
         });

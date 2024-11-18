@@ -10,6 +10,7 @@ use App\Models\Remaja;
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanIbu;
 use App\Models\PemeriksaanAnak;
+use App\Models\MissedPelayanans;
 use App\Models\PemeriksaanLansia;
 use App\Models\PemeriksaanRemaja;
 use App\Http\Controllers\Controller;
@@ -51,6 +52,7 @@ class DashboardController extends Controller
             'dataAnak' => $dataAnak,
             'dataRemaja' => $dataRemaja,
             'dataLansia' => $dataLansia,
+            'tanpaPemeriksaan' => MissedPelayanans::latest()->get(),
         ]);
     }
 
