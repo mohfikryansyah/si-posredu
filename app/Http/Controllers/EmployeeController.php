@@ -69,7 +69,7 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         return view('Employee.edit', [
-            'employees' => Employee::with('users')->latest()->get(),
+            'employees' => Employee::with('user')->latest()->get(),
             'e' => $employee,
         ]);
     }
