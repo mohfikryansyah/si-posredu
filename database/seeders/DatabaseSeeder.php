@@ -36,10 +36,10 @@ class DatabaseSeeder extends Seeder
         // User::factory(2)->create();
         // Employee::factory(3)->create();
         // Ibu::factory(1)->create();
-        PemeriksaanIbu::factory(129)->create();
-        PemeriksaanLansia::factory(139)->create();
-        PemeriksaanAnak::factory(179)->create();
-        PemeriksaanRemaja::factory(159)->create();
+        // PemeriksaanIbu::factory(129)->create();
+        // PemeriksaanLansia::factory(139)->create();
+        // PemeriksaanAnak::factory(179)->create();
+        // PemeriksaanRemaja::factory(159)->create();
         // Anak::factory(10)->create();
         // Lansia::factory(1)->create();
         // Remaja::factory(1)->create();
