@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -30,7 +31,11 @@ class AnakFactory extends Factory
             'nama_ibu' => fake()->name(),
             'nama_ayah' => fake()->name(),
             'no_tlp' => fake()->phoneNumber(),
-            'tanggal_pendaftaran' => fake()->date(),
+            'tanggal_pendaftaran' => fake()->date(
+                'Y-m-d',
+                '2024-12-31',
+                '2024-01-01'
+            ),
             'alamat' => fake()->address(),
         ];
     }

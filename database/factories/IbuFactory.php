@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -32,7 +33,11 @@ class IbuFactory extends Factory
             'alamat' => fake()->address(),
             'no_tlp' => fake()->randomNumber(5, true),
             'pekerjaan' => fake()->jobTitle(),
-            'tanggal_pendaftaran' => fake()->date(),
+            'tanggal_pendaftaran' => fake()->date(
+                'Y-m-d',
+                '2024-12-31',
+                '2024-01-01'
+            ),
         ];
     }
 }

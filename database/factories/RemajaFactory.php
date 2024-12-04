@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -34,7 +35,11 @@ class RemajaFactory extends Factory
             'nama_orang_tua' => fake()->name(),
             'pekerjaan_orang_tua' => fake()->jobTitle(),
             'golongan_darah' => fake()->randomElement(['A', 'AB', 'O', 'B']),
-            'tanggal_pendaftaran' => fake()->date(),
+            'tanggal_pendaftaran' => fake()->date(
+                'Y-m-d',
+                '2024-12-31',
+                '2024-01-01'
+            ),
         ];
     }
 }

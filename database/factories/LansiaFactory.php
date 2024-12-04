@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lansia>
@@ -31,7 +32,11 @@ class LansiaFactory extends Factory
             'alamat' => fake()->address(),
             'no_tlp' => $no_tlp . fake()->randomNumber(5, true),
             'pekerjaan' => fake()->jobTitle(),
-            'tanggal_pendaftaran' => fake()->date()
+            'tanggal_pendaftaran' => fake()->date(
+                'Y-m-d',
+                '2024-12-31',
+                '2024-01-01'
+            ),
         ];
     }
 }
