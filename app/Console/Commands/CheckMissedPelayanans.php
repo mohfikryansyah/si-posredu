@@ -11,6 +11,8 @@ use App\Models\Pelayanan;
 use Illuminate\Console\Command;
 use App\Models\MissedPelayanans;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MissedPelayananNotification;
 
 class CheckMissedPelayanans extends Command
 {
@@ -60,6 +62,17 @@ class CheckMissedPelayanans extends Command
         $entitiesWithoutPemeriksaan = $model::whereDoesntHave($relation, function ($query) use ($pelayanan) {
             $query->where('tanggal_pemeriksaan', '>', $pelayanan->tanggal_pelayanan);
         })->get();
+
+        $entitiesWithUsers = $entitiesWithoutPemeriksaan->filter(fn($e) => $e->user);
+
+        foreach ($entitiesWithUsers as $entitiesWithUser) {
+            $infomasiEmail = [
+                'nama' => $entitiesWithUser->nama,
+                'tanggal_pelayanan' => $pelayanan->tanggal_pelayanan,
+                'judul_pelayanan' => $pelayanan->nama,
+            ];
+            Mail::to($entitiesWithUser->user->email)->send(new MissedPelayananNotification($infomasiEmail));
+        }
 
         foreach ($entitiesWithoutPemeriksaan as $entity) {
             MissedPelayanans::create([

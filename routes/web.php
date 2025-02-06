@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Master;
+use Illuminate\Http\Request;
 use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IbuController;
@@ -15,17 +17,25 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Kader\DashboardController as KaderController;
-use App\Http\Controllers\Masyarakat\DashboardController as MasyarakatController;
 use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\PemeriksaanIbuController;
 use App\Http\Controllers\PemeriksaanAnakController;
+use App\Http\Controllers\PetugasKesehatanController;
 use App\Http\Controllers\PemeriksaanLansiaController;
 use App\Http\Controllers\PemeriksaanRemajaController;
-use App\Http\Controllers\PetugasKesehatanController;
+use App\Http\Controllers\Kader\DashboardController as KaderController;
+use App\Http\Controllers\MasterController;
+use App\Http\Controllers\Masyarakat\DashboardController as MasyarakatController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+Route::get('/check-nik', function (Request $request) {
+    $nik = $request->query('nik');
+    return Master::where('nik', $nik)->exists()
+        ? response()->json(['message' => 'NIK ditemukan', 'status' => true])
+        : response()->json(['message' => 'NIK tidak ditemukan', 'status' => false], 404);
+});
 
 Route::prefix('admin')
     ->middleware('auth', CheckRole::class . ':ADMIN')
@@ -43,6 +53,9 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/export-entitas-tanpa-pemeriksaan', [DashboardController::class, 'export'])->name('dashboard.export');
+        Route::resource('/master', MasterController::class)->except(['destroy', 'update']);
+        Route::delete('/master', [MasterController::class, 'destroy'])->name('master.destroy');
+        Route::put('/master', [MasterController::class, 'update'])->name('master.update');
     });
 
 Route::prefix('petugas')

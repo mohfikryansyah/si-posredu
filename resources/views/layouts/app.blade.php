@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/app-Cc4M-NSc.css') }}" data-navigate-track="reload" />
-    <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-Cc4M-NSc.css') }}" data-navigate-track="reload" />
+    <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script> --}}
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     
@@ -53,6 +53,24 @@
                 "hideMethod": "fadeOut",
             };
             toastr.success('{{ Session('success') }}', 'Success');
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+            };
+            toastr.error('{{ Session('error') }}', 'Error');
         </script>
     @endif
 

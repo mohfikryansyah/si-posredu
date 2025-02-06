@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\IbuExport;
+use Carbon\Carbon;
 use App\Models\Ibu;
+use App\Models\Master;
+use App\Models\Remaja;
+use App\Models\Pelayanan;
+use App\Exports\IbuExport;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
@@ -47,6 +51,12 @@ class IbuController extends Controller
             'tanggal_pendaftaran' => 'required',
             'no_tlp' => 'required|numeric|min_digits:10|max_digits:13',
         ]);
+
+        
+        $cekNIK = Master::where('nik', $validatedData['nik'])->exists();
+        if(!$cekNIK) {
+            return redirect()->route('remaja')->with('error', 'NIK tidak ditemukan!');
+        }
 
 
         Ibu::create($validatedData);

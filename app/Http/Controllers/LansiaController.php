@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\LansiaExport;
 use App\Models\Lansia;
+use App\Models\Master;
 use Illuminate\Http\Request;
+use App\Exports\LansiaExport;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -47,6 +48,10 @@ class LansiaController extends Controller
             'pekerjaan' => 'required|string|max:255',
         ]);
 
+        $cekNIK = Master::where('nik', $validatedData['nik'])->exists();
+        if(!$cekNIK) {
+            return redirect()->route('remaja')->with('error', 'NIK tidak ditemukan!');
+        }
 
         Lansia::create($validatedData);
 

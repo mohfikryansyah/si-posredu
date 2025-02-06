@@ -6,13 +6,15 @@
             Periksa semua data sebelum menyimpan.
         </p>
 
-        <form action="{{ route('ibu') }}" method="POST" class="mt-4">
+        <form action="{{ route('ibu') }}" method="POST" id="form-ibu" class="mt-4">
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2 sm:col-span-1">
                     <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama<span class="text-red-500">*</span></label>
-                    <x-text-input name="nama" id="nama" class="{{ $errors->add_ibu->has('nama') ? 'border-red-500' : 'border-gray-300' }}" placeholder="Ketik Nama Ibu" required value="{{ old('nama') }}"></x-text-input>
+                    <x-text-input name="nama" id="nama"
+                        class="{{ $errors->add_ibu->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Nama Ibu" required value="{{ old('nama') }}"></x-text-input>
                     @error('nama', 'add_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -20,7 +22,9 @@
                 <div class="col-span-2 sm:col-span-1">
                     <label for="nama_suami" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama Suami<span class="text-red-500">*</span></label>
-                    <x-text-input name="nama_suami" id="nama_suami" class="{{ $errors->add_ibu->has('nama_suami') ? 'border-red-500' : 'border-gray-300' }}" placeholder="Ketik Nama Suami" required value="{{ old('nama_suami') }}"></x-text-input>
+                    <x-text-input name="nama_suami" id="nama_suami"
+                        class="{{ $errors->add_ibu->has('nama_suami') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Nama Suami" required value="{{ old('nama_suami') }}"></x-text-input>
                     @error('nama_suami', 'add_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -38,11 +42,19 @@
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
-                            class="text-red-500">*</span></label>
+                    <div class="flex items-center justify-between">
+                        <label for="nik"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
+                                class="text-red-500">*</span></label>
+                        <button type="button" class="block mb-2 text-sm font-medium text-blue-500 underline-offset-1 underline dark:text-white"
+                            id="check-nik">Cek
+                            NIK</button>
+                    </div>
                     <x-number-input name="nik" id="nik"
                         class="{{ $errors->add_ibu->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
                         value="{{ old('nik') }}"></x-number-input>
+
+                    <p id="result" class="text-sm"></p>
                     @error('nik', 'add_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
@@ -114,7 +126,8 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kehamilan Ke<span
                             class="text-red-500">*</span></label>
                     <x-text-input name="nomor_kehamilan" id="nomor_kehamilan"
-                        class="{{ $errors->add_ibu->has('nomor_kehamilan') ? 'border-red-500' : 'border-gray-300' }}" required value="{{ old('nomor_kehamilan') }}"></x-text-input>
+                        class="{{ $errors->add_ibu->has('nomor_kehamilan') ? 'border-red-500' : 'border-gray-300' }}"
+                        required value="{{ old('nomor_kehamilan') }}"></x-text-input>
                     @error('nomor_kehamilan', 'add_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror

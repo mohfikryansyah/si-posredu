@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\RemajaExport;
+use App\Models\Master;
 use App\Models\Remaja;
 use Illuminate\Http\Request;
+use App\Exports\RemajaExport;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -52,6 +53,12 @@ class RemajaController extends Controller
             'jenis_kelamin' => 'required|max:255',
             'tanggal_pendaftaran' => 'required|max:255',
         ]);
+
+        
+        $cekNIK = Master::where('nik', $validatedData['nik'])->exists();
+        if(!$cekNIK) {
+            return redirect()->route('remaja')->with('error', 'NIK tidak ditemukan!');
+        }
 
         Remaja::create($validatedData);
         return redirect()->route('remaja')->with('success', 'Data berhasil disimpan!');

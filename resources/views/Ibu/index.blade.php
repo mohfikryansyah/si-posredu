@@ -121,6 +121,43 @@
         </script>
         <script>
             $(document).ready(function() {
+                let nikValid = false;
+
+                $('#check-nik').on('click', function(event) {
+                    event.preventDefault();
+                    let nik = $('#nik').val();
+
+                    if (nik === '') {
+                        $('#result').text('Harap masukkan NIK').css('color', 'red');
+                        nikValid = false;
+                        return;
+                    }
+
+                    $.ajax({
+                        url: '/check-nik',
+                        type: 'GET',
+                        data: { nik: nik },
+                        success: function(response) {
+                            $('#result').text(response.message).css('color', 'green');
+                            nikValid = true;
+                        },
+                        error: function(xhr) {
+                            $('#result').text(xhr.responseJSON.message).css('color', 'red');
+                            nikValid = false;
+                        }
+                    });
+                });
+
+                $('#form-ibu').on('submit', function(event) {
+                    if (!nikValid) {
+                        event.preventDefault();
+                        alert('Silakan cek NIK terlebih dahulu sebelum menyimpan!');
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
                 
                 $(".select2nama").select2({
                     width: 'resolve' // need to override the changed default
