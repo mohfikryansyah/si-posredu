@@ -60,7 +60,6 @@ class RegisteredUserController extends Controller
             'role' => ['required', 'in:KADER,MASYARAKAT'],
             'tipe_entitas' => ['required', 'in:anak,remaja,ibu,lansia,petugas'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $tipe_entitas = $request->tipe_entitas;
@@ -70,7 +69,7 @@ class RegisteredUserController extends Controller
                 'anak_id' => $request->anak_id,
                 'tipe_entitas' => $tipe_entitas,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make("password"),
             ]);
             $user->assignRole('MASYARAKAT');
         } elseif ($tipe_entitas === 'remaja') {
@@ -78,7 +77,7 @@ class RegisteredUserController extends Controller
                 'remaja_id' => $request->remaja_id,
                 'tipe_entitas' => $tipe_entitas,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make("password"),
             ]);
             $user->assignRole('MASYARAKAT');
         } elseif ($tipe_entitas === 'lansia') {
@@ -86,7 +85,7 @@ class RegisteredUserController extends Controller
                 'lansia_id' => $request->lansia_id,
                 'tipe_entitas' => $tipe_entitas,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make("password"),
             ]);
             $user->assignRole('MASYARAKAT');
         } elseif ($tipe_entitas === 'ibu') {
@@ -94,7 +93,7 @@ class RegisteredUserController extends Controller
                 'ibu_id' => $request->ibu_id,
                 'tipe_entitas' => $tipe_entitas,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make("password"),
             ]);
             $user->assignRole('MASYARAKAT');
         } elseif ($tipe_entitas === 'petugas') {
@@ -102,7 +101,7 @@ class RegisteredUserController extends Controller
                 'employee_id' => $request->employee_id,
                 'tipe_entitas' => $tipe_entitas,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make("password"),
             ]);
             $user->assignRole('KADER');
         }
