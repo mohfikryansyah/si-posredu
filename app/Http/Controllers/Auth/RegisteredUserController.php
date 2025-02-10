@@ -7,12 +7,13 @@ use App\Models\Anak;
 use App\Models\User;
 use App\Models\Lansia;
 use App\Models\Remaja;
+use App\Models\Employee;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -52,14 +53,19 @@ class RegisteredUserController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'anak_id' => ['sometimes', 'unique:' . User::class],
-            'ibu_id' => ['sometimes', 'unique:' . User::class],
-            'remaja_id' => ['sometimes', 'unique:' . User::class],
-            'lansia_id' => ['sometimes', 'unique:' . User::class],
-            'employee_id' => ['sometimes', 'unique:' . User::class],
+            'anak_id' => ['nullable', 'unique:' . User::class],
+            'ibu_id' => ['nullable', 'unique:' . User::class],
+            'remaja_id' => ['nullable', 'unique:' . User::class],
+            'lansia_id' => ['nullable', 'unique:' . User::class],
+            'employee_id' => ['nullable', 'unique:' . User::class],
             'role' => ['required', 'in:KADER,MASYARAKAT'],
             'tipe_entitas' => ['required', 'in:anak,remaja,ibu,lansia,petugas'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'anak_id' => 'required_without_all:ibu_id,remaja_id,lansia_id,employee_id',
+            'ibu_id' => 'required_without_all:anak_id,remaja_id,lansia_id,employee_id',
+            'remaja_id' => 'required_without_all:anak_id,ibu_id,lansia_id,employee_id',
+            'lansia_id' => 'required_without_all:anak_id,ibu_id,remaja_id,employee_id',
+            'employee_id' => 'required_without_all:anak_id,ibu_id,remaja_id,lansia_id',
         ]);
 
         $tipe_entitas = $request->tipe_entitas;

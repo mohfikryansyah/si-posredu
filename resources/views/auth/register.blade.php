@@ -89,7 +89,7 @@
                             </label>
                             <select id="tipe_entitas" name="tipe_entitas"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                style="width: 100%;">
+                                style="width: 100%;" required>
                                 <option value="" disabled {{ old('tipe_entitas') == '' ? 'selected' : '' }}>Pilih
                                 </option>
                                 <option value="anak" {{ old('tipe_entitas') == 'anak' ? 'selected' : '' }}>Anak
@@ -115,8 +115,8 @@
                                     class="text-red-500">*</span></label>
                             <select id="role" name="role"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                style="width: 100%;">
-                                <option disabled selected>Pilih</option>
+                                style="width: 100%;" required>
+                                <option value="" disabled selected>Pilih</option>
                                 @foreach ($roles as $role)
                                     @if (old('role') === $role->id)
                                         <option value="{{ $role->name }}" selected>{{ $role->name }}</option>
@@ -202,8 +202,8 @@
                                 <label for="anak_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span class="text-red-500">*</span></label>
                                 <select id="anak_id" name="anak_id"
                             class="select2nama bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            style="width: 100%;">
-                            <option disabled selected>Pilih</option>
+                            style="width: 100%;" required>
+                            <option value="" disabled selected>Pilih</option>
                             @foreach ($anaks as $anak)
                                 <option value="{{ $anak->id }}" {{ old('anak_id') == $anak->id ? 'selected' : '' }}>{{ $anak->nama }}</option>
                             @endforeach
@@ -216,8 +216,8 @@
                                 <label for="remaja_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span class="text-red-500">*</span></label>
                                 <select id="remaja_id" name="remaja_id"
                             class="select2nama bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            style="width: 100%;">
-                            <option disabled selected>Pilih</option>
+                            style="width: 100%;" required>
+                            <option value="" disabled selected>Pilih</option>
                             @foreach ($remajas as $remaja)
                                 <option value="{{ $remaja->id }}" {{ old('remaja_id') == $remaja->id ? 'selected' : '' }}>{{ $remaja->nama }}</option>
                             @endforeach
@@ -230,8 +230,8 @@
                                 <label for="lansia_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span class="text-red-500">*</span></label>
                                 <select id="lansia_id" name="lansia_id"
                             class="select2nama bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            style="width: 100%;">
-                            <option disabled selected>Pilih</option>
+                            style="width: 100%;" required>
+                            <option value="" disabled selected>Pilih</option>
                             @foreach ($lansias as $lansia)
                                 <option value="{{ $lansia->id }}" {{ old('lansia_id') == $lansia->id ? 'selected' : '' }}>{{ $lansia->nama }}</option>
                             @endforeach
@@ -244,8 +244,8 @@
                                 <label for="ibu_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span class="text-red-500">*</span></label>
                                 <select id="ibu_id" name="ibu_id"
                             class="select2nama bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            style="width: 100%;">
-                            <option disabled selected>Pilih</option>
+                            style="width: 100%;" required>
+                            <option value="" disabled selected>Pilih</option>
                             @foreach ($ibus as $ibu)
                                 <option value="{{ $ibu->id }}" {{ old('ibu_id') == $ibu->id ? 'selected' : '' }}>{{ $ibu->nama }}</option>
                             @endforeach
@@ -258,8 +258,8 @@
                                 <label for="employee_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama<span class="text-red-500">*</span></label>
                                 <select id="employee_id" name="employee_id"
                             class="select2nama bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            style="width: 100%;">
-                            <option disabled selected>Pilih</option>
+                            style="width: 100%;" required>
+                            <option value="" disabled selected>Pilih</option>
                             @foreach ($kaders as $kader)
                                 <option value="{{ $kader->id }}" {{ old('employee_id') == $kader->id ? 'selected' : '' }}>{{ $kader->nama }}</option>
                             @endforeach
