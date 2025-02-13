@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Master;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MasterController extends Controller
 {
@@ -61,7 +62,13 @@ class MasterController extends Controller
     public function update(Request $request)
     {
         $validatedData = $request->validateWithBag('edit_nik', [
-            'nik' => 'required|numeric|digits:16|unique:masters,nik,',
+            'nik' => [
+                'required',
+                'numeric',
+                'digits:16',
+                Rule::unique('masters', 'nik')->ignore($request->id),
+            ],
+            'nama' => 'required|string|max:100'
         ]);
 
         Master::where('id', $request->id)->update($validatedData);

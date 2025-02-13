@@ -24,7 +24,7 @@
                         Nama<span class="text-red-500">*</span></label>
                     <x-text-input name="nama" id="nama"
                         class="{{ $errors->add_nik->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="Ketik Nama Ibu" required value="{{ old('nama') }}"></x-text-input>
+                        placeholder="Ketik Nama" required value="{{ old('nama') }}"></x-text-input>
                     @error('nama', 'add_nik')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror

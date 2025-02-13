@@ -11,7 +11,7 @@
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <input type="hidden" name="id" id="edit_id" value="{{ old('id') }}">
-                <div class="col-span-2 w-full">
+                <div class="col-span-2 sm:col-span-1">
                     <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
                             class="text-red-500">*</span></label>
                     <x-number-input name="nik" id="edit_nik"
@@ -21,7 +21,16 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
-                
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Nama<span class="text-red-500">*</span></label>
+                    <x-text-input name="nama" id="edit_nama"
+                        class="{{ $errors->edit_nik->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Nama" required value="{{ old('nama') }}"></x-text-input>
+                    @error('nama', 'edit_nik')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
             <div class="mt-6 flex justify-end">
                 <x-secondary-button x-on:click="$dispatch('close')">
