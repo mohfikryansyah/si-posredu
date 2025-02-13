@@ -11,6 +11,16 @@
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2 sm:col-span-1">
+                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
+                            class="text-red-500">*</span></label>
+                    <x-number-input name="nik" id="nik"
+                        class="{{ $errors->edit_anak->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
+                        value="{{ old('nik') }}"></x-number-input>
+                    @error('nik', 'edit_anak')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
                     <input type="hidden" name="id" id="edit_id" value="{{ old('id') }}">
                     <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama<span class="text-red-500">*</span></label>
@@ -30,16 +40,6 @@
                         placeholder="Contoh: Gorontalo, 11 April 2001" required
                         value="{{ old('tempat_tanggal_lahir') }}"></x-text-input>
                     @error('tempat_tanggal_lahir', 'edit_anak')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-span-2 sm:col-span-1">
-                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
-                            class="text-red-500">*</span></label>
-                    <x-number-input name="nik" id="nik"
-                        class="{{ $errors->edit_anak->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
-                        value="{{ old('nik') }}"></x-number-input>
-                    @error('nik', 'edit_anak')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

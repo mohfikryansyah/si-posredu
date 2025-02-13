@@ -21,7 +21,7 @@
 
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js' ]) --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/app-8tPDpgGb.css') }}" data-navigate-track="reload" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-6jq5ayqk.css') }}" data-navigate-track="reload" />
     <script type="module" src="{{ asset('build/assets/app-DFq2sf4p.js') }}" data-navigate-track="reload"></script>
 
     <script src="{{ asset('plugins/echarts/echarts.min.js') }}"></script>

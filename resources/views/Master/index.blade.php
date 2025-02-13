@@ -26,11 +26,12 @@
     </div>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-2xl bg-white">
-        <table id="table_remaja">
+        <table id="table_nik">
             <thead>
                 <tr>
                     <th scope="col" class="w-20">No.</th>
                     <th scope="col">NIK</th>
+                    <th scope="col">Nama</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -44,9 +45,12 @@
                         <td class="whitespace-nowrap md:whitespace-normal">
                             {{ $nik->nik }}
                         </td>
+                        <td class="whitespace-nowrap md:whitespace-normal truncate" title="{{ $nik->nama }}">
+                            {{ $nik->nama }}
+                        </td>
                         <td>
                             <div class="flex items-center">
-                                <a href="javascript:void(0);" x-data data-id="{{ $nik->id }}"
+                                <a href="javascript:void(0);" x-data data-id="{{ $nik->id }}" data-nama="{{ $nik->nama }}"
                                     data-nik="{{ $nik->nik }}" x-on:click="$dispatch('open-modal', 'edit_nik')"
                                     class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-green-500 focus:outline-none transition group-hover:bg-gray-50">
                                     <i class="fa-regular fa-pen-to-square"></i>
@@ -70,47 +74,8 @@
 
     <x-slot:script>
         <script>
-            new DataTable('#table_remaja', {
+            new DataTable('#table_nik', {
                 order: []
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                let nikValid = false;
-
-                $('#check-nik').on('click', function(event) {
-                    event.preventDefault();
-                    let nik = $('#nik').val();
-
-                    if (nik === '') {
-                        $('#result').text('Harap masukkan NIK').css('color', 'red');
-                        nikValid = false;
-                        return;
-                    }
-
-                    $.ajax({
-                        url: '/check-nik',
-                        type: 'GET',
-                        data: {
-                            nik: nik
-                        },
-                        success: function(response) {
-                            $('#result').text(response.message).css('color', 'green');
-                            nikValid = true;
-                        },
-                        error: function(xhr) {
-                            $('#result').text(xhr.responseJSON.message).css('color', 'red');
-                            nikValid = false;
-                        }
-                    });
-                });
-
-                $('#form-ibu').on('submit', function(event) {
-                    if (!nikValid) {
-                        event.preventDefault();
-                        alert('Silakan cek NIK terlebih dahulu sebelum menyimpan!');
-                    }
-                });
             });
         </script>
         <script>
@@ -120,6 +85,7 @@
                     var data = $(this).data();
 
                     $('#edit_id').val(data.id);
+                    $('#edit_nama').val(data.nama);
                     $('#edit_nik').val(data.nik);
                 });
 

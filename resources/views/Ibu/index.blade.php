@@ -52,15 +52,14 @@
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th class="whitespace-nowrap">
                             <a href="javascript:void(0);" x-data data-id="{{ $mom->id }}"
-                                data-nik="{{ $mom->nik }}"
-                                data-nama="{{ $mom->nama }}" data-nama-suami="{{ $mom->nama_suami }}"
+                                data-nik="{{ $mom->nik }}" data-nama="{{ $mom->nama }}"
+                                data-nama-suami="{{ $mom->nama_suami }}"
                                 data-tempat-tanggal-lahir="{{ $mom->tempat_tanggal_lahir }}"
                                 data-alamat="{{ $mom->alamat }}" data-pekerjaan="{{ $mom->pekerjaan }}"
                                 data-golongan-darah="{{ $mom->golongan_darah }}"
                                 data-nomor-kehamilan="{{ $mom->nomor_kehamilan }}" data-no-tlp="{{ $mom->no_tlp }}"
                                 data-tanggal-pendaftaran="{{ $mom->tanggal_pendaftaran }}"
-                                x-on:click="$dispatch('open-modal', 'show_ibu')"
-                                class="showbtn hover:text-orange-400">
+                                x-on:click="$dispatch('open-modal', 'show_ibu')" class="showbtn hover:text-orange-400">
                                 {{ $mom->nama }}
                             </a>
                         </th>
@@ -79,8 +78,8 @@
                         <td>
                             <div class="flex items-center">
                                 <a href="javascript:void(0);" x-data data-id="{{ $mom->id }}"
-                                    data-nik="{{ $mom->nik }}"
-                                    data-nama="{{ $mom->nama }}" data-nama-suami="{{ $mom->nama_suami }}"
+                                    data-nik="{{ $mom->nik }}" data-nama="{{ $mom->nama }}"
+                                    data-nama-suami="{{ $mom->nama_suami }}"
                                     data-tempat-tanggal-lahir="{{ $mom->tempat_tanggal_lahir }}"
                                     data-alamat="{{ $mom->alamat }}" data-pekerjaan="{{ $mom->pekerjaan }}"
                                     data-golongan-darah="{{ $mom->golongan_darah }}"
@@ -113,7 +112,7 @@
     @include('Ibu.export')
 
     <x-slot:script>
-        
+
         <script>
             new DataTable('#table_ibu', {
                 order: []
@@ -136,13 +135,22 @@
                     $.ajax({
                         url: '/check-nik',
                         type: 'GET',
-                        data: { nik: nik },
+                        data: {
+                            nik: nik
+                        },
                         success: function(response) {
-                            $('#result').text(response.message).css('color', 'green');
-                            nikValid = true;
+                            if (response.success) {
+                                $('#result').text('NIK ditemukan').css('color', 'green');
+                                $('#nama').val(response.nama);
+                                nikValid = true;
+                            } else {
+                                $('#result').text(response.message).css('color', 'red');
+                                nikValid = false;
+                            }
                         },
                         error: function(xhr) {
                             $('#result').text(xhr.responseJSON.message).css('color', 'red');
+                            $('#nama').val('');
                             nikValid = false;
                         }
                     });
@@ -158,7 +166,7 @@
         </script>
         <script>
             $(document).ready(function() {
-                
+
                 $(".select2nama").select2({
                     width: 'resolve' // need to override the changed default
                 });

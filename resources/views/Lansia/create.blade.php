@@ -10,30 +10,34 @@
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Nama<span class="text-red-500">*</span></label>
-                    <x-text-input name="nama" id="nama" class="{{ $errors->add_lansia->has('nama') ? 'border-red-500' : 'border-gray-300' }}" placeholder="Ketik Nama Lengkap" required value="{{ old('nama') }}"></x-text-input>
-                    @error('nama', 'add_lansia')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-span-2 sm:col-span-1">
                     <div class="flex items-center justify-between">
                         <label for="nik"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
                                 class="text-red-500">*</span></label>
-                        <button type="button" class="block mb-2 text-sm font-medium text-blue-500 underline-offset-1 underline dark:text-white"
+                        <button type="button"
+                            class="block mb-2 text-sm font-medium text-blue-500 underline-offset-1 underline dark:text-white"
                             id="check-nik">Cek
                             NIK</button>
                     </div>
                     <x-number-input name="nik" id="nik"
-                    class="{{ $errors->add_lansia->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
-                    value="{{ old('nik') }}"></x-number-input>
+                        class="{{ $errors->add_lansia->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
+                        value="{{ old('nik') }}"></x-number-input>
                     <p id="result" class="text-sm"></p>
                     @error('nik', 'add_lansia')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Nama<span class="text-red-500">*</span></label>
+                    <x-text-input name="nama" id="nama"
+                        class="{{ $errors->add_lansia->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Nama Lengkap" required value="{{ old('nama') }}"></x-text-input>
+                    @error('nama', 'add_lansia')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="col-span-2 sm:col-span-1">
                     <label for="tempat_tanggal_lahir"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat, Tanggal

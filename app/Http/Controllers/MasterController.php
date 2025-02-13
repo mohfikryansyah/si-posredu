@@ -31,6 +31,7 @@ class MasterController extends Controller
     {
         $validatedData = $request->validateWithBag('add_nik', [
             'nik' => 'required|numeric|digits:16|unique:masters,nik',
+            'nama' => 'required|string|max:100'
         ]);
 
         Master::create($validatedData);

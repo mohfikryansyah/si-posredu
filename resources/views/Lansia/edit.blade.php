@@ -7,18 +7,9 @@
         </p>
 
         <form action="{{ route('lansia') }}" method="POST" class="mt-4">
-            @method("PUT")
+            @method('PUT')
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
-                <div class="col-span-2 sm:col-span-1">
-                    <input type="hidden" name="id" id="edit_id" value="{{ old('id') }}">
-                    <label for="edit_nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Nama<span class="text-red-500">*</span></label>
-                    <x-text-input name="nama" id="edit_nama" class="{{ $errors->edit_lansia->has('nama') ? 'border-red-500' : 'border-gray-300' }}" placeholder="Ketik Nama Lengkap" required value="{{ old('nama') }}"></x-text-input>
-                    @error('nama', 'edit_lansia')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
                 <div class="col-span-2 sm:col-span-1">
                     <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
                             class="text-red-500">*</span></label>
@@ -26,6 +17,17 @@
                         class="{{ $errors->edit_lansia->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
                         value="{{ old('nik') }}"></x-number-input>
                     @error('nik', 'edit_lansia')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <input type="hidden" name="id" id="edit_id" value="{{ old('id') }}">
+                    <label for="edit_nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Nama<span class="text-red-500">*</span></label>
+                    <x-text-input name="nama" id="edit_nama"
+                        class="{{ $errors->edit_lansia->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
+                        placeholder="Ketik Nama Lengkap" required value="{{ old('nama') }}"></x-text-input>
+                    @error('nama', 'edit_lansia')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

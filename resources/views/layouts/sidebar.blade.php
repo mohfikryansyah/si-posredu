@@ -31,7 +31,7 @@
             <li>
                 <x-sidebar-link :href="route('master.index')" :active="request()->routeIs('master.index')">
                     <i class="fa-solid fa-database w-5"></i>
-                    <span class="ms-3">{{ __('Data NIK') }}</span>
+                    <span class="ms-3">{{ __('Data Master') }}</span>
                 </x-sidebar-link>
             </li>
             @endrole

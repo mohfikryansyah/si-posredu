@@ -7,9 +7,19 @@
         </p>
 
         <form action="{{ route('remaja') }}" method="POST" class="mt-4">
-            @method("PUT")
+            @method('PUT')
             @csrf
             <div class="grid gap-4 mb-4 grid-cols-2">
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="edit_nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
+                            class="text-red-500">*</span></label>
+                    <x-number-input name="nik" id="edit_nik"
+                        class="{{ $errors->edit_remaja->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
+                        value="{{ old('nik') }}"></x-number-input>
+                    @error('nik', 'edit_remaja')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
                 <div class="col-span-2 sm:col-span-1">
                     <input type="hidden" name="id" id="edit_id" value="{{ old('id') }}">
                     <label for="edit_nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -29,16 +39,6 @@
                         class="{{ $errors->edit_ibu->has('tanggal_pendaftaran') ? 'border-red-500' : 'border-gray-300' }}"
                         required value="{{ old('tanggal_pendaftaran') }}"></x-date-input>
                     @error('tanggal_pendaftaran', 'edit_ibu')
-                        <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="col-span-2 sm:col-span-1">
-                    <label for="edit_nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK<span
-                            class="text-red-500">*</span></label>
-                    <x-number-input name="nik" id="edit_nik"
-                        class="{{ $errors->edit_remaja->has('nik') ? 'border-red-500' : 'border-gray-300' }}" required
-                        value="{{ old('nik') }}"></x-number-input>
-                    @error('nik', 'edit_remaja')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
@@ -93,7 +93,8 @@
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="edit_usia" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usia<span
+                    <label for="edit_usia"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usia<span
                             class="text-red-500">*</span><span class="text-gray-400"> (tahun)</span></label>
                     <x-number-input name="usia" id="edit_usia"
                         class="{{ $errors->edit_remaja->has('usia') ? 'border-red-500' : 'border-gray-300' }}" required
@@ -113,7 +114,8 @@
                     @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="edit_nama_orang_tua" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="edit_nama_orang_tua"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama Orang Tua<span class="text-red-500">*</span></label>
                     <x-text-input name="nama_orang_tua" id="edit_nama_orang_tua"
                         class="{{ $errors->edit_remaja->has('nama_orang_tua') ? 'border-red-500' : 'border-gray-300' }}"

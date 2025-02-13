@@ -31,10 +31,25 @@ use App\Http\Controllers\Masyarakat\DashboardController as MasyarakatController;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::get('/check-nik', function (Request $request) {
-    $nik = $request->query('nik');
-    return Master::where('nik', $nik)->exists()
-        ? response()->json(['message' => 'NIK ditemukan', 'status' => true])
-        : response()->json(['message' => 'NIK tidak ditemukan', 'status' => false], 404);
+    // $nik = $request->query('nik');
+    // return Master::where('nik', $nik)->exists()
+    //     ? response()->json(['message' => 'NIK ditemukan', 'status' => true])
+    //     : response()->json(['message' => 'NIK tidak ditemukan', 'status' => false], 404);
+
+    $nik = $request->nik;
+    $user = Master::where('nik', $nik)->first();
+
+    if ($user) {
+        return response()->json([
+            'success' => true,
+            'nama' => $user->nama,
+        ]);
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'NIK tidak ditemukan'
+        ], 404);
+    }
 });
 
 Route::prefix('admin')

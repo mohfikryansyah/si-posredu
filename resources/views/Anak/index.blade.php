@@ -112,7 +112,7 @@
     @include('Anak.export')
 
     <x-slot:script>
-        
+
         <script>
             new DataTable('#table_anak', {
                 order: []
@@ -135,13 +135,22 @@
                     $.ajax({
                         url: '/check-nik',
                         type: 'GET',
-                        data: { nik: nik },
+                        data: {
+                            nik: nik
+                        },
                         success: function(response) {
-                            $('#result').text(response.message).css('color', 'green');
-                            nikValid = true;
+                            if (response.success) {
+                                $('#result').text('NIK ditemukan').css('color', 'green');
+                                $('#nama').val(response.nama);
+                                nikValid = true;
+                            } else {
+                                $('#result').text(response.message).css('color', 'red');
+                                nikValid = false;
+                            }
                         },
                         error: function(xhr) {
                             $('#result').text(xhr.responseJSON.message).css('color', 'red');
+                            $('#nama').val('');
                             nikValid = false;
                         }
                     });
@@ -161,7 +170,7 @@
                 $(".select2nama").select2({
                     width: 'resolve' // need to override the changed default
                 });
-                
+
                 $('table').on('click', '.editbtn', function() {
                     var data = $(this).data();
 
