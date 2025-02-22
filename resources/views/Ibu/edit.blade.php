@@ -36,7 +36,7 @@
                         Nama Suami<span class="text-red-500">*</span></label>
                     <x-text-input name="nama_suami" id="edit_nama_suami"
                         class="{{ $errors->edit_ibu->has('nama_suami') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="Ketik Nama Suami" required value="{{ old('nama_suami') }}"></x-text-input>
+                        placeholder="Ketik Nama Suami" required value="{{ old('nama_suami') }}" readonly></x-text-input>
                     @error('nama_suami', 'edit_ibu')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror

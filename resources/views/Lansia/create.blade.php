@@ -32,7 +32,7 @@
                         Nama<span class="text-red-500">*</span></label>
                     <x-text-input name="nama" id="nama"
                         class="{{ $errors->add_lansia->has('nama') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="Ketik Nama Lengkap" required value="{{ old('nama') }}"></x-text-input>
+                        placeholder="Ketik Nama Lengkap" required value="{{ old('nama') }}" readonly></x-text-input>
                     @error('nama', 'add_lansia')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
