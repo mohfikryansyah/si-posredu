@@ -26,7 +26,7 @@ class EmployeeFactory extends Factory
             'unit_kerja' => fake()->city,
             'no_tlp' => '081234567890',
             'tempat_tanggal_lahir' => $kota . $formatDate,
-            'jabatan' => fake()->randomElement(['Kader', 'Dokter', 'Perawat', 'Bidan']),
+            'jabatan' => fake()->randomElement(['Dokter', 'Perawat', 'Bidan']),
             'join' => fake()->dateTimeBetween('-4 years'),
             'alamat' => fake()->address(),
         ];
