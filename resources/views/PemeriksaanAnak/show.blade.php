@@ -27,7 +27,9 @@
                     <th scope="col" class="whitespace-normal">Status Imunisasi</th>
                     <th scope="col" class="whitespace-normal">Riwayat Penyakit</th>
                     <th scope="col" class="whitespace-normal">Catatan</th>
-                    <th scope="col" class="whitespace-normal">Aksi</th>
+                    @role(['ADMIN', 'KADER'])
+                        <th scope="col" class="whitespace-normal">Aksi</th>
+                    @endrole
                 </tr>
             </thead>
             <tbody>
@@ -61,30 +63,32 @@
                         <td class="whitespace-nowrap md:whitespace-normal">
                             {{ $item->catatan }}
                         </td>
-                        <td>
-                            <div class="flex items-center">
-                                <a href="javascript:void(0);" x-data data-id="{{ $item->id }}"
-                                    data-anak-id="{{ $item->anak->id }}" data-employee-id="{{ $item->employee_id }}"
-                                    data-tanggal-pemeriksaan="{{ $item->tanggal_pemeriksaan }}"
-                                    data-berat-badan="{{ $item->berat_badan }}"
-                                    data-tinggi-badan="{{ $item->tinggi_badan }}"
-                                    data-tekanan-darah="{{ $item->tekanan_darah }}"
-                                    data-suhu-tubuh="{{ $item->suhu_tubuh }}"
-                                    data-status-imunisasi="{{ $item->status_imunisasi }}"
-                                    data-riwayat-penyakit="{{ $item->riwayat_penyakit }}"
-                                    data-catatan="{{ $item->catatan }}"
-                                    x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_anak')"
-                                    class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-green-500 bg-white hover:text-green-700 focus:outline-none transition">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </a>
-                                <a data-id={{ $item->id }} data-nama="{{ $item->anak->nama }}"
-                                    href="javascript:void(0);" x-data=""
-                                    x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_anak')"
-                                    class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-red-500 bg-white hover:text-red-700 focus:outline-none transition">
-                                    <i class="fa-solid fa-trash-arrow-up"></i>
-                                </a>
-                            </div>
-                        </td>
+                        @role(['ADMIN', 'KADER'])
+                            <td>
+                                <div class="flex items-center">
+                                    <a href="javascript:void(0);" x-data data-id="{{ $item->id }}"
+                                        data-anak-id="{{ $item->anak->id }}" data-employee-id="{{ $item->employee_id }}"
+                                        data-tanggal-pemeriksaan="{{ $item->tanggal_pemeriksaan }}"
+                                        data-berat-badan="{{ $item->berat_badan }}"
+                                        data-tinggi-badan="{{ $item->tinggi_badan }}"
+                                        data-tekanan-darah="{{ $item->tekanan_darah }}"
+                                        data-suhu-tubuh="{{ $item->suhu_tubuh }}"
+                                        data-status-imunisasi="{{ $item->status_imunisasi }}"
+                                        data-riwayat-penyakit="{{ $item->riwayat_penyakit }}"
+                                        data-catatan="{{ $item->catatan }}"
+                                        x-on:click="$dispatch('open-modal', 'edit_pemeriksaan_anak')"
+                                        class="editbtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-green-500 bg-white hover:text-green-700 focus:outline-none transition">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+                                    <a data-id={{ $item->id }} data-nama="{{ $item->anak->nama }}"
+                                        href="javascript:void(0);" x-data=""
+                                        x-on:click="$dispatch('open-modal', 'delete_pemeriksaan_anak')"
+                                        class="deletebtn inline-flex items-center px-1 py-2 border border-transparent text-md leading-4 font-medium rounded-md text-red-500 bg-white hover:text-red-700 focus:outline-none transition">
+                                        <i class="fa-solid fa-trash-arrow-up"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        @endrole
                     </tr>
                 @endforeach
             </tbody>
