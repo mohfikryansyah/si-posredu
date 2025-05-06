@@ -79,7 +79,7 @@
                         <td class="whitespace-nowrap md:whitespace-normal">
                             {{ $item->tekanan_darah . ' mmHg' }}
                         </td>
-                        @role('ADMIN', 'KADER')
+                        @role(['ADMIN', 'KADER'])
                             <td>
                                 <div class="flex items-center">
                                     <a href="javascript:void(0);" x-data data-id="{{ $item->id }}"
