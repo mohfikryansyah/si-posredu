@@ -31,7 +31,7 @@
                     <th scope="col" class="whitespace-normal">Keluhan</th>
                     <th scope="col" class="whitespace-normal">Pemberian Vitamin</th>
                     <th scope="col" class="whitespace-normal">Tekanan Darah</th>
-                    @role('admin')
+                    @role(['ADMIN', 'KADER'])
                         <th scope="col" class="whitespace-normal">Aksi</th>
                     @endrole
                 </tr>
